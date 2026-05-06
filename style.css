@@ -508,7 +508,10 @@ a { color: var(--google-blue); text-underline-offset: 3px; }
 .mc-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 1px;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 .mc-head {
@@ -516,17 +519,25 @@ a { color: var(--google-blue); text-underline-offset: 3px; }
     font-weight: 700;
     text-align: center;
     color: var(--text2);
-    padding: 2px 0;
+    padding: 4px 2px;
+    background: #EEEFF1;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
 }
+
+.mc-head:last-of-type { border-right: none; }
 
 .mc-day {
     font-size: 0.8rem;
     text-align: center;
-    padding: 2px 1px;
-    border-radius: 3px;
+    padding: 3px 2px;
     line-height: 1.4;
     position: relative;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
 }
+
+.mc-day:nth-child(7n) { border-right: none; }
 
 .mc-day.today {
     font-weight: 700;
