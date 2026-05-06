@@ -462,6 +462,10 @@ function renderCountdown() {
 // ── Duration summary ──────────────────────────────────────────────
 
 function durationSummary(v) {
+    if (activeRegion !== 'alle') {
+        const p = v.periodes[activeRegion];
+        return `<strong>${durationDays(p.van, p.tot)} dagen</strong>`;
+    }
     const days = Object.fromEntries(
         Object.entries(v.periodes).map(([r,p]) => [r, durationDays(p.van,p.tot)])
     );
@@ -550,7 +554,7 @@ function injectDotStyles() {
 // Actually simpler: set background on ::after via JS by wrapping
 // We'll re-render using a different approach — add a <b> child element
 
-function renderMiniCalFixed(year, month, v) {
+function renderMiniCalFixed(year, month, v, selectedRegion) {
     const t = today();
     const firstDay = new Date(year, month, 1);
     const lastDay  = new Date(year, month+1, 0);
@@ -566,8 +570,12 @@ function renderMiniCalFixed(year, month, v) {
         const isWe = dow===0||dow===6;
         const isTd = date.getTime()===t.getTime();
 
+        // Filter vacation days to only the selected region
         const vacRegions = Object.entries(v.periodes)
-            .filter(([,p]) => date>=parseDate(p.van) && date<=parseDate(p.tot))
+            .filter(([r,p]) => {
+                if (selectedRegion !== 'alle' && r !== selectedRegion) return false;
+                return date >= parseDate(p.van) && date <= parseDate(p.tot);
+            })
             .map(([r]) => r);
 
         let dotBg = '';
@@ -595,33 +603,59 @@ function renderMiniCalFixed(year, month, v) {
 }
 
 function buildCardFixed(v, year) {
-    const status = statusForAll(v);
-    const months = getMonthsForVakantie(v);
-    const miniCals = months.map(({y,m}) => renderMiniCalFixed(y,m,v)).join('');
+    // Status based on selected region for accurate past/current/upcoming
+    const status = activeRegion === 'alle'
+        ? statusForAll(v)
+        : cardStatus(v.periodes[activeRegion].van, v.periodes[activeRegion].tot);
+
+    // Only render months relevant to the selected region
+    const months = activeRegion === 'alle'
+        ? getMonthsForVakantie(v)
+        : (() => {
+            const p = v.periodes[activeRegion];
+            const result = [];
+            let cur = new Date(parseDate(p.van).getFullYear(), parseDate(p.van).getMonth(), 1);
+            const end = new Date(parseDate(p.tot).getFullYear(), parseDate(p.tot).getMonth(), 1);
+            while (cur <= end) { result.push({y:cur.getFullYear(),m:cur.getMonth()}); cur=new Date(cur.getFullYear(),cur.getMonth()+1,1); }
+            return result;
+          })();
+
+    const miniCals = months.map(({y,m}) => renderMiniCalFixed(y,m,v,activeRegion)).join('');
 
     const regions = ['noord','midden','zuidd'];
     let regionHTML = '';
 
-    if (v.alleSame) {
-        const p = v.periodes.noord;
-        const d = durationDays(p.van, p.tot);
-        regionHTML = `<div class="rrow-same">Alle regio's: ${formatDate(p.van)} – ${formatDate(p.tot)} · <strong>${d} dagen</strong></div>`;
+    if (activeRegion === 'alle') {
+        if (v.alleSame) {
+            const p = v.periodes.noord;
+            const d = durationDays(p.van, p.tot);
+            regionHTML = `<div class="rrow-same">Alle regio's: ${formatDate(p.van)} – ${formatDate(p.tot)} · <strong>${d} dagen</strong></div>`;
+        } else {
+            regionHTML = `<div class="region-rows">${
+                regions.map(r => {
+                    const p = v.periodes[r];
+                    const d = durationDays(p.van, p.tot);
+                    return `<div class="rrow">
+                        <span class="rrow-dot" style="background:${REGION_COLOR[r]}"></span>
+                        <span class="rrow-name">${REGION_LABEL[r]}</span>
+                        <span class="rrow-dates">${formatDate(p.van)} – ${formatDate(p.tot)}</span>
+                        <span class="rrow-days">${d} dgn</span>
+                    </div>`;
+                }).join('')
+            }</div>`;
+        }
     } else {
-        regionHTML = `<div class="region-rows">${
-            regions.map(r => {
-                const p = v.periodes[r];
-                const d = durationDays(p.van, p.tot);
-                let cls = 'rrow';
-                if (activeRegion===r) cls+=' active';
-                else if (activeRegion!=='alle') cls+=' dimmed';
-                return `<div class="${cls}">
-                    <span class="rrow-dot" style="background:${REGION_COLOR[r]}"></span>
-                    <span class="rrow-name">${REGION_LABEL[r]}</span>
-                    <span class="rrow-dates">${formatDate(p.van)} – ${formatDate(p.tot)}</span>
-                    <span class="rrow-days">${d} dgn</span>
-                </div>`;
-            }).join('')
-        }</div>`;
+        // Only show the selected region's row
+        const p = v.periodes[activeRegion];
+        const d = durationDays(p.van, p.tot);
+        regionHTML = `<div class="region-rows">
+            <div class="rrow active">
+                <span class="rrow-dot" style="background:${REGION_COLOR[activeRegion]}"></span>
+                <span class="rrow-name">${REGION_LABEL[activeRegion]}</span>
+                <span class="rrow-dates">${formatDate(p.van)} – ${formatDate(p.tot)}</span>
+                <span class="rrow-days">${d} dgn</span>
+            </div>
+        </div>`;
     }
 
     const badgeText = {current:'Nu',upcoming:'Binnenkort',past:'Voorbij'}[status];
