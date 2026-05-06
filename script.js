@@ -10,9 +10,9 @@ const MONTHS_NL  = ['Januari','Februari','Maart','April','Mei','Juni',
 const MONTHS_SH  = ['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
 const DAYS_SH    = ['Ma','Di','Wo','Do','Vr','Za','Zo'];
 
-const C_NOORD  = '#F9AB00';
-const C_MIDDEN = '#1A73E8';
-const C_ZUIDD  = '#34A853';
+const C_NOORD  = '#D4956A';
+const C_MIDDEN = '#6B96C4';
+const C_ZUIDD  = '#7EBD8F';
 
 const REGION_COLOR = { noord: C_NOORD, midden: C_MIDDEN, zuidd: C_ZUIDD };
 const REGION_LABEL = { noord: 'Noord', midden: 'Midden', zuidd: 'Zuid' };
