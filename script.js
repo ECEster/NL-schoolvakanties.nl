@@ -691,7 +691,37 @@ function renderCards() {
     const grid   = document.getElementById('cards');
     const notice = document.getElementById('notice-provisional');
 
-    grid.innerHTML = yd.vakanties.map(v => buildCardFixed(v, activeYear)).join('');
+    // Collect calendar years spanned by this school year
+    const calYears = new Set();
+    for (const v of yd.vakanties) {
+        for (const p of Object.values(v.periodes)) {
+            calYears.add(parseDate(p.van).getFullYear());
+            calYears.add(parseDate(p.tot).getFullYear());
+        }
+    }
+
+    // Collect start dates already in this school year to avoid duplicates
+    const existingStarts = new Set(
+        yd.vakanties.flatMap(v => Object.values(v.periodes).map(p => p.van))
+    );
+
+    // Append vacations from the next school year that start in the same calendar years
+    const yearKeys = Object.keys(DATA);
+    const nextYearKey = yearKeys[yearKeys.indexOf(activeYear) + 1];
+    const extraCards = [];
+    if (nextYearKey) {
+        for (const v of DATA[nextYearKey].vakanties) {
+            const starts = Object.values(v.periodes).map(p => p.van);
+            // Skip if already present in current year's data
+            if (starts.some(s => existingStarts.has(s))) continue;
+            const startYear = Math.min(...starts.map(s => parseDate(s).getFullYear()));
+            if (calYears.has(startYear)) {
+                extraCards.push(buildCardFixed(v, nextYearKey));
+            }
+        }
+    }
+
+    grid.innerHTML = yd.vakanties.map(v => buildCardFixed(v, activeYear)).join('') + extraCards.join('');
     notice.hidden  = yd.confirmed;
 }
 

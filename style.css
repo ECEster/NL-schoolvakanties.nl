@@ -443,6 +443,8 @@ a { color: var(--google-blue); text-underline-offset: 3px; }
 
 .card:hover { box-shadow: var(--shadow-2); transform: translateY(-2px); }
 .card.past { opacity: .55; }
+.card.past .card-img { height: 64px; }
+.card.past .card-body { display: none; }
 
 /* Card image header */
 .card-img {
