@@ -429,6 +429,9 @@ function renderCountdown() {
         return;
     }
 
+    // Zet seizoensfoto op de hero-banner
+    document.querySelector('.hero').dataset.season = found.v.type;
+
     const {v, isCurrent} = found;
 
     if (isCurrent) {

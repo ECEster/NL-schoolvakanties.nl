@@ -199,20 +199,54 @@ a { color: var(--google-blue); text-underline-offset: 3px; }
 
 /* ── Hero ────────────────────────────────────────────── */
 .hero {
-    background: linear-gradient(135deg, #0D47A1 0%, #1565C0 40%, #1976D2 100%);
     padding: 48px 0;
     position: relative;
     overflow: hidden;
+    background-color: #0D47A1;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 0.4s ease;
 }
 
+/* Seizoens-foto's — wisselen automatisch mee met de eerstvolgende vakantie */
+.hero[data-season="zomer"] {
+    background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600&q=80&fit=crop');
+}
+.hero[data-season="herfst"] {
+    background-image: url('https://images.unsplash.com/photo-1504684977343-7d471f54f74d?w=1600&q=80&fit=crop');
+}
+.hero[data-season="kerst"] {
+    background-image: url('https://images.unsplash.com/photo-1418985991034-4d4ef16e5d5c?w=1600&q=80&fit=crop');
+}
+.hero[data-season="voorjaar"] {
+    background-image: url('https://images.unsplash.com/photo-1462275646964-a0e3386b89fa?w=1600&q=80&fit=crop');
+}
+.hero[data-season="mei"] {
+    background-image: url('https://images.unsplash.com/photo-1497655582826-b1419a9aba1a?w=1600&q=80&fit=crop');
+}
+
+/* Donkere overlay voor leesbaarheid */
 .hero::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.42);
 }
 
-.hero-inner { position: relative; text-align: center; }
+/* Seizoens-tint over de overlay */
+.hero[data-season="zomer"]::before    { background: linear-gradient(135deg, rgba(183,63,0,0.55), rgba(0,0,0,0.35)); }
+.hero[data-season="herfst"]::before   { background: linear-gradient(135deg, rgba(100,40,0,0.60), rgba(0,0,0,0.38)); }
+.hero[data-season="kerst"]::before    { background: linear-gradient(135deg, rgba(13,50,120,0.60), rgba(0,0,0,0.40)); }
+.hero[data-season="voorjaar"]::before { background: linear-gradient(135deg, rgba(20,80,30,0.55), rgba(0,0,0,0.35)); }
+.hero[data-season="mei"]::before      { background: linear-gradient(135deg, rgba(80,10,100,0.55), rgba(0,0,0,0.35)); }
+
+.hero-inner {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
 
 /* Countdown */
 #countdown { color: #fff; }
