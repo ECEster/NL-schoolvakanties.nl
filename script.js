@@ -434,13 +434,16 @@ function renderCountdown() {
 
     const {v, isCurrent} = found;
 
+    const todayStr = t.toLocaleDateString('nl-NL', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
+
     if (isCurrent) {
-        const maxEnd  = latestEnd(v);
+        const start    = earliestStart(v);
+        const maxEnd   = latestEnd(v);
         const daysLeft = daysBetween(t, maxEnd) + 1;
         el.innerHTML = `
-            <div class="cd-label">Je bent nu op vakantie 🎉</div>
             <div class="cd-name">${TYPE_EMOJI[v.type]} ${v.naam}</div>
-            <div class="cd-dates">Tot en met ${maxEnd.toLocaleDateString('nl-NL',{day:'numeric',month:'long'})}</div>
+            <div class="cd-dates">${start.toLocaleDateString('nl-NL',{day:'numeric',month:'long'})} – ${maxEnd.toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'})}</div>
+            <div class="cd-today">${todayStr}</div>
             <div class="cd-on-vacation">
                 <span class="pulse"></span>
                 Nog <strong>&nbsp;${daysLeft}&nbsp;</strong> dag${daysLeft!==1?'en':''}
@@ -452,6 +455,7 @@ function renderCountdown() {
             <div class="cd-label">Volgende vakantie</div>
             <div class="cd-name">${TYPE_EMOJI[v.type]} ${v.naam}</div>
             <div class="cd-dates">Vanaf ${start.toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'})}</div>
+            <div class="cd-today">${todayStr}</div>
             <div class="cd-pill">
                 <span class="cd-num">${daysLeft}</span>
                 <span class="cd-unit">dag${daysLeft!==1?'en':''}</span>

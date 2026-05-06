@@ -210,20 +210,25 @@ a { color: var(--google-blue); text-underline-offset: 3px; }
 }
 
 /* Seizoens-foto's — wisselen automatisch mee met de eerstvolgende vakantie */
+/* Zomer: zonnig korenveld met klaprozen */
 .hero[data-season="zomer"] {
-    background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600&q=80&fit=crop');
+    background-image: url('https://images.unsplash.com/photo-1500534314209-a157a496dc14?w=1600&q=85&fit=crop&crop=center');
 }
+/* Herfst: oranje-rood herfstbos */
 .hero[data-season="herfst"] {
-    background-image: url('https://images.unsplash.com/photo-1504684977343-7d471f54f74d?w=1600&q=80&fit=crop');
+    background-image: url('https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=1600&q=85&fit=crop&crop=center');
 }
+/* Kerst: besneeuwd dennenbos */
 .hero[data-season="kerst"] {
-    background-image: url('https://images.unsplash.com/photo-1418985991034-4d4ef16e5d5c?w=1600&q=80&fit=crop');
+    background-image: url('https://images.unsplash.com/photo-1418985991034-4d4ef16e5d5c?w=1600&q=85&fit=crop&crop=center');
 }
+/* Voorjaar: bloeiende kersenbloesem */
 .hero[data-season="voorjaar"] {
-    background-image: url('https://images.unsplash.com/photo-1462275646964-a0e3386b89fa?w=1600&q=80&fit=crop');
+    background-image: url('https://images.unsplash.com/photo-1522748906645-95d8adfd52c7?w=1600&q=85&fit=crop&crop=center');
 }
+/* Meivakantie: bloeiende wilde jasmijn / witte bloesem */
 .hero[data-season="mei"] {
-    background-image: url('https://images.unsplash.com/photo-1497655582826-b1419a9aba1a?w=1600&q=80&fit=crop');
+    background-image: url('https://images.unsplash.com/photo-1490750802394-a36bb7d5d88a?w=1600&q=85&fit=crop&crop=center');
 }
 
 /* Donkere overlay voor leesbaarheid */
@@ -271,7 +276,14 @@ a { color: var(--google-blue); text-underline-offset: 3px; }
 .cd-dates {
     font-size: 0.95rem;
     opacity: 0.72;
-    margin-bottom: 22px;
+    margin-bottom: 6px;
+}
+
+.cd-today {
+    font-size: 0.82rem;
+    opacity: 0.55;
+    margin-bottom: 20px;
+    font-style: italic;
 }
 
 .cd-pill {
