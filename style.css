@@ -496,7 +496,7 @@ a { color: var(--google-blue); text-underline-offset: 3px; }
 }
 
 .mc-title {
-    font-size: 0.72rem;
+    font-size: 0.875rem;
     font-weight: 700;
     text-align: center;
     color: var(--text2);
@@ -512,7 +512,7 @@ a { color: var(--google-blue); text-underline-offset: 3px; }
 }
 
 .mc-head {
-    font-size: 0.6rem;
+    font-size: 0.75rem;
     font-weight: 700;
     text-align: center;
     color: var(--text2);
@@ -520,7 +520,7 @@ a { color: var(--google-blue); text-underline-offset: 3px; }
 }
 
 .mc-day {
-    font-size: 0.65rem;
+    font-size: 0.8rem;
     text-align: center;
     padding: 2px 1px;
     border-radius: 3px;
