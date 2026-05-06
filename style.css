@@ -326,9 +326,9 @@ a { color: var(--google-blue); text-underline-offset: 3px; }
     line-height: 1;
 }
 
-.rbtn-n .rbtn-top { font-size: 0.7rem; font-weight: 900; letter-spacing: .08em; color: var(--c-n); }
-.rbtn-m .rbtn-top { font-size: 0.7rem; font-weight: 900; letter-spacing: .08em; color: var(--c-m); }
-.rbtn-z .rbtn-top { font-size: 0.7rem; font-weight: 900; letter-spacing: .08em; color: var(--c-z); }
+.rbtn-n .rbtn-top { font-size: 1.3rem; font-weight: 900; letter-spacing: .04em; color: var(--c-n); }
+.rbtn-m .rbtn-top { font-size: 1.3rem; font-weight: 900; letter-spacing: .04em; color: var(--c-m); }
+.rbtn-z .rbtn-top { font-size: 1.3rem; font-weight: 900; letter-spacing: .04em; color: var(--c-z); }
 
 .rbtn-name {
     font-size: 1rem;
@@ -586,6 +586,16 @@ a { color: var(--google-blue); text-underline-offset: 3px; }
     color: var(--text2);
     white-space: nowrap;
     font-weight: 500;
+}
+
+.card-note {
+    font-size: 0.78rem;
+    color: #6D4C00;
+    background: #FFF8E1;
+    border: 1px solid #F9AB00;
+    border-radius: 7px;
+    padding: 7px 10px;
+    line-height: 1.4;
 }
 
 .rrow-same {

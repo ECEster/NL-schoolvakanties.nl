@@ -61,7 +61,7 @@ const DATA = {
                 midden:{van:'2025-02-15',tot:'2025-02-23'},
                 zuidd: {van:'2025-02-22',tot:'2025-03-02'},
             }},
-            { naam:'Meivakantie', type:'mei', alleSame:true, periodes:{
+            { naam:'Meivakantie', type:'mei', note:'Datums kunnen per school verschillen. Controleer bij de eigen school.', periodes:{
                 noord: {van:'2025-04-26',tot:'2025-05-11'},
                 midden:{van:'2025-04-26',tot:'2025-05-11'},
                 zuidd: {van:'2025-04-26',tot:'2025-05-11'},
@@ -91,7 +91,7 @@ const DATA = {
                 midden:{van:'2026-02-28',tot:'2026-03-08'},
                 zuidd: {van:'2026-02-14',tot:'2026-02-22'},
             }},
-            { naam:'Meivakantie', type:'mei', alleSame:true, periodes:{
+            { naam:'Meivakantie', type:'mei', note:'Datums kunnen per school verschillen. Controleer bij de eigen school.', periodes:{
                 noord: {van:'2026-04-25',tot:'2026-05-10'},
                 midden:{van:'2026-04-25',tot:'2026-05-10'},
                 zuidd: {van:'2026-04-25',tot:'2026-05-10'},
@@ -126,7 +126,7 @@ const DATA = {
                 midden:{van:'2027-02-27',tot:'2027-03-07'},
                 zuidd: {van:'2027-02-13',tot:'2027-02-21'},
             }},
-            { naam:'Meivakantie', type:'mei', alleSame:true, periodes:{
+            { naam:'Meivakantie', type:'mei', note:'Datums kunnen per school verschillen. Controleer bij de eigen school.', periodes:{
                 noord: {van:'2027-04-24',tot:'2027-05-09'},
                 midden:{van:'2027-04-24',tot:'2027-05-09'},
                 zuidd: {van:'2027-04-24',tot:'2027-05-09'},
@@ -161,7 +161,7 @@ const DATA = {
                 midden:{van:'2028-02-26',tot:'2028-03-05'},
                 zuidd: {van:'2028-02-12',tot:'2028-02-20'},
             }},
-            { naam:'Meivakantie', type:'mei', alleSame:true, periodes:{
+            { naam:'Meivakantie', type:'mei', note:'Datums kunnen per school verschillen. Controleer bij de eigen school.', periodes:{
                 noord: {van:'2028-04-29',tot:'2028-05-14'},
                 midden:{van:'2028-04-29',tot:'2028-05-14'},
                 zuidd: {van:'2028-04-29',tot:'2028-05-14'},
@@ -196,7 +196,7 @@ const DATA = {
                 midden:{van:'2029-03-02',tot:'2029-03-10'},
                 zuidd: {van:'2029-02-16',tot:'2029-02-24'},
             }},
-            { naam:'Meivakantie', type:'mei', alleSame:true, periodes:{
+            { naam:'Meivakantie', type:'mei', note:'Datums kunnen per school verschillen. Controleer bij de eigen school.', periodes:{
                 noord: {van:'2029-04-28',tot:'2029-05-13'},
                 midden:{van:'2029-04-28',tot:'2029-05-13'},
                 zuidd: {van:'2029-04-28',tot:'2029-05-13'},
@@ -231,7 +231,7 @@ const DATA = {
                 midden:{van:'2030-03-01',tot:'2030-03-09'},
                 zuidd: {van:'2030-02-15',tot:'2030-02-23'},
             }},
-            { naam:'Meivakantie', type:'mei', alleSame:true, periodes:{
+            { naam:'Meivakantie', type:'mei', note:'Datums kunnen per school verschillen. Controleer bij de eigen school.', periodes:{
                 noord: {van:'2030-04-27',tot:'2030-05-12'},
                 midden:{van:'2030-04-27',tot:'2030-05-12'},
                 zuidd: {van:'2030-04-27',tot:'2030-05-12'},
@@ -266,7 +266,7 @@ const DATA = {
                 midden:{van:'2031-03-01',tot:'2031-03-09'},
                 zuidd: {van:'2031-02-15',tot:'2031-02-23'},
             }},
-            { naam:'Meivakantie', type:'mei', alleSame:true, periodes:{
+            { naam:'Meivakantie', type:'mei', note:'Datums kunnen per school verschillen. Controleer bij de eigen school.', periodes:{
                 noord: {van:'2031-04-26',tot:'2031-05-11'},
                 midden:{van:'2031-04-26',tot:'2031-05-11'},
                 zuidd: {van:'2031-04-26',tot:'2031-05-11'},
@@ -510,6 +510,7 @@ function buildCard(v, year) {
 
     const badgeText = {current:'Nu',upcoming:'Binnenkort',past:'Voorbij'}[status];
     const badgeCls  = {current:'badge-current',upcoming:'badge-upcoming',past:'badge-past'}[status];
+    const noteHTML  = v.note ? `<div class="card-note">ℹ️ ${v.note}</div>` : '';
 
     return `<div class="card ${status}" data-type="${v.type}">
         <div class="card-img">
@@ -524,6 +525,7 @@ function buildCard(v, year) {
             <div class="card-duration">Duur: ${durationSummary(v)}</div>
             <div class="mini-cal-wrap">${miniCals}</div>
             ${regionHTML}
+            ${noteHTML}
         </div>
     </div>`;
 }
@@ -621,6 +623,7 @@ function buildCardFixed(v, year) {
 
     const badgeText = {current:'Nu',upcoming:'Binnenkort',past:'Voorbij'}[status];
     const badgeCls  = {current:'badge-current',upcoming:'badge-upcoming',past:'badge-past'}[status];
+    const noteHTML  = v.note ? `<div class="card-note">ℹ️ ${v.note}</div>` : '';
 
     return `<div class="card ${status}" data-type="${v.type}">
         <div class="card-img">
@@ -635,6 +638,7 @@ function buildCardFixed(v, year) {
             <div class="card-duration">Duur: ${durationSummary(v)}</div>
             <div class="mini-cal-wrap">${miniCals}</div>
             ${regionHTML}
+            ${noteHTML}
         </div>
     </div>`;
 }
@@ -657,7 +661,7 @@ function renderYearBar() {
     bar.innerHTML = Object.keys(DATA).map(y => {
         const cls = y===activeYear ? 'ytab active' : 'ytab';
         const confirmed = DATA[y].confirmed;
-        return `<button class="${cls}" data-year="${y}">${y.replace('-','–')}${confirmed?'':' ⚡'}</button>`;
+        return `<button class="${cls}" data-year="${y}">${y.replace('-','–')}</button>`;
     }).join('');
 }
 
