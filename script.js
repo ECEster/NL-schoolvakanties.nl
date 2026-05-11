@@ -10,7 +10,7 @@ const MONTHS_NL  = ['Januari','Februari','Maart','April','Mei','Juni',
 const MONTHS_SH  = ['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
 const DAYS_SH    = ['Ma','Di','Wo','Do','Vr','Za','Zo'];
 
-const C_NOORD  = '#D4956A';
+const C_NOORD  = '#B5A800';
 const C_MIDDEN = '#6B96C4';
 const C_ZUIDD  = '#7EBD8F';
 
