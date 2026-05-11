@@ -35,6 +35,15 @@ const TYPE_DECO = {
 
 const TYPE_ICON = {
     voorjaar: 'images/icons_seasons/IconLenteBright.png',
+    kerst:    'images/icons_seasons/IconWinterGreen.png',
+};
+
+const TYPE_COLOR = {
+    zomer:    '#C8A000',
+    herfst:   '#7AB884',
+    kerst:    '#1A5C2A',
+    voorjaar: '#2B7A3C',
+    mei:      '#C4A0CC',
 };
 
 // ── School holiday data ──────────────────────────────────────────
@@ -50,9 +59,9 @@ const DATA = {
                 midden:{van:'2024-07-20',tot:'2024-09-01'},
                 zuidd: {van:'2024-07-06',tot:'2024-08-18'},
             }},
-            { naam:'Herfstvakantie', type:'herfst', alleSame:true, periodes:{
-                noord: {van:'2024-10-19',tot:'2024-10-27'},
-                midden:{van:'2024-10-19',tot:'2024-10-27'},
+            { naam:'Herfstvakantie', type:'herfst', periodes:{
+                noord: {van:'2024-10-26',tot:'2024-11-03'},
+                midden:{van:'2024-10-26',tot:'2024-11-03'},
                 zuidd: {van:'2024-10-19',tot:'2024-10-27'},
             }},
             { naam:'Kerstvakantie', type:'kerst', alleSame:true, periodes:{
@@ -61,14 +70,14 @@ const DATA = {
                 zuidd: {van:'2024-12-21',tot:'2025-01-05'},
             }},
             { naam:'Voorjaarsvakantie', type:'voorjaar', periodes:{
-                noord: {van:'2025-02-22',tot:'2025-03-02'},
-                midden:{van:'2025-02-15',tot:'2025-02-23'},
+                noord: {van:'2025-02-15',tot:'2025-02-23'},
+                midden:{van:'2025-02-22',tot:'2025-03-02'},
                 zuidd: {van:'2025-02-22',tot:'2025-03-02'},
             }},
             { naam:'Meivakantie', type:'mei', note:'Datums kunnen per school verschillen. Controleer bij de eigen school.', periodes:{
-                noord: {van:'2025-04-26',tot:'2025-05-11'},
-                midden:{van:'2025-04-26',tot:'2025-05-11'},
-                zuidd: {van:'2025-04-26',tot:'2025-05-11'},
+                noord: {van:'2025-04-26',tot:'2025-05-04'},
+                midden:{van:'2025-04-26',tot:'2025-05-04'},
+                zuidd: {van:'2025-04-26',tot:'2025-05-04'},
             }},
         ]
     },
@@ -82,63 +91,63 @@ const DATA = {
             }},
             { naam:'Herfstvakantie', type:'herfst', periodes:{
                 noord: {van:'2025-10-18',tot:'2025-10-26'},
-                midden:{van:'2025-10-25',tot:'2025-11-02'},
-                zuidd: {van:'2025-10-25',tot:'2025-11-02'},
+                midden:{van:'2025-10-18',tot:'2025-10-26'},
+                zuidd: {van:'2025-10-11',tot:'2025-10-19'},
             }},
             { naam:'Kerstvakantie', type:'kerst', alleSame:true, periodes:{
-                noord: {van:'2025-12-27',tot:'2026-01-04'},
-                midden:{van:'2025-12-27',tot:'2026-01-04'},
-                zuidd: {van:'2025-12-27',tot:'2026-01-04'},
+                noord: {van:'2025-12-20',tot:'2026-01-04'},
+                midden:{van:'2025-12-20',tot:'2026-01-04'},
+                zuidd: {van:'2025-12-20',tot:'2026-01-04'},
             }},
             { naam:'Voorjaarsvakantie', type:'voorjaar', periodes:{
                 noord: {van:'2026-02-21',tot:'2026-03-01'},
-                midden:{van:'2026-02-28',tot:'2026-03-08'},
+                midden:{van:'2026-02-14',tot:'2026-02-22'},
                 zuidd: {van:'2026-02-14',tot:'2026-02-22'},
             }},
             { naam:'Meivakantie', type:'mei', note:'Datums kunnen per school verschillen. Controleer bij de eigen school.', periodes:{
-                noord: {van:'2026-04-25',tot:'2026-05-10'},
-                midden:{van:'2026-04-25',tot:'2026-05-10'},
-                zuidd: {van:'2026-04-25',tot:'2026-05-10'},
+                noord: {van:'2026-04-25',tot:'2026-05-03'},
+                midden:{van:'2026-04-25',tot:'2026-05-03'},
+                zuidd: {van:'2026-04-25',tot:'2026-05-03'},
             }},
             { naam:'Zomervakantie', type:'zomer', periodes:{
-                noord: {van:'2026-07-11',tot:'2026-08-23'},
+                noord: {van:'2026-07-04',tot:'2026-08-16'},
                 midden:{van:'2026-07-18',tot:'2026-08-30'},
-                zuidd: {van:'2026-07-04',tot:'2026-08-16'},
+                zuidd: {van:'2026-07-11',tot:'2026-08-23'},
             }},
         ]
     },
     '2026-2027': {
-        confirmed: false,
+        confirmed: true,
         vakanties: [
             { naam:'Zomervakantie', type:'zomer', periodes:{
-                noord: {van:'2026-07-11',tot:'2026-08-23'},
+                noord: {van:'2026-07-04',tot:'2026-08-16'},
                 midden:{van:'2026-07-18',tot:'2026-08-30'},
-                zuidd: {van:'2026-07-04',tot:'2026-08-16'},
+                zuidd: {van:'2026-07-11',tot:'2026-08-23'},
             }},
             { naam:'Herfstvakantie', type:'herfst', periodes:{
-                noord: {van:'2026-10-17',tot:'2026-10-25'},
-                midden:{van:'2026-10-24',tot:'2026-11-01'},
-                zuidd: {van:'2026-10-24',tot:'2026-11-01'},
+                noord: {van:'2026-10-10',tot:'2026-10-18'},
+                midden:{van:'2026-10-17',tot:'2026-10-25'},
+                zuidd: {van:'2026-10-17',tot:'2026-10-25'},
             }},
             { naam:'Kerstvakantie', type:'kerst', alleSame:true, periodes:{
-                noord: {van:'2026-12-26',tot:'2027-01-10'},
-                midden:{van:'2026-12-26',tot:'2027-01-10'},
-                zuidd: {van:'2026-12-26',tot:'2027-01-10'},
+                noord: {van:'2026-12-19',tot:'2027-01-03'},
+                midden:{van:'2026-12-19',tot:'2027-01-03'},
+                zuidd: {van:'2026-12-19',tot:'2027-01-03'},
             }},
             { naam:'Voorjaarsvakantie', type:'voorjaar', periodes:{
                 noord: {van:'2027-02-20',tot:'2027-02-28'},
-                midden:{van:'2027-02-27',tot:'2027-03-07'},
+                midden:{van:'2027-02-20',tot:'2027-02-28'},
                 zuidd: {van:'2027-02-13',tot:'2027-02-21'},
             }},
             { naam:'Meivakantie', type:'mei', note:'Datums kunnen per school verschillen. Controleer bij de eigen school.', periodes:{
-                noord: {van:'2027-04-24',tot:'2027-05-09'},
-                midden:{van:'2027-04-24',tot:'2027-05-09'},
-                zuidd: {van:'2027-04-24',tot:'2027-05-09'},
+                noord: {van:'2027-04-24',tot:'2027-05-02'},
+                midden:{van:'2027-04-24',tot:'2027-05-02'},
+                zuidd: {van:'2027-04-24',tot:'2027-05-02'},
             }},
             { naam:'Zomervakantie', type:'zomer', periodes:{
                 noord: {van:'2027-07-10',tot:'2027-08-22'},
                 midden:{van:'2027-07-17',tot:'2027-08-29'},
-                zuidd: {van:'2027-07-03',tot:'2027-08-15'},
+                zuidd: {van:'2027-07-24',tot:'2027-09-05'},
             }},
         ]
     },
@@ -440,18 +449,20 @@ function renderCountdown() {
 
     const todayStr = t.toLocaleDateString('nl-NL', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
 
+    const regionP = v.periodes[activeRegion];
+    const startDate = regionP ? parseDate(regionP.van) : earliestStart(v);
+    const endDate   = regionP ? parseDate(regionP.tot) : latestEnd(v);
+
     if (isCurrent) {
-        const start  = earliestStart(v);
-        const maxEnd = latestEnd(v);
         el.innerHTML = `
+            <div class="cd-region">${REGION_LABEL[activeRegion]}</div>
             <div class="cd-name">${v.naam}</div>
-            <div class="cd-dates">${start.toLocaleDateString('nl-NL',{day:'numeric',month:'long'})} t/m ${maxEnd.toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'})}</div>`;
+            <div class="cd-dates">${startDate.toLocaleDateString('nl-NL',{day:'numeric',month:'long'})} t/m ${endDate.toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'})}</div>`;
     } else {
-        const start  = earliestStart(v);
-        const maxEnd = latestEnd(v);
         el.innerHTML = `
+            <div class="cd-region">${REGION_LABEL[activeRegion]}</div>
             <div class="cd-name">${v.naam}</div>
-            <div class="cd-dates">vanaf ${start.toLocaleDateString('nl-NL',{day:'numeric',month:'long'})} t/m ${maxEnd.toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'})}</div>`;
+            <div class="cd-dates">vanaf ${startDate.toLocaleDateString('nl-NL',{day:'numeric',month:'long'})} t/m ${endDate.toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'})}</div>`;
     }
 }
 
@@ -626,6 +637,79 @@ function renderMiniCalFixed(year, month, v, selectedRegion) {
     </div>`;
 }
 
+function renderYearCalMonth(year, month, vakanties, region) {
+    const t = today();
+    const firstDay = new Date(year, month, 1);
+    const lastDay  = new Date(year, month+1, 0);
+    let startDow   = (firstDay.getDay() + 6) % 7;
+
+    const cells = [];
+    for (const h of DAYS_SH) cells.push(`<span class="mc-head">${h}</span>`);
+    for (let i=0; i<startDow; i++) cells.push(`<span></span>`);
+
+    for (let day=1; day<=lastDay.getDate(); day++) {
+        const date = new Date(year, month, day);
+        const dow  = date.getDay();
+        const isWe = dow===0||dow===6;
+        const isTd = date.getTime()===t.getTime();
+
+        let vacType = null;
+        for (const v of vakanties) {
+            const p = v.periodes[region];
+            if (p && date >= parseDate(p.van) && date <= parseDate(p.tot)) {
+                vacType = v.type;
+                break;
+            }
+        }
+
+        let cls = 'mc-day';
+        if (isWe) cls += ' weekend';
+        if (isTd) cls += ' today';
+
+        const dot = vacType
+            ? `<b style="display:block;height:3px;border-radius:2px;background:${TYPE_COLOR[vacType]};margin-top:1px"></b>`
+            : '';
+        cells.push(`<span class="${cls}">${day}${dot}</span>`);
+    }
+
+    return `<div class="mini-cal">
+        <div class="mc-title">${MONTHS_NL[month].slice(0,3)} ${year}</div>
+        <div class="mc-grid">${cells.join('')}</div>
+    </div>`;
+}
+
+function buildYearCard(year) {
+    const yd = DATA[year];
+    const parts = year.split('-');
+    const y1 = parseInt(parts[0]);
+    const y2 = parseInt(parts[1]);
+
+    // Aug y1 → Jul y2 (12 months)
+    const months = [];
+    for (let m = 7; m <= 11; m++) months.push({y: y1, m});
+    for (let m = 0; m <= 6; m++) months.push({y: y2, m});
+
+    const legendHTML = yd.vakanties
+        .filter(v => v.periodes[activeRegion])
+        .map(v => `<span class="ycal-legend-item"><span class="ycal-swatch" style="background:${TYPE_COLOR[v.type]}"></span>${v.naam}</span>`)
+        .join('');
+
+    const monthsHTML = months.map(({y, m}) => renderYearCalMonth(y, m, yd.vakanties, activeRegion)).join('');
+
+    return `<div class="card year-card">
+        <div class="card-img year-card-img">
+            <div class="card-img-text">
+                <div class="card-img-name">Schooljaar ${year.replace('-', '–')}</div>
+                <div class="card-img-year">Jaaroverzicht · ${REGION_LABEL[activeRegion]}</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="ycal-legend">${legendHTML}</div>
+            <div class="year-cal-grid">${monthsHTML}</div>
+        </div>
+    </div>`;
+}
+
 function buildCardFixed(v, year) {
     // Status based on selected region for accurate past/current/upcoming
     const status = activeRegion === 'alle'
@@ -644,6 +728,7 @@ function buildCardFixed(v, year) {
             return result;
           })();
 
+    const isWide = months.length >= 2;
     const miniCals = months.map(({y,m}) => renderMiniCalFixed(y,m,v,activeRegion)).join('');
 
     const regions = ['noord','midden','zuidd'];
@@ -687,7 +772,7 @@ function buildCardFixed(v, year) {
     const noteHTML  = v.note ? `<div class="card-note">ℹ️ ${v.note}</div>` : '';
     const iconHTML  = TYPE_ICON[v.type] ? `<img class="season-icon" src="${TYPE_ICON[v.type]}" alt="${v.naam} icoon">` : '';
 
-    return `<div class="card ${status}" data-type="${v.type}">
+    return `<div class="card ${status}${isWide ? ' card--wide' : ''}" data-type="${v.type}">
         <div class="card-img">
             <div class="card-img-deco">${TYPE_DECO[v.type]}</div>
             <div class="card-img-text">
@@ -744,7 +829,7 @@ function renderCards() {
         }
     }
 
-    grid.innerHTML = yd.vakanties.map(v => buildCardFixed(v, activeYear)).join('') + extraCards.join('');
+    grid.innerHTML = buildYearCard(activeYear) + yd.vakanties.map(v => buildCardFixed(v, activeYear)).join('') + extraCards.join('');
     notice.hidden  = yd.confirmed;
 }
 
@@ -934,6 +1019,7 @@ document.getElementById('region-row').addEventListener('click', e => {
     if (!btn) return;
     activeRegion = btn.dataset.region;
     document.querySelectorAll('.rbtn').forEach(b => b.classList.toggle('active', b===btn));
+    renderCountdown();
     renderRegionCountdown();
     renderCards();
 });

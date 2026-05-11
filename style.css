@@ -235,6 +235,15 @@ a { color: var(--green); text-underline-offset: 3px; }
 /* Banner — vakantiename + datumrange */
 #countdown { color: var(--white); }
 
+.cd-region {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    opacity: 0.75;
+    margin-bottom: 6px;
+}
+
 .cd-name {
     font-family: 'Playwrite GB J Guides', cursive;
     font-size: 2.2rem;
@@ -351,7 +360,7 @@ a { color: var(--green); text-underline-offset: 3px; }
     margin-bottom: 2px;
 }
 
-.rbtn-n .rbtn-top { font-family: 'Playwrite GB J Guides', cursive; font-size: 1.05rem; font-weight: 400; color: var(--green);     line-height: 1.3; }
+.rbtn-n .rbtn-top { font-family: 'Playwrite GB J Guides', cursive; font-size: 1.05rem; font-weight: 400; color: #B5A800;          line-height: 1.3; }
 .rbtn-m .rbtn-top { font-family: 'Playwrite GB J Guides', cursive; font-size: 1.05rem; font-weight: 400; color: var(--green-mid); line-height: 1.3; }
 .rbtn-z .rbtn-top { font-family: 'Playwrite GB J Guides', cursive; font-size: 1.05rem; font-weight: 400; color: var(--lilac);     line-height: 1.3; }
 
@@ -413,6 +422,59 @@ a { color: var(--green); text-underline-offset: 3px; }
     gap: 20px;
 }
 
+/* ── Wide vacation card (spans 2 months) ────────────── */
+@media (min-width: 700px) {
+    .card--wide { grid-column: span 2; }
+}
+
+/* ── Year overview card ──────────────────────────────── */
+.year-card {
+    grid-column: 1 / -1;
+}
+
+.year-card-img {
+    background: linear-gradient(135deg, var(--green) 0%, var(--green-mid) 100%);
+}
+
+.year-cal-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+@media (max-width: 960px) {
+    .year-cal-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 640px) {
+    .year-cal-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.year-card .mini-cal { min-width: unset; }
+
+.ycal-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: var(--text2);
+    margin-bottom: 4px;
+}
+
+.ycal-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.ycal-swatch {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    flex-shrink: 0;
+}
+
 /* ── Vacation card ───────────────────────────────────── */
 .card {
     background: var(--white);
@@ -455,7 +517,7 @@ a { color: var(--green); text-underline-offset: 3px; }
 }
 
 /* Monochromatisch groen + lila accent */
-.card[data-type="zomer"]    .card-img { background: var(--green-mid); }
+.card[data-type="zomer"]    .card-img { background: #C8A000; }
 .card[data-type="herfst"]   .card-img { background: #7AB884; }
 .card[data-type="kerst"]    .card-img { background: #1A5C2A; }
 .card[data-type="voorjaar"] .card-img { background: var(--green); }
