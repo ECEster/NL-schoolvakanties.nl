@@ -452,8 +452,33 @@ a { color: var(--green); text-underline-offset: 3px; }
 
 .card:hover { box-shadow: var(--shadow-2); transform: translateY(-3px); }
 .card.past { opacity: .45; }
-.card.past .card-img { height: 62px; }
-.card.past .card-body { display: none; }
+.card.past .card-img {
+    height: 62px;
+    cursor: pointer;
+    user-select: none;
+}
+.card.past .card-img:hover { filter: brightness(1.1); }
+.card.past .card-img::after {
+    content: '▾';
+    position: absolute;
+    bottom: 8px;
+    right: 14px;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,.7);
+    transition: transform 0.25s ease;
+}
+.card.past.expanded { opacity: .75; }
+.card.past.expanded .card-img::after { transform: rotate(180deg); }
+.card.past .card-body {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 18px;
+    transition: max-height 0.35s ease, padding 0.25s ease;
+}
+.card.past.expanded .card-body {
+    max-height: 900px;
+    padding: 16px 18px 20px;
+}
 
 /* Card header */
 .card-img {

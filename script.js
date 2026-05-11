@@ -1047,6 +1047,13 @@ exportPanel.addEventListener('click', e => {
     exportPanel.hidden = true;
 });
 
+// Toggle past cards open/closed on header click
+document.getElementById('cards').addEventListener('click', e => {
+    const header = e.target.closest('.card.past .card-img');
+    if (!header) return;
+    header.closest('.card').classList.toggle('expanded');
+});
+
 // Close panel when clicking outside
 document.addEventListener('click', e => {
     if (!exportPanel.hidden &&
