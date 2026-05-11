@@ -192,8 +192,17 @@ const DATA = {
 
 // ── State ─────────────────────────────────────────────────────────
 
-let activeYear   = '2025-2026';
 let activeRegion = 'noord';
+
+// Start bij het eerste schooljaar dat nog toekomstige vakanties heeft
+let activeYear = (() => {
+    const t = today();
+    for (const [y, yd] of Object.entries(DATA)) {
+        if (yd.vakanties.some(v => Object.values(v.periodes).some(p => parseDate(p.tot) >= t)))
+            return y;
+    }
+    return Object.keys(DATA)[0];
+})();
 
 // ── Date helpers ──────────────────────────────────────────────────
 
@@ -733,11 +742,15 @@ function renderCards() {
 
 function renderYearBar() {
     const bar = document.getElementById('year-bar');
-    bar.innerHTML = Object.keys(DATA).map(y => {
-        const cls = y===activeYear ? 'ytab active' : 'ytab';
-        const confirmed = DATA[y].confirmed;
-        return `<button class="${cls}" data-year="${y}">${y.replace('-','–')}</button>`;
-    }).join('');
+    const t = today();
+    bar.innerHTML = Object.keys(DATA)
+        .filter(y => DATA[y].vakanties.some(v =>
+            Object.values(v.periodes).some(p => parseDate(p.tot) >= t)
+        ))
+        .map(y => {
+            const cls = y === activeYear ? 'ytab active' : 'ytab';
+            return `<button class="${cls}" data-year="${y}">${y.replace('-','–')}</button>`;
+        }).join('');
 }
 
 // ── ICS export ────────────────────────────────────────────────────
