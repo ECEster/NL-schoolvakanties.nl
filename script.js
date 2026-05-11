@@ -776,7 +776,6 @@ function buildCardFixed(v, year) {
 
     return `<div class="card ${status}${isWide ? ' card--wide' : ''}" data-type="${v.type}">
         <div class="card-img">
-            <div class="card-img-deco">${TYPE_DECO[v.type]}</div>
             <div class="card-img-text">
                 <div class="card-img-name">${v.naam}</div>
                 <div class="card-img-year">Schooljaar ${year}</div>
