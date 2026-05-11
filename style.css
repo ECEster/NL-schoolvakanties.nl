@@ -34,11 +34,11 @@
 }
 
 body {
-    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Space Mono', 'Courier New', monospace;
     background: var(--bg);
     color: var(--text);
-    line-height: 1.55;
-    font-size: 14px;
+    line-height: 1.6;
+    font-size: 13px;
 }
 
 a { color: var(--sage); text-underline-offset: 3px; }
@@ -244,10 +244,11 @@ a { color: var(--sage); text-underline-offset: 3px; }
 }
 
 .cd-name {
-    font-size: 2.4rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
+    font-family: 'Playwrite GB J Guides', cursive;
+    font-size: 2.2rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.2;
     margin-bottom: 8px;
 }
 
@@ -483,10 +484,11 @@ a { color: var(--sage); text-underline-offset: 3px; }
 }
 
 .card-img-name {
-    font-size: 1.2rem;
-    font-weight: 700;
-    letter-spacing: 0.01em;
-    line-height: 1.2;
+    font-family: 'Playwrite GB J Guides', cursive;
+    font-size: 1.1rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.3;
     text-shadow: 0 1px 6px rgba(0,0,0,.18);
 }
 
@@ -693,7 +695,7 @@ a { color: var(--sage); text-underline-offset: 3px; }
     .no-print { display: none !important; }
     .print-only { display: block; }
 
-    body { background: #fff; font-size: 12px; font-family: 'Space Grotesk', sans-serif; }
+    body { background: #fff; font-size: 12px; font-family: 'Space Mono', monospace; }
 
     .print-cover { text-align: center; padding: 60px 40px; page-break-after: always; }
     .print-cover h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
