@@ -52,12 +52,12 @@ a { color: var(--green); text-underline-offset: 3px; }
 
 /* ── Header ──────────────────────────────────────────── */
 .header {
-    background: var(--white);
-    border-bottom: 1.5px solid var(--border);
+    background: var(--lilac);
+    border-bottom: none;
     position: sticky;
     top: 0;
     z-index: 200;
-    box-shadow: var(--shadow-1);
+    box-shadow: 0 2px 12px rgba(180,140,190,.25);
 }
 
 .nav {
@@ -88,11 +88,11 @@ a { color: var(--green); text-underline-offset: 3px; }
 .logo-text {
     font-size: 1.1rem;
     font-weight: 700;
-    color: var(--text);
+    color: var(--white);
     letter-spacing: -0.01em;
 }
 
-.logo-tld { color: var(--green); }
+.logo-tld { color: rgba(255,255,255,.75); }
 
 .nav-right { display: flex; gap: 8px; }
 
@@ -101,10 +101,10 @@ a { color: var(--green); text-underline-offset: 3px; }
     align-items: center;
     gap: 6px;
     padding: 7px 16px;
-    border: 1.5px solid var(--border);
+    border: 1.5px solid rgba(255,255,255,.55);
     border-radius: 999px;
-    background: var(--white);
-    color: var(--text2);
+    background: rgba(255,255,255,.22);
+    color: var(--white);
     font-family: inherit;
     font-size: 0.82rem;
     font-weight: 600;
@@ -113,10 +113,10 @@ a { color: var(--green); text-underline-offset: 3px; }
 }
 
 .nav-btn:hover {
-    background: var(--bg);
-    border-color: var(--green);
-    color: var(--green);
-    box-shadow: var(--shadow-1);
+    background: rgba(255,255,255,.45);
+    border-color: rgba(255,255,255,.8);
+    color: var(--white);
+    box-shadow: none;
 }
 
 /* ── Export panel ────────────────────────────────────── */
