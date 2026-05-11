@@ -192,7 +192,8 @@ const DATA = {
 
 // ── State ─────────────────────────────────────────────────────────
 
-let activeRegion = 'noord';
+let activeRegion      = 'noord';
+let yearExplicit      = false; // true wanneer gebruiker zelf een jaar-tab heeft geklikt
 
 // Start bij het eerste schooljaar dat nog toekomstige vakanties heeft
 let activeYear = (() => {
@@ -734,7 +735,14 @@ function renderCards() {
         }
     }
 
-    grid.innerHTML = buildYearCard(activeYear) + yd.vakanties.map(v => buildCardFixed(v, activeYear)).join('') + extraCards.join('');
+    const visibleVakanties = yearExplicit
+        ? yd.vakanties
+        : yd.vakanties.filter(v => {
+            const p = v.periodes[activeRegion];
+            return p && cardStatus(p.van, p.tot) !== 'past';
+          });
+
+    grid.innerHTML = buildYearCard(activeYear) + visibleVakanties.map(v => buildCardFixed(v, activeYear)).join('') + extraCards.join('');
     notice.hidden  = yd.confirmed;
 }
 
@@ -918,7 +926,8 @@ function triggerPrint() {
 document.getElementById('year-bar').addEventListener('click', e => {
     const btn = e.target.closest('.ytab');
     if (!btn) return;
-    activeYear = btn.dataset.year;
+    activeYear    = btn.dataset.year;
+    yearExplicit  = true;
     document.querySelectorAll('.ytab').forEach(b => b.classList.toggle('active', b===btn));
     renderCards();
 });
