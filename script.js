@@ -537,7 +537,7 @@ function buildCard(v, year) {
         `</div>`;
     }
 
-    const badgeText = {current:'Nu',upcoming:'Binnenkort',past:'Voorbij'}[status];
+    const badgeText = {current:'Nu',upcoming:'',past:'Voorbij'}[status];
     const badgeCls  = {current:'badge-current',upcoming:'badge-upcoming',past:'badge-past'}[status];
     const noteHTML  = v.note ? `<div class="card-note">ℹ️ ${v.note}</div>` : '';
     const iconHTML  = TYPE_ICON[v.type] ? `<img class="season-icon" src="${TYPE_ICON[v.type]}" alt="${v.naam} icoon">` : '';
@@ -682,7 +682,7 @@ function buildCardFixed(v, year) {
         </div>`;
     }
 
-    const badgeText = {current:'Nu',upcoming:'Binnenkort',past:'Voorbij'}[status];
+    const badgeText = {current:'Nu',upcoming:'',past:'Voorbij'}[status];
     const badgeCls  = {current:'badge-current',upcoming:'badge-upcoming',past:'badge-past'}[status];
     const noteHTML  = v.note ? `<div class="card-note">ℹ️ ${v.note}</div>` : '';
     const iconHTML  = TYPE_ICON[v.type] ? `<img class="season-icon" src="${TYPE_ICON[v.type]}" alt="${v.naam} icoon">` : '';
