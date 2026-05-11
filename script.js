@@ -735,11 +735,12 @@ function renderCards() {
         }
     }
 
+    const currentCalYear = today().getFullYear();
     const visibleVakanties = yearExplicit
         ? yd.vakanties
         : yd.vakanties.filter(v => {
             const p = v.periodes[activeRegion];
-            return p && cardStatus(p.van, p.tot) !== 'past';
+            return p && parseDate(p.tot).getFullYear() >= currentCalYear;
           });
 
     grid.innerHTML = buildYearCard(activeYear) + visibleVakanties.map(v => buildCardFixed(v, activeYear)).join('') + extraCards.join('');
