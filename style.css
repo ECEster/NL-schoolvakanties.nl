@@ -295,18 +295,26 @@ a { color: var(--green); text-underline-offset: 3px; }
     border-radius: 14px;
     background: transparent;
     cursor: pointer;
-    transition: background .18s, box-shadow .18s;
+    transition: background .18s, box-shadow .18s, transform .18s;
     font-family: inherit;
     text-align: center;
     box-shadow: none;
 }
 
-.rbtn:hover { background: rgba(255,255,255,.55); }
+.rbtn:hover { background: rgba(255,255,255,.55); transform: translateY(-1px); }
+.rbtn:active { transform: scale(0.96); }
 
-/* Actieve tab als wit kaartje */
+/* Actieve tab: wit kaartje, omhoog */
 .rbtn.active {
     background: var(--white);
-    box-shadow: var(--shadow-1);
+    box-shadow: var(--shadow-2);
+    transform: translateY(-3px);
+}
+
+.rbtn.active .rbtn-top {
+    transform: scale(1.1);
+    display: inline-block;
+    transition: transform .18s ease;
 }
 
 .rbtn-top-alle {
