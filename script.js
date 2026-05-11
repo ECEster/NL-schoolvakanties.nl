@@ -357,8 +357,7 @@ function renderCountdown() {
 
     el.innerHTML = `
         <div class="cd-region">${REGION_LABEL[activeRegion]}</div>
-        ${countdownHTML}
-        <div class="cd-dates">${startDate.toLocaleDateString('nl-NL',{day:'numeric',month:'long'})} t/m ${endDate.toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'})}</div>`;
+        ${countdownHTML}`;
 }
 
 // ── Duration summary ──────────────────────────────────────────────
