@@ -33,6 +33,10 @@ const TYPE_DECO = {
     mei:      '🌼',
 };
 
+const TYPE_ICON = {
+    voorjaar: 'images/icons_seasons/IconLenteBright.png',
+};
+
 // ── School holiday data ──────────────────────────────────────────
 // Bron: rijksoverheid.nl
 // Jaren 2024-2026: bevestigd. 2027+: indicatief.
@@ -522,6 +526,7 @@ function buildCard(v, year) {
     const badgeText = {current:'Nu',upcoming:'Binnenkort',past:'Voorbij'}[status];
     const badgeCls  = {current:'badge-current',upcoming:'badge-upcoming',past:'badge-past'}[status];
     const noteHTML  = v.note ? `<div class="card-note">ℹ️ ${v.note}</div>` : '';
+    const iconHTML  = TYPE_ICON[v.type] ? `<img class="season-icon" src="${TYPE_ICON[v.type]}" alt="${v.naam} icoon">` : '';
 
     return `<div class="card ${status}" data-type="${v.type}">
         <div class="card-img">
@@ -534,6 +539,7 @@ function buildCard(v, year) {
         </div>
         <div class="card-body">
             <div class="card-duration">Duur: ${durationSummary(v)}</div>
+            ${iconHTML}
             <div class="mini-cal-wrap">${miniCals}</div>
             ${regionHTML}
             ${noteHTML}
@@ -665,6 +671,7 @@ function buildCardFixed(v, year) {
     const badgeText = {current:'Nu',upcoming:'Binnenkort',past:'Voorbij'}[status];
     const badgeCls  = {current:'badge-current',upcoming:'badge-upcoming',past:'badge-past'}[status];
     const noteHTML  = v.note ? `<div class="card-note">ℹ️ ${v.note}</div>` : '';
+    const iconHTML  = TYPE_ICON[v.type] ? `<img class="season-icon" src="${TYPE_ICON[v.type]}" alt="${v.naam} icoon">` : '';
 
     return `<div class="card ${status}" data-type="${v.type}">
         <div class="card-img">
@@ -677,6 +684,7 @@ function buildCardFixed(v, year) {
         </div>
         <div class="card-body">
             <div class="card-duration">Duur: ${durationSummary(v)}</div>
+            ${iconHTML}
             <div class="mini-cal-wrap">${miniCals}</div>
             ${regionHTML}
             ${noteHTML}
