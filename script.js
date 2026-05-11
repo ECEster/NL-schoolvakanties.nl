@@ -42,7 +42,7 @@ const TYPE_ICON = {
 
 const TYPE_COLOR = {
     zomer:    '#C8A000',
-    herfst:   '#7AB884',
+    herfst:   '#B8541A',
     kerst:    '#1A5C2A',
     voorjaar: '#2B7A3C',
     mei:      '#C4A0CC',
@@ -431,41 +431,39 @@ function renderCountdown() {
 
     outer: for (const [year, yd] of Object.entries(DATA)) {
         for (const v of yd.vakanties) {
-            const all = Object.values(v.periodes);
-            if (all.every(p => t > parseDate(p.tot))) continue;
-            const isCurrent = all.some(p => t >= parseDate(p.van) && t <= parseDate(p.tot));
-            found = {v, year, isCurrent};
+            const p = v.periodes[activeRegion];
+            if (!p || t > parseDate(p.tot)) continue;
+            found = {v, year};
             break outer;
         }
     }
 
     if (!found) {
-        el.innerHTML = `<div class="cd-name">nl-schoolvakanties.nl</div>`;
+        el.innerHTML = `<div class="cd-region">${REGION_LABEL[activeRegion]}</div>`;
         return;
     }
 
-    // Zet seizoensfoto op de hero-banner
-    document.querySelector('.hero').dataset.season = found.v.type;
+    const {v} = found;
+    document.querySelector('.hero').dataset.season = v.type;
 
-    const {v, isCurrent} = found;
+    const p = v.periodes[activeRegion];
+    const startDate = parseDate(p.van);
+    const endDate   = parseDate(p.tot);
+    const isCurrent = t >= startDate && t <= endDate;
 
-    const todayStr = t.toLocaleDateString('nl-NL', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
-
-    const regionP = v.periodes[activeRegion];
-    const startDate = regionP ? parseDate(regionP.van) : earliestStart(v);
-    const endDate   = regionP ? parseDate(regionP.tot) : latestEnd(v);
-
+    let countdownHTML;
     if (isCurrent) {
-        el.innerHTML = `
-            <div class="cd-region">${REGION_LABEL[activeRegion]}</div>
-            <div class="cd-name">${v.naam}</div>
-            <div class="cd-dates">${startDate.toLocaleDateString('nl-NL',{day:'numeric',month:'long'})} t/m ${endDate.toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'})}</div>`;
+        const daysLeft = daysBetween(t, endDate) + 1;
+        countdownHTML = `<div class="cd-countdown">Nog <strong>${daysLeft} dag${daysLeft !== 1 ? 'en' : ''}</strong> ${v.naam.toLowerCase()}</div>`;
     } else {
-        el.innerHTML = `
-            <div class="cd-region">${REGION_LABEL[activeRegion]}</div>
-            <div class="cd-name">${v.naam}</div>
-            <div class="cd-dates">vanaf ${startDate.toLocaleDateString('nl-NL',{day:'numeric',month:'long'})} t/m ${endDate.toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'})}</div>`;
+        const daysTo = daysBetween(t, startDate);
+        countdownHTML = `<div class="cd-countdown"><strong>${daysTo} dag${daysTo !== 1 ? 'en' : ''}</strong> tot ${v.naam}</div>`;
     }
+
+    el.innerHTML = `
+        <div class="cd-region">${REGION_LABEL[activeRegion]}</div>
+        ${countdownHTML}
+        <div class="cd-dates">${startDate.toLocaleDateString('nl-NL',{day:'numeric',month:'long'})} t/m ${endDate.toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'})}</div>`;
 }
 
 // ── Duration summary ──────────────────────────────────────────────
@@ -702,7 +700,6 @@ function buildYearCard(year) {
         <div class="card-img year-card-img">
             <div class="card-img-text">
                 <div class="card-img-name">Schooljaar ${year.replace('-', '–')}</div>
-                <div class="card-img-year">Jaaroverzicht · ${REGION_LABEL[activeRegion]}</div>
             </div>
         </div>
         <div class="card-body">
