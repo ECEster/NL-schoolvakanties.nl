@@ -44,7 +44,7 @@ const TYPE_COLOR = {
     zomer:    '#C8A000',
     herfst:   '#B8541A',
     kerst:    '#1A5C2A',
-    voorjaar: '#2B7A3C',
+    voorjaar: '#B06A7A',
     mei:      '#C4A0CC',
 };
 
