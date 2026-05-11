@@ -287,7 +287,7 @@ const DATA = {
 // ── State ─────────────────────────────────────────────────────────
 
 let activeYear   = '2025-2026';
-let activeRegion = 'alle';
+let activeRegion = 'noord';
 
 // ── Date helpers ──────────────────────────────────────────────────
 
@@ -441,29 +441,17 @@ function renderCountdown() {
     const todayStr = t.toLocaleDateString('nl-NL', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
 
     if (isCurrent) {
-        const start    = earliestStart(v);
-        const maxEnd   = latestEnd(v);
-        const daysLeft = daysBetween(t, maxEnd) + 1;
+        const start  = earliestStart(v);
+        const maxEnd = latestEnd(v);
         el.innerHTML = `
-            <div class="cd-name">${TYPE_EMOJI[v.type]} ${v.naam}</div>
-            <div class="cd-dates">${start.toLocaleDateString('nl-NL',{day:'numeric',month:'long'})} – ${maxEnd.toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'})}</div>
-            <div class="cd-today">${todayStr}</div>
-            <div class="cd-on-vacation">
-                <span class="pulse"></span>
-                Nog <strong>&nbsp;${daysLeft}&nbsp;</strong> dag${daysLeft!==1?'en':''}
-            </div>`;
+            <div class="cd-name">${v.naam}</div>
+            <div class="cd-dates">${start.toLocaleDateString('nl-NL',{day:'numeric',month:'long'})} t/m ${maxEnd.toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'})}</div>`;
     } else {
-        const start    = earliestStart(v);
-        const daysLeft = daysBetween(t, start);
+        const start  = earliestStart(v);
+        const maxEnd = latestEnd(v);
         el.innerHTML = `
-            <div class="cd-label">Volgende vakantie</div>
-            <div class="cd-name">${TYPE_EMOJI[v.type]} ${v.naam}</div>
-            <div class="cd-dates">Vanaf ${start.toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'})}</div>
-            <div class="cd-today">${todayStr}</div>
-            <div class="cd-pill">
-                <span class="cd-num">${daysLeft}</span>
-                <span class="cd-unit">dag${daysLeft!==1?'en':''}</span>
-            </div>`;
+            <div class="cd-name">${v.naam}</div>
+            <div class="cd-dates">vanaf ${start.toLocaleDateString('nl-NL',{day:'numeric',month:'long'})} t/m ${maxEnd.toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'})}</div>`;
     }
 }
 
@@ -483,6 +471,32 @@ function durationSummary(v) {
     return Object.entries(days)
         .map(([r,d]) => `${REGION_LABEL[r]}: <strong>${d} dgn</strong>`)
         .join(' · ');
+}
+
+// ── Regio-countdown ───────────────────────────────────────────────
+
+function renderRegionCountdown() {
+    const el = document.getElementById('region-cd');
+    if (!el) return;
+    const t = today();
+    const years = Object.keys(DATA).sort();
+
+    for (const yr of years) {
+        for (const v of DATA[yr]) {
+            const p = v.periodes[activeRegion];
+            const s = parseDate(p.van), e = parseDate(p.tot);
+            if (t > e) continue;
+            if (t >= s) {
+                const daysLeft = daysBetween(t, e) + 1;
+                el.innerHTML = `<div class="rcd rcd-current"><span class="pulse"></span> Nog <strong>${daysLeft} dag${daysLeft!==1?'en':''}</strong> vakantie</div>`;
+            } else {
+                const daysLeft = daysBetween(t, s);
+                el.innerHTML = `<div class="rcd"><strong>${daysLeft} dag${daysLeft!==1?'en':''}</strong> tot ${v.naam}</div>`;
+            }
+            return;
+        }
+    }
+    el.innerHTML = '';
 }
 
 // ── Card renderer ─────────────────────────────────────────────────
@@ -695,6 +709,7 @@ function buildCardFixed(v, year) {
 // ── Render grid ───────────────────────────────────────────────────
 
 function renderCards() {
+    renderRegionCountdown();
     const yd     = DATA[activeYear];
     const grid   = document.getElementById('cards');
     const notice = document.getElementById('notice-provisional');
@@ -919,6 +934,7 @@ document.getElementById('region-row').addEventListener('click', e => {
     if (!btn) return;
     activeRegion = btn.dataset.region;
     document.querySelectorAll('.rbtn').forEach(b => b.classList.toggle('active', b===btn));
+    renderRegionCountdown();
     renderCards();
 });
 
