@@ -532,7 +532,7 @@ function buildCard(v, year) {
         <div class="card-img">
             <div class="card-img-deco">${TYPE_DECO[v.type]}</div>
             <div class="card-img-text">
-                <div class="card-img-name">${TYPE_EMOJI[v.type]} ${v.naam}</div>
+                <div class="card-img-name">${v.naam}</div>
                 <div class="card-img-year">Schooljaar ${year}</div>
             </div>
             <span class="card-badge ${badgeCls}">${badgeText}</span>
@@ -677,7 +677,7 @@ function buildCardFixed(v, year) {
         <div class="card-img">
             <div class="card-img-deco">${TYPE_DECO[v.type]}</div>
             <div class="card-img-text">
-                <div class="card-img-name">${TYPE_EMOJI[v.type]} ${v.naam}</div>
+                <div class="card-img-name">${v.naam}</div>
                 <div class="card-img-year">Schooljaar ${year}</div>
             </div>
             <span class="card-badge ${badgeCls}">${badgeText}</span>
