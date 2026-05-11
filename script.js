@@ -484,7 +484,7 @@ function injectDotStyles() {
 // Actually simpler: set background on ::after via JS by wrapping
 // We'll re-render using a different approach — add a <b> child element
 
-function renderMiniCalFixed(year, month, v, selectedRegion) {
+function renderMiniCalFixed(year, month, v, selectedRegion, highlightColor) {
     const t = today();
     const firstDay = new Date(year, month, 1);
     const lastDay  = new Date(year, month+1, 0);
@@ -509,12 +509,16 @@ function renderMiniCalFixed(year, month, v, selectedRegion) {
             .map(([r]) => r);
 
         let dotBg = '';
-        if (vacRegions.length===1) dotBg = REGION_COLOR[vacRegions[0]];
+        if (vacRegions.length===1) dotBg = highlightColor || REGION_COLOR[vacRegions[0]];
         else if (vacRegions.length===2) {
-            const [c1,c2]=vacRegions.map(r=>REGION_COLOR[r]);
+            const [c1,c2] = highlightColor
+                ? [highlightColor, highlightColor]
+                : vacRegions.map(r=>REGION_COLOR[r]);
             dotBg=`linear-gradient(to right,${c1} 50%,${c2} 50%)`;
         } else if (vacRegions.length>=3) {
-            const [c1,c2,c3]=vacRegions.map(r=>REGION_COLOR[r]);
+            const [c1,c2,c3] = highlightColor
+                ? [highlightColor, highlightColor, highlightColor]
+                : vacRegions.map(r=>REGION_COLOR[r]);
             dotBg=`linear-gradient(to right,${c1} 33%,${c2} 33% 66%,${c3} 66%)`;
         }
 
@@ -623,7 +627,7 @@ function buildCardFixed(v, year) {
           })();
 
     const isWide = months.length >= 2;
-    const miniCals = months.map(({y,m}) => renderMiniCalFixed(y,m,v,activeRegion)).join('');
+    const miniCals = months.map(({y,m}) => renderMiniCalFixed(y,m,v,activeRegion,TYPE_COLOR[v.type])).join('');
 
     const regions = ['noord','midden','zuidd'];
     let regionHTML = '';
