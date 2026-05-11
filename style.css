@@ -741,24 +741,25 @@ a { color: var(--green); text-underline-offset: 3px; }
 
 /* ── Footer ──────────────────────────────────────────── */
 .footer {
-    background: var(--green);
-    color: rgba(255,255,255,.65);
+    background: var(--white);
+    color: var(--green);
+    border-top: 4px solid var(--green);
     padding: 36px 24px;
     text-align: center;
     font-size: 0.875rem;
     font-weight: 500;
 }
 
-.footer a { color: rgba(255,255,255,.90); text-underline-offset: 3px; }
+.footer a { color: var(--green); text-underline-offset: 3px; }
 
-.footer-sub { font-size: 0.76rem; opacity: 0.38; margin-top: 6px; }
+.footer-sub { font-size: 0.76rem; opacity: 0.55; margin-top: 6px; }
 
 .footer-disclaimer {
     margin-top: 18px;
     padding-top: 16px;
-    border-top: 1px solid rgba(255,255,255,.08);
+    border-top: 1px solid rgba(43,122,60,.15);
     font-size: 0.72rem;
-    opacity: 0.28;
+    opacity: 0.45;
     max-width: 640px;
     margin-left: auto;
     margin-right: auto;
