@@ -482,7 +482,7 @@ function renderRegionCountdown() {
     const years = Object.keys(DATA).sort();
 
     for (const yr of years) {
-        for (const v of DATA[yr]) {
+        for (const v of DATA[yr].vakanties) {
             const p = v.periodes[activeRegion];
             const s = parseDate(p.van), e = parseDate(p.tot);
             if (t > e) continue;
