@@ -287,7 +287,7 @@ function renderMiniCal(year, month, v) {
     const lastDay  = new Date(year, month+1, 0);
     let startDow   = (firstDay.getDay() + 6) % 7; // Mo=0
 
-    let html = `<div class="mini-cal"><div class="mc-title">${MONTHS_NL[month].slice(0,3)} ${year}</div><div class="mc-grid">`;
+    let html = `<div class="mini-cal"><div class="mc-title">${MONTHS_SH[month]} ${year}</div><div class="mc-grid">`;
 
     for (const h of DAYS_SH) html += `<span class="mc-head">${h}</span>`;
     for (let i=0; i<startDow; i++) html += `<span></span>`;
@@ -541,7 +541,7 @@ function renderMiniCalFixed(year, month, v, selectedRegion, highlightColor) {
     }
 
     return `<div class="mini-cal">
-        <div class="mc-title">${MONTHS_NL[month].slice(0,3)} ${year}</div>
+        <div class="mc-title">${MONTHS_SH[month]} ${year}</div>
         <div class="mc-grid">${cells.join('')}</div>
     </div>`;
 }
@@ -592,7 +592,7 @@ function renderYearCalMonth(year, month, vakanties, region) {
         : '';
 
     return `<div class="mini-cal">
-        <div class="mc-title">${MONTHS_NL[month].slice(0,3)} ${year}</div>
+        <div class="mc-title">${MONTHS_SH[month]} ${year}</div>
         <div class="mc-grid">${cells.join('')}</div>
         ${vacHTML}
     </div>`;
