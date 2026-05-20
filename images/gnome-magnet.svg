@@ -31,8 +31,8 @@
     <ellipse cx="70" cy="89" rx="46" ry="12" fill="#FDFAF4"/>
     <!-- Hoofd + oren -->
     <ellipse cx="70" cy="103" rx="32" ry="24" fill="#FDFAF4"/>
-    <!-- Baard -->
-    <ellipse cx="70" cy="138" rx="40" ry="34" fill="#FDFAF4"/>
+    <!-- Baard (smaller) -->
+    <ellipse cx="70" cy="140" rx="28" ry="34" fill="#FDFAF4"/>
     <!-- Lijf -->
     <rect x="40" y="158" width="60" height="22" rx="11" fill="#FDFAF4"/>
     <!-- Laarzen -->
@@ -71,12 +71,15 @@
     <circle cx="62" cy="96" r="1.3" fill="rgba(255,255,255,0.65)"/>
     <circle cx="80" cy="96" r="1.3" fill="rgba(255,255,255,0.65)"/>
 
-    <!-- Baard -->
-    <ellipse cx="70" cy="138" rx="40" ry="34" fill="url(#gm-beard)"/>
-    <path d="M48,118 Q70,130 92,118" stroke="rgba(180,168,148,0.45)" stroke-width="2" fill="none" stroke-linecap="round"/>
-    <path d="M44,129 Q70,142 96,129" stroke="rgba(180,168,148,0.45)" stroke-width="2" fill="none" stroke-linecap="round"/>
-    <path d="M46,140 Q70,154 94,140" stroke="rgba(180,168,148,0.45)" stroke-width="2" fill="none" stroke-linecap="round"/>
-    <path d="M50,151 Q70,163 90,151" stroke="rgba(180,168,148,0.45)" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <!-- Baard (smaller) -->
+    <ellipse cx="70" cy="140" rx="28" ry="34" fill="url(#gm-beard)"/>
+    <path d="M50,122 Q70,132 90,122" stroke="rgba(180,168,148,0.45)" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M48,133 Q70,144 92,133" stroke="rgba(180,168,148,0.45)" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M49,144 Q70,156 91,144" stroke="rgba(180,168,148,0.45)" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M52,155 Q70,165 88,155" stroke="rgba(180,168,148,0.45)" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+    <!-- Mondje (in de baard, net boven het midden) -->
+    <path d="M63,120 Q70,127 77,120" stroke="#9A8868" stroke-width="2.2" fill="none" stroke-linecap="round"/>
 
     <!-- Armpjes -->
     <ellipse cx="40" cy="156" rx="11" ry="6" fill="#A878B8" transform="rotate(-28 40 156)"/>
