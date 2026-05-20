@@ -194,6 +194,14 @@ a { color: var(--green); text-underline-offset: 3px; }
 
 .ebtn:hover { background: var(--bg2); border-color: var(--green); box-shadow: var(--shadow-1); }
 
+.ebtn-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
 .ebtn-noord { border-left: 4px solid #B5A800; }
 .ebtn-noord:hover { border-left-color: #B5A800; border-color: #B5A800; background: #FAFAE8; }
 
