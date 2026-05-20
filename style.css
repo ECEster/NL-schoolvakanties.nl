@@ -820,15 +820,24 @@ a { color: var(--green); text-underline-offset: 3px; }
 /* ── Print styles ────────────────────────────────────── */
 .print-only { display: none; }
 
+@page { margin: 0; }
+
 @media print {
     .no-print { display: none !important; }
     .print-only { display: block; }
 
     body { background: #fff; font-size: 12px; font-family: 'Space Mono', monospace; }
 
-    .print-header { font-size: 0.8rem; color: #888; text-align: right; padding: 6px 24px 0; }
+    .print-header {
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: #333;
+        padding: 14px 24px 6px;
+        border-bottom: 1.5px solid #ddd;
+        margin-bottom: 4px;
+    }
 
-    .print-month { page-break-before: always; padding: 20px 24px; }
+    .print-month { page-break-before: always; padding: 16px 24px; }
     .print-month:first-of-type { page-break-before: avoid; }
 
     .pm-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; color: #2A2018; }

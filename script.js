@@ -892,7 +892,6 @@ function doExport(region, year) {
 function buildPrintView() {
     const yd     = DATA[activeYear];
     const region = activeRegion;
-    const regionLabel = region==='alle' ? 'Alle regio\'s' : REGION_LABEL[region];
     const root   = document.getElementById('print-root');
 
     // Gather all months in the school year
@@ -912,7 +911,7 @@ function buildPrintView() {
         .map(s => { const [y,m]=s.split('-'); return {y:+y,m:+m}; })
         .sort((a,b)=>a.y-b.y||a.m-b.m);
 
-    let html = `<div class="print-header">Schoolvakanties ${activeYear} · ${regionLabel}${!yd.confirmed?' · Indicatief':''}</div>`;
+    let html = `<div class="print-header">nl-schoolvakanties – Schoolvakanties Nederland</div>`;
 
     for (const {y,m} of months) {
         const firstDay = new Date(y,m,1);
