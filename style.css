@@ -194,6 +194,15 @@ a { color: var(--green); text-underline-offset: 3px; }
 
 .ebtn:hover { background: var(--bg2); border-color: var(--green); box-shadow: var(--shadow-1); }
 
+.ebtn-noord { border-left: 4px solid #B5A800; }
+.ebtn-noord:hover { border-left-color: #B5A800; border-color: #B5A800; background: #FAFAE8; }
+
+.ebtn-midden { border-left: 4px solid var(--green-mid); }
+.ebtn-midden:hover { border-left-color: var(--green-mid); border-color: var(--green-mid); background: var(--green-light); }
+
+.ebtn-zuidd { border-left: 4px solid var(--lilac); }
+.ebtn-zuidd:hover { border-left-color: var(--lilac); border-color: var(--lilac); background: var(--lilac-light); }
+
 .export-hint {
     margin-top: 12px;
     font-size: 0.74rem;
