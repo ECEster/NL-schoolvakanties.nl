@@ -34,11 +34,11 @@ const TYPE_DECO = {
 };
 
 const TYPE_ICON = {
-    zomer:    'images/icons_seasons/IconSummerSea.png',
-    herfst:   'images/icons_seasons/IconFall.png',
-    voorjaar: 'images/icons_seasons/IconLenteBright.png',
-    mei:      'images/icons_seasons/IconLenteBright.png',
-    kerst:    'images/icons_seasons/IconWinterGreen.png',
+    zomer:    'images/clay-zomer.svg',
+    herfst:   'images/clay-herfst.svg',
+    kerst:    'images/clay-kerst.svg',
+    voorjaar: null,
+    mei:      null,
 };
 
 const TYPE_COLOR = {
@@ -747,12 +747,11 @@ function renderCards() {
         }
     }
 
-    const currentCalYear = today().getFullYear();
     const visibleVakanties = yearExplicit
         ? yd.vakanties
         : yd.vakanties.filter(v => {
-            const p = v.periodes[activeRegion];
-            return p && parseDate(p.tot).getFullYear() >= currentCalYear;
+            const status = activeRegion === 'alle' ? statusForAll(v) : cardStatus(v.periodes[activeRegion]?.van, v.periodes[activeRegion]?.tot);
+            return status !== 'past';
           });
 
     grid.innerHTML = buildYearCard(activeYear) + visibleVakanties.map(v => buildCardFixed(v, activeYear)).join('') + extraCards.join('');
