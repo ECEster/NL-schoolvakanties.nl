@@ -34,7 +34,7 @@ const TYPE_DECO = {
 };
 
 const TYPE_ICON = {
-    zomer:    'images/clay-zomer.svg',
+    zomer:    'images/icons_seasons/IconSummer.png',
     herfst:   'images/clay-herfst.svg',
     kerst:    'images/clay-kerst.svg',
     voorjaar: null,
