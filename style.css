@@ -549,7 +549,7 @@ a { color: var(--green); text-underline-offset: 3px; }
 /* Monochromatisch groen + lila accent */
 .card[data-type="zomer"]    .card-img { background: #C8A000; }
 .card[data-type="herfst"]   .card-img { background: #B8541A; }
-.card[data-type="kerst"]    .card-img { background: #1A5C2A; }
+.card[data-type="kerst"]    .card-img { background: #0D2E1A; }
 .card[data-type="voorjaar"] .card-img { background: #B06A7A; }
 .card[data-type="mei"]      .card-img { background: var(--lilac); }
 
