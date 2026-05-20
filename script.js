@@ -35,7 +35,7 @@ const TYPE_DECO = {
 
 const TYPE_ICON = {
     zomer:    'images/icons_seasons/IconSummer.png',
-    herfst:   'images/clay-herfst.svg',
+    herfst:   'images/icons_seasons/IconFall.png',
     kerst:    'images/clay-kerst.svg',
     voorjaar: null,
     mei:      null,
