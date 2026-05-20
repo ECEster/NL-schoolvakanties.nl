@@ -195,6 +195,7 @@ const DATA = {
 
 let activeRegion      = 'noord';
 let yearExplicit      = false; // true wanneer gebruiker zelf een jaar-tab heeft geklikt
+let showPast          = false;
 
 // Start bij het eerste schooljaar dat nog toekomstige vakanties heeft
 let activeYear = (() => {
@@ -759,15 +760,28 @@ function renderCards() {
         }
     }
 
+    const getStatus = v => activeRegion === 'alle' ? statusForAll(v) : cardStatus(v.periodes[activeRegion]?.van, v.periodes[activeRegion]?.tot);
+
     const visibleVakanties = yearExplicit
         ? yd.vakanties
-        : yd.vakanties.filter(v => {
-            const status = activeRegion === 'alle' ? statusForAll(v) : cardStatus(v.periodes[activeRegion]?.van, v.periodes[activeRegion]?.tot);
-            return status !== 'past';
-          });
+        : yd.vakanties.filter(v => getStatus(v) !== 'past');
 
-    grid.innerHTML = buildYearCard(activeYear) + visibleVakanties.map(v => buildCardFixed(v, activeYear)).join('') + extraCards.join('');
+    const pastVakanties = yearExplicit ? [] : yd.vakanties.filter(v => getStatus(v) === 'past');
+
+    const pastHTML = showPast ? pastVakanties.map(v => buildCardFixed(v, activeYear)).join('') : '';
+    const toggleHTML = !yearExplicit && pastVakanties.length
+        ? `<div class="past-toggle-wrap">
+               <button class="past-toggle-btn" id="btn-toggle-past">
+                   ${showPast ? 'Verberg voorbije vakanties' : `Toon voorbije vakanties (${pastVakanties.length})`}
+               </button>
+           </div>`
+        : '';
+
+    grid.innerHTML = buildYearCard(activeYear) + visibleVakanties.map(v => buildCardFixed(v, activeYear)).join('') + extraCards.join('') + pastHTML + toggleHTML;
     notice.hidden  = yd.confirmed;
+
+    const toggleBtn = document.getElementById('btn-toggle-past');
+    if (toggleBtn) toggleBtn.addEventListener('click', () => { showPast = !showPast; renderCards(); });
 }
 
 // ── Year tabs ─────────────────────────────────────────────────────
@@ -948,6 +962,7 @@ document.getElementById('year-bar').addEventListener('click', e => {
     if (!btn) return;
     activeYear    = btn.dataset.year;
     yearExplicit  = true;
+    showPast      = false;
     document.querySelectorAll('.ytab').forEach(b => b.classList.toggle('active', b===btn));
     renderCards();
 });
@@ -956,6 +971,7 @@ document.getElementById('region-row').addEventListener('click', e => {
     const btn = e.target.closest('.rbtn');
     if (!btn) return;
     activeRegion = btn.dataset.region;
+    showPast     = false;
     document.querySelectorAll('.rbtn').forEach(b => b.classList.toggle('active', b===btn));
     renderCountdown();
     renderRegionCountdown();

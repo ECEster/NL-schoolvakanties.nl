@@ -374,6 +374,33 @@ a { color: var(--green); text-underline-offset: 3px; }
 .ytab:hover { border-color: var(--green); color: var(--green); background: var(--green-light); }
 .ytab.active { background: var(--green); border-color: var(--green); color: var(--white); font-weight: 700; box-shadow: 0 2px 8px rgba(43,122,60,.25); }
 
+/* Past toggle button */
+.past-toggle-wrap {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    padding: 8px 0 4px;
+}
+
+.past-toggle-btn {
+    padding: 8px 20px;
+    border: 1.5px solid var(--border);
+    border-radius: 999px;
+    background: var(--bg);
+    color: var(--text2);
+    font-family: inherit;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .15s;
+}
+
+.past-toggle-btn:hover {
+    border-color: var(--green);
+    color: var(--green);
+    background: var(--green-light);
+}
+
 /* Provisional notice */
 .notice {
     background: var(--green-light);
