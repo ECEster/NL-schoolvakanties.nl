@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <defs>
+    <radialGradient id="leaf" cx="38%" cy="28%" r="72%">
+      <stop offset="0%"  stop-color="#F4B870"/>
+      <stop offset="55%" stop-color="#D06020"/>
+      <stop offset="100%" stop-color="#8B3A10"/>
+    </radialGradient>
+    <filter id="sh" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="rgba(80,30,0,0.35)"/>
+    </filter>
+  </defs>
+  <g filter="url(#sh)">
+    <!-- Maple leaf shape -->
+    <path d="
+      M60 8
+      C58 16, 50 20, 44 18
+      C42 24, 48 32, 42 36
+      C36 38, 26 34, 22 40
+      C18 46, 26 52, 28 56
+      C24 60, 16 62, 18 68
+      C20 74, 30 70, 34 74
+      C32 82, 26 88, 30 92
+      C34 96, 46 92, 52 94
+      C54 100, 54 108, 60 110
+      C66 108, 66 100, 68 94
+      C74 92, 86 96, 90 92
+      C94 88, 88 82, 86 74
+      C90 70, 100 74, 102 68
+      C104 62, 96 60, 92 56
+      C94 52, 102 46, 98 40
+      C94 34, 84 38, 78 36
+      C72 32, 78 24, 76 18
+      C70 20, 62 16, 60 8Z
+    " fill="url(#leaf)"/>
+    <!-- Stem -->
+    <path d="M60 108 L60 118" stroke="#6B2808" stroke-width="6" stroke-linecap="round"/>
+    <!-- Leaf veins -->
+    <path d="M60 22 L60 100" stroke="rgba(80,28,5,0.25)" stroke-width="2" fill="none"/>
+    <path d="M60 46 L36 33" stroke="rgba(80,28,5,0.20)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <path d="M60 46 L84 33" stroke="rgba(80,28,5,0.20)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <path d="M60 62 L30 50" stroke="rgba(80,28,5,0.18)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <path d="M60 62 L90 50" stroke="rgba(80,28,5,0.18)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <path d="M60 76 L34 67" stroke="rgba(80,28,5,0.16)" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+    <path d="M60 76 L86 67" stroke="rgba(80,28,5,0.16)" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+  </g>
+  <!-- Gloss -->
+  <ellipse cx="42" cy="34" rx="11" ry="7" fill="rgba(255,255,255,0.38)"
+           transform="rotate(-25 42 34)"/>
+</svg>

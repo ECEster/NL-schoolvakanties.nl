@@ -512,6 +512,13 @@ a { color: var(--green); text-underline-offset: 3px; }
     user-select: none;
 }
 
+/* Clay SVG illustration inside deco area */
+.card-img-deco .deco-clay {
+    width: 88px;
+    height: 88px;
+    object-fit: contain;
+}
+
 /* Monochromatisch groen + lila accent */
 .card[data-type="zomer"]    .card-img { background: #C8A000; }
 .card[data-type="herfst"]   .card-img { background: #B8541A; }

@@ -26,9 +26,9 @@ const TYPE_EMOJI = {
 };
 
 const TYPE_DECO = {
-    zomer:    '🌊',
-    herfst:   '🍁',
-    kerst:    '⛄',
+    zomer:    '<img src="images/clay-zomer.svg" class="deco-clay" alt="">',
+    herfst:   '<img src="images/clay-herfst.svg" class="deco-clay" alt="">',
+    kerst:    '<img src="images/clay-kerst.svg" class="deco-clay" alt="">',
     voorjaar: '🌸',
     mei:      '🌼',
 };

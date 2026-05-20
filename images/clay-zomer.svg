@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <defs>
+    <radialGradient id="disc" cx="38%" cy="32%" r="68%">
+      <stop offset="0%"  stop-color="#FFE98C"/>
+      <stop offset="60%" stop-color="#F9C030"/>
+      <stop offset="100%" stop-color="#C97B10"/>
+    </radialGradient>
+    <radialGradient id="ray" cx="50%" cy="20%" r="80%">
+      <stop offset="0%"  stop-color="#FFE060"/>
+      <stop offset="100%" stop-color="#F4A800"/>
+    </radialGradient>
+    <filter id="sh" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="rgba(140,70,0,0.35)"/>
+    </filter>
+  </defs>
+  <g filter="url(#sh)">
+    <!-- 8 rays behind disc -->
+    <rect x="57" y="4"  width="6" height="22" rx="3" fill="url(#ray)" transform="rotate(  0 60 60)"/>
+    <rect x="57" y="4"  width="6" height="22" rx="3" fill="url(#ray)" transform="rotate( 45 60 60)"/>
+    <rect x="57" y="4"  width="6" height="22" rx="3" fill="url(#ray)" transform="rotate( 90 60 60)"/>
+    <rect x="57" y="4"  width="6" height="22" rx="3" fill="url(#ray)" transform="rotate(135 60 60)"/>
+    <rect x="57" y="4"  width="6" height="22" rx="3" fill="url(#ray)" transform="rotate(180 60 60)"/>
+    <rect x="57" y="4"  width="6" height="22" rx="3" fill="url(#ray)" transform="rotate(225 60 60)"/>
+    <rect x="57" y="4"  width="6" height="22" rx="3" fill="url(#ray)" transform="rotate(270 60 60)"/>
+    <rect x="57" y="4"  width="6" height="22" rx="3" fill="url(#ray)" transform="rotate(315 60 60)"/>
+    <!-- Clay disc -->
+    <circle cx="60" cy="60" r="37" fill="url(#disc)"/>
+    <circle cx="60" cy="60" r="37" fill="none" stroke="rgba(160,90,0,0.18)" stroke-width="2.5"/>
+  </g>
+  <!-- Dot eyes -->
+  <circle cx="50" cy="56" r="3.5" fill="#7A4800" opacity="0.65"/>
+  <circle cx="70" cy="56" r="3.5" fill="#7A4800" opacity="0.65"/>
+  <!-- Smile -->
+  <path d="M47 67 Q60 79 73 67" stroke="#7A4800" stroke-width="3.2" fill="none"
+        stroke-linecap="round" opacity="0.60"/>
+  <!-- Rosy cheeks -->
+  <ellipse cx="44" cy="65" rx="6" ry="4" fill="#FF8C42" opacity="0.25"/>
+  <ellipse cx="76" cy="65" rx="6" ry="4" fill="#FF8C42" opacity="0.25"/>
+  <!-- Gloss -->
+  <ellipse cx="43" cy="41" rx="11" ry="7" fill="rgba(255,255,255,0.48)"
+           transform="rotate(-30 43 41)"/>
+</svg>
