@@ -37,8 +37,8 @@ const TYPE_ICON = {
     zomer:    'images/icons_seasons/IconSummer.png',
     herfst:   'images/icons_seasons/IconFall.png',
     kerst:    'images/icons_seasons/IconWinterGreen.png',
-    voorjaar: 'images/icons_seasons/IconLenteBright.png',
-    mei:      'images/icons_seasons/IconMay.png',
+    voorjaar: 'images/icons_seasons/IconPreyear.png',
+    mei:      'images/icons_seasons/IconLenteBright.png',
 };
 
 const TYPE_COLOR = {
