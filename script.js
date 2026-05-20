@@ -581,9 +581,20 @@ function renderYearCalMonth(year, month, vakanties, region) {
         cells.push(`<span class="${cls}">${day}${dot}</span>`);
     }
 
+    const vacInMonth = vakanties.filter(v => {
+        const p = v.periodes[region];
+        return p && parseDate(p.van) <= lastDay && parseDate(p.tot) >= firstDay;
+    });
+    const vacHTML = vacInMonth.length
+        ? `<div class="mc-vac-row">${vacInMonth.map(v =>
+            `<span class="mc-vac-label"><b class="mc-vac-dot" style="background:${TYPE_COLOR[v.type]}"></b>${v.naam}</span>`
+          ).join('')}</div>`
+        : '';
+
     return `<div class="mini-cal">
         <div class="mc-title">${MONTHS_NL[month].slice(0,3)} ${year}</div>
         <div class="mc-grid">${cells.join('')}</div>
+        ${vacHTML}
     </div>`;
 }
 
@@ -867,11 +878,7 @@ function buildPrintView() {
         .map(s => { const [y,m]=s.split('-'); return {y:+y,m:+m}; })
         .sort((a,b)=>a.y-b.y||a.m-b.m);
 
-    let html = `<div class="print-cover">
-        <h1>🇳🇱 nl-schoolvakanties.nl</h1>
-        <p>Schoolvakanties ${activeYear} · ${regionLabel}</p>
-        <p style="font-size:.85rem;color:#888;margin-top:8px">Bron: rijksoverheid.nl${!yd.confirmed?' · Indicatief':''}</p>
-    </div>`;
+    let html = `<div class="print-header">Schoolvakanties ${activeYear} · ${regionLabel}${!yd.confirmed?' · Indicatief':''}</div>`;
 
     for (const {y,m} of months) {
         const firstDay = new Date(y,m,1);

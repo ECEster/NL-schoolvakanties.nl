@@ -673,6 +673,31 @@ a { color: var(--green); text-underline-offset: 3px; }
 
 .mc-day.vac { font-weight: 600; }
 
+.mc-vac-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px 6px;
+    margin-top: 5px;
+    padding: 0 1px;
+}
+
+.mc-vac-label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.60rem;
+    font-weight: 600;
+    color: var(--text2);
+}
+
+.mc-vac-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
 /* Region rows */
 .region-rows { display: flex; flex-direction: column; gap: 7px; }
 
@@ -745,11 +770,10 @@ a { color: var(--green); text-underline-offset: 3px; }
 
     body { background: #fff; font-size: 12px; font-family: 'Space Mono', monospace; }
 
-    .print-cover { text-align: center; padding: 60px 40px; page-break-after: always; }
-    .print-cover h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
-    .print-cover p { color: #555; margin-bottom: 4px; }
+    .print-header { font-size: 0.8rem; color: #888; text-align: right; padding: 6px 24px 0; }
 
     .print-month { page-break-before: always; padding: 20px 24px; }
+    .print-month:first-of-type { page-break-before: avoid; }
 
     .pm-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; color: #2A2018; }
 
