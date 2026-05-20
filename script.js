@@ -601,13 +601,11 @@ function renderYearCalMonth(year, month, vakanties, region) {
 function buildYearCard(year) {
     const yd = DATA[year];
     const parts = year.split('-');
-    const y1 = parseInt(parts[0]);
     const y2 = parseInt(parts[1]);
 
-    // Aug y1 → Jul y2 (12 months)
+    // Jan y2 → Dec y2 (kalenderjaar van het tweede jaar)
     const months = [];
-    for (let m = 7; m <= 11; m++) months.push({y: y1, m});
-    for (let m = 0; m <= 6; m++) months.push({y: y2, m});
+    for (let m = 0; m <= 11; m++) months.push({y: y2, m});
 
     const legendHTML = yd.vakanties
         .filter(v => v.periodes[activeRegion])
