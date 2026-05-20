@@ -629,10 +629,19 @@ function buildYearCard(year) {
 
     const monthsHTML = months.map(({y, m}) => renderYearCalMonth(y, m, allVakanties, activeRegion)).join('');
 
+    const t = today();
+    const yearTabsHTML = Object.keys(DATA)
+        .filter(y => DATA[y].vakanties.some(v =>
+            Object.values(v.periodes).some(p => parseDate(p.tot) >= t)
+        ))
+        .map(y => `<button class="ytab${y === activeYear ? ' active' : ''}" data-year="${y}">${y.replace('-','–')}</button>`)
+        .join('');
+
     return `<div class="card year-card">
         <div class="card-img year-card-img">
+            <div class="year-card-tabs">${yearTabsHTML}</div>
             <div class="card-img-text">
-                <div class="card-img-name">Schooljaar ${year.replace('-', '–')}</div>
+                <div class="card-img-name">Kalenderjaar ${y2}</div>
             </div>
         </div>
         <div class="card-body">
@@ -957,13 +966,12 @@ function triggerPrint() {
 
 // ── Event listeners ───────────────────────────────────────────────
 
-document.getElementById('year-bar').addEventListener('click', e => {
+document.addEventListener('click', e => {
     const btn = e.target.closest('.ytab');
     if (!btn) return;
     activeYear    = btn.dataset.year;
     yearExplicit  = true;
     showPast      = false;
-    document.querySelectorAll('.ytab').forEach(b => b.classList.toggle('active', b===btn));
     renderCards();
 });
 
