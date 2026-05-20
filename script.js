@@ -603,16 +603,30 @@ function buildYearCard(year) {
     const parts = year.split('-');
     const y2 = parseInt(parts[1]);
 
+    // Voeg vakanties van het volgende schooljaar toe die in kalenderjaar y2 vallen
+    const calStart = new Date(y2, 0, 1);
+    const calEnd   = new Date(y2, 11, 31);
+    const yearKeys = Object.keys(DATA);
+    const nextKey  = yearKeys[yearKeys.indexOf(year) + 1];
+    const extraVak = nextKey ? DATA[nextKey].vakanties.filter(v =>
+        Object.values(v.periodes).some(p =>
+            parseDate(p.van) <= calEnd && parseDate(p.tot) >= calStart
+        )
+    ) : [];
+    const allVakanties = [...yd.vakanties, ...extraVak];
+
     // Jan y2 → Dec y2 (kalenderjaar van het tweede jaar)
     const months = [];
     for (let m = 0; m <= 11; m++) months.push({y: y2, m});
 
-    const legendHTML = yd.vakanties
-        .filter(v => v.periodes[activeRegion])
+    // Legend: dedupliceer op type
+    const seenTypes = new Set();
+    const legendHTML = allVakanties
+        .filter(v => { if (!v.periodes[activeRegion] || seenTypes.has(v.type)) return false; seenTypes.add(v.type); return true; })
         .map(v => `<span class="ycal-legend-item"><span class="ycal-swatch" style="background:${TYPE_COLOR[v.type]}"></span>${v.naam}</span>`)
         .join('');
 
-    const monthsHTML = months.map(({y, m}) => renderYearCalMonth(y, m, yd.vakanties, activeRegion)).join('');
+    const monthsHTML = months.map(({y, m}) => renderYearCalMonth(y, m, allVakanties, activeRegion)).join('');
 
     return `<div class="card year-card">
         <div class="card-img year-card-img">
