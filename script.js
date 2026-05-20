@@ -918,12 +918,13 @@ function buildPrintView() {
         const lastDay  = new Date(y,m+1,0);
         let startDow   = (firstDay.getDay()+6)%7;
 
-        // Legend
-        const legend = `<div class="pm-legend">
-            <span class="pm-legend-item"><span class="pm-swatch" style="background:${C_NOORD}"></span>Noord</span>
-            <span class="pm-legend-item"><span class="pm-swatch" style="background:${C_MIDDEN}"></span>Midden</span>
-            <span class="pm-legend-item"><span class="pm-swatch" style="background:${C_ZUIDD}"></span>Zuid</span>
-        </div>`;
+        // Legend — alleen geselecteerde regio(s)
+        const legendRegions = region === 'alle'
+            ? [['noord', C_NOORD, 'Noord'], ['midden', C_MIDDEN, 'Midden'], ['zuidd', C_ZUIDD, 'Zuid']]
+            : [[region, REGION_COLOR[region], REGION_LABEL[region]]];
+        const legend = `<div class="pm-legend">${legendRegions.map(([,kleur,label]) =>
+            `<span class="pm-legend-item"><span class="pm-swatch" style="background:${kleur}"></span>${label}</span>`
+        ).join('')}</div>`;
 
         let cells = DAYS_SH.map(h=>`<div class="pm-head">${h}</div>`).join('');
         for (let i=0;i<startDow;i++) cells += `<div class="pm-cell outside"></div>`;
