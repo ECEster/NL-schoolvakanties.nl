@@ -993,14 +993,7 @@ a { color: var(--green); text-underline-offset: 3px; }
     .hero { padding: 36px 0; }
     .rbtn { padding: 10px 6px; }
     .rbtn-provinces { display: none; }
-    .postit {
-        width: 110px;
-        font-size: 0.78rem;
-        line-height: 1.6;
-        padding: 10px 12px 14px;
-        right: 0;
-    }
-    .postit-gnome { width: 110px; bottom: -35px; right: -18px; }
+    .postit { display: none; }
     .postit-long { display: none; }
     .postit-short { display: inline; }
     .mini-cal-wrap {
