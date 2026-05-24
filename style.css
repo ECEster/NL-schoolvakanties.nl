@@ -1029,6 +1029,8 @@ a { color: var(--green); text-underline-offset: 3px; }
 
 .footer-sub { font-size: 0.76rem; opacity: 0.65; margin-top: 6px; }
 
+.footer-seo { font-size: 0.72rem; opacity: 0.55; margin-bottom: 14px; line-height: 1.6; }
+
 .footer-disclaimer {
     margin-top: 18px;
     padding-top: 16px;
