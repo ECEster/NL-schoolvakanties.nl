@@ -990,10 +990,22 @@ a { color: var(--green); text-underline-offset: 3px; }
 @media (max-width: 680px) {
     .cards { grid-template-columns: 1fr; }
     .cd-name { font-size: 1.6rem; }
-    .hero { padding: 36px 0; }
+    .hero { padding: 24px 0 16px; overflow: visible; }
+    .hero-inner { flex-wrap: wrap; }
+    #countdown { order: -1; flex: 0 0 100%; margin-bottom: 6px; }
+    .main { padding-top: 70px; }
     .rbtn { padding: 10px 6px; }
     .rbtn-provinces { display: none; }
-    .postit { display: none; }
+    .postit {
+        display: block;
+        width: 95px;
+        font-size: 0.62rem;
+        line-height: 1.6;
+        padding: 8px 8px 16px;
+        right: 0;
+        transform: rotate(3deg);
+    }
+    .postit-gnome { width: 68px; bottom: -24px; right: -12px; }
     .postit-long { display: none; }
     .postit-short { display: inline; }
     .mini-cal-wrap {
