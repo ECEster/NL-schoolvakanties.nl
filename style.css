@@ -127,6 +127,8 @@ a { color: var(--green); text-underline-offset: 3px; }
     pointer-events: none;
 }
 
+.postit-short { display: none; }
+
 .postit::before {
     content: '';
     position: absolute;
@@ -949,6 +951,16 @@ a { color: var(--green); text-underline-offset: 3px; }
     .hero { padding: 36px 0; }
     .rbtn { padding: 10px 6px; }
     .rbtn-provinces { display: none; }
+    .postit {
+        width: 110px;
+        font-size: 0.78rem;
+        line-height: 1.6;
+        padding: 10px 12px 14px;
+        right: 0;
+    }
+    .postit-gnome { width: 44px; bottom: -14px; right: 4px; }
+    .postit-long { display: none; }
+    .postit-short { display: inline; }
 }
 
 /* ── Footer ──────────────────────────────────────────── */
