@@ -991,6 +991,13 @@ a { color: var(--green); text-underline-offset: 3px; }
     .postit-gnome { width: 110px; bottom: -35px; right: -18px; }
     .postit-long { display: none; }
     .postit-short { display: inline; }
+    .mini-cal-wrap {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 4px;
+    }
+    .mini-cal { min-width: 140px; flex-shrink: 0; }
 }
 
 /* ── Footer ──────────────────────────────────────────── */
