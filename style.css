@@ -126,8 +126,8 @@ a { color: var(--green); text-underline-offset: 3px; }
 .postit {
     position: absolute;
     top: calc(100% + 10px);
-    right: -8px;
-    width: 250px;
+    right: 0;
+    width: 195px;
     background: #FFF176;
     color: #3A2E00;
     font-family: 'Playwrite GB J Guides', cursive;
