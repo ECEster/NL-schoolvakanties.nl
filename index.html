@@ -45,7 +45,26 @@
 <!-- ── Hero / Countdown ────────────────────────────── -->
 <div class="hero no-print">
     <div class="hero-inner container">
+        <!-- Export knop links -->
+        <button class="rbtn-action" id="btn-export" title="Exporteer naar agenda">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span>Export</span>
+        </button>
+
         <div id="countdown"></div>
+
+        <!-- Print knop rechts -->
+        <div class="print-btn-wrap">
+            <button class="rbtn-action" onclick="triggerPrint()" title="Afdrukken">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                <span>Print</span>
+            </button>
+            <div class="postit no-print">
+                <span class="postit-long">Print hier gemakkelijk de kalender voor op je koelkast!</span>
+                <span class="postit-short">Print!</span>
+                <img src="images/icons_seasons/MagnetGnomePastel.png" class="postit-gnome" alt="">
+            </div>
+        </div>
     </div>
 </div>
 
@@ -55,13 +74,6 @@
 
         <!-- Region selector -->
         <div class="region-row" id="region-row">
-            <!-- Export knop links -->
-            <button class="rbtn-action" id="btn-export" title="Exporteer naar agenda">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                <span>Export</span>
-            </button>
-
-            <!-- Regio tabs -->
             <button class="rbtn rbtn-n active" data-region="noord">
                 <span class="rbtn-top">Noord</span>
                 <span class="rbtn-provinces">Gron. · Fries. · Drenthe · Overijssel · Flevoland · Gelderland · Utrecht</span>
@@ -74,19 +86,6 @@
                 <span class="rbtn-top">Zuid</span>
                 <span class="rbtn-provinces">Noord-Brabant · Limburg</span>
             </button>
-
-            <!-- Print knop rechts -->
-            <div class="print-btn-wrap">
-                <button class="rbtn-action" onclick="triggerPrint()" title="Afdrukken">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-                    <span>Print</span>
-                </button>
-                <div class="postit no-print">
-                    <span class="postit-long">Print hier gemakkelijk de kalender voor op je koelkast!</span>
-                    <span class="postit-short">Print!</span>
-                    <img src="images/icons_seasons/MagnetGnomePastel.png" class="postit-gnome" alt="">
-                </div>
-            </div>
         </div>
 
         <!-- Year tabs -->

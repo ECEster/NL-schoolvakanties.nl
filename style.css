@@ -112,15 +112,15 @@ a { color: var(--green); text-underline-offset: 3px; }
     font-family: inherit;
     font-size: 0.58rem;
     font-weight: 700;
-    color: var(--green);
+    color: var(--white);
     text-transform: uppercase;
     letter-spacing: 0.06em;
     white-space: nowrap;
     flex-shrink: 0;
 }
 
-.rbtn-action svg { stroke: var(--green); }
-.rbtn-action:hover { background: rgba(255,255,255,.55); transform: translateY(-1px); }
+.rbtn-action svg { stroke: var(--white); }
+.rbtn-action:hover { background: rgba(255,255,255,.22); transform: translateY(-1px); }
 .rbtn-action:active { transform: scale(0.96); }
 
 .postit {
@@ -144,11 +144,11 @@ a { color: var(--green); text-underline-offset: 3px; }
 
 .postit-gnome {
     position: absolute;
-    bottom: -30px;
-    right: -18px;
-    width: 90px;
+    bottom: -55px;
+    right: -30px;
+    width: 180px;
     height: auto;
-    filter: drop-shadow(2px 5px 6px rgba(0,0,0,0.32));
+    filter: drop-shadow(2px 5px 8px rgba(0,0,0,0.35));
     pointer-events: none;
 }
 
@@ -313,8 +313,13 @@ a { color: var(--green); text-underline-offset: 3px; }
 .hero-inner {
     position: relative;
     z-index: 2;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
 }
+
+#countdown { flex: 1; text-align: center; }
 
 /* Banner — vakantiename + datumrange */
 #countdown { color: var(--white); }
@@ -983,7 +988,7 @@ a { color: var(--green); text-underline-offset: 3px; }
         padding: 10px 12px 14px;
         right: 0;
     }
-    .postit-gnome { width: 60px; bottom: -20px; right: -10px; }
+    .postit-gnome { width: 110px; bottom: -35px; right: -18px; }
     .postit-long { display: none; }
     .postit-short { display: inline; }
 }
