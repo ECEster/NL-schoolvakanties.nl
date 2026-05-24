@@ -564,7 +564,14 @@ a { color: var(--green); text-underline-offset: 3px; }
 }
 
 @media (max-width: 640px) {
-    .year-cal-grid { grid-template-columns: repeat(2, 1fr); }
+    .year-cal-grid {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 4px;
+    }
+    .year-card .mini-cal { min-width: 140px; flex-shrink: 0; }
 }
 
 .year-card .mini-cal { min-width: unset; }
