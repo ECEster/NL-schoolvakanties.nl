@@ -981,6 +981,11 @@ a { color: var(--green); text-underline-offset: 3px; }
     .pm-vac-bar { font-size: 0.6rem; font-weight: 700; border-radius: 4px; padding: 2px 4px; margin-top: 1px; color: #fff; }
 }
 
+/* Post-it verborgen op tussenliggende breedtes — te weinig ruimte naast vakantiename */
+@media (min-width: 681px) and (max-width: 960px) {
+    .postit { display: none; }
+}
+
 /* ── Responsive ──────────────────────────────────────── */
 @media (max-width: 680px) {
     .cards { grid-template-columns: 1fr; }
