@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schoolvakanties Noord Nederland 2025-2026 | Groningen, Friesland, Drenthe</title>
+    <meta name="description" content="Alle schoolvakanties voor regio Noord Nederland (Groningen, Friesland, Drenthe, Overijssel, Flevoland, Gelderland, Utrecht) voor 2025-2026. Met afteltimer en agenda-export.">
+    <link rel="canonical" href="https://www.nl-schoolvakanties.nl/noord.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.nl-schoolvakanties.nl/noord.html">
+    <meta property="og:title" content="Schoolvakanties Noord Nederland 2025-2026">
+    <meta property="og:description" content="Schoolvakanties voor regio Noord: Groningen, Friesland, Drenthe, Overijssel, Flevoland, Gelderland en Utrecht. Zomervakantie, herfstvakantie, kerstvakantie en meer.">
+    <meta property="og:image" content="https://www.nl-schoolvakanties.nl/images/icons_seasons/MagnetGnomePastel.png">
+    <meta property="og:locale" content="nl_NL">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Schoolvakanties Noord Nederland 2025-2026">
+    <meta name="twitter:description" content="Schoolvakanties regio Noord: Groningen, Friesland, Drenthe, Overijssel, Flevoland, Gelderland en Utrecht.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+GB+J+Guides:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Schoolvakanties Noord Nederland 2025-2026",
+      "url": "https://www.nl-schoolvakanties.nl/noord.html",
+      "description": "Alle schoolvakanties voor regio Noord Nederland voor 2025-2026.",
+      "inLanguage": "nl"
+    }
+    </script>
+    <script>window.__defaultRegion = 'noord';</script>
+</head>
+<body>
+
+<!-- ── Header ──────────────────────────────────────── -->
+<header class="header no-print">
+    <div class="nav container">
+        <a class="logo" href="index.html">
+            <span class="logo-mark">NL</span>
+            <span class="logo-text">schoolvakanties<span class="logo-tld">.nl</span></span>
+        </a>
+    </div>
+</header>
+
+<!-- Export panel -->
+<div class="export-panel no-print" id="export-panel" hidden>
+    <div class="export-inner">
+        <div class="export-head">
+            <strong>📅 Exporteer naar agenda (.ics)</strong>
+            <button class="export-close" id="export-close">✕</button>
+        </div>
+        <label class="export-label">Schooljaar
+            <select id="export-year-sel"></select>
+        </label>
+        <div class="export-btns">
+            <button class="ebtn ebtn-alle" data-region="alle"><img src="images/icons_seasons/IconFlag.png" class="ebtn-icon" alt="">Alle regio's</button>
+            <button class="ebtn ebtn-noord" data-region="noord"><img src="images/icons_seasons/IconFlag.png" class="ebtn-icon" alt="">Noord</button>
+            <button class="ebtn ebtn-midden" data-region="midden"><img src="images/icons_seasons/IconFlag.png" class="ebtn-icon" alt="">Midden</button>
+            <button class="ebtn ebtn-zuidd" data-region="zuidd"><img src="images/icons_seasons/IconFlag.png" class="ebtn-icon" alt="">Zuid</button>
+        </div>
+        <p class="export-hint">Importeer het .ics bestand in Google Agenda, Outlook of Apple Agenda.</p>
+    </div>
+</div>
+
+<!-- ── Hero / Countdown ────────────────────────────── -->
+<div class="hero no-print">
+    <div class="hero-inner container">
+        <button class="rbtn-action" id="btn-export" title="Exporteer naar agenda">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span>Export</span>
+        </button>
+        <div id="countdown"></div>
+        <div class="print-btn-wrap">
+            <button class="rbtn-action" onclick="triggerPrint()" title="Afdrukken">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                <span>Print</span>
+            </button>
+            <div class="postit no-print">
+                <span class="postit-long">Print hier gemakkelijk de kalender voor op<br>je koelkast!</span>
+                <span class="postit-short">Print!</span>
+                <img src="images/icons_seasons/MagnetGnomePastel.png" class="postit-gnome" alt="Kabouter mascotte">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ── Main ────────────────────────────────────────── -->
+<main class="main no-print">
+    <div class="container">
+        <div class="region-row" id="region-row">
+            <button class="rbtn rbtn-n active" data-region="noord">
+                <span class="rbtn-top">Noord</span>
+                <span class="rbtn-provinces">Gron. · Fries. · Drenthe · Overijssel · Flevoland · Gelderland · Utrecht</span>
+            </button>
+            <button class="rbtn rbtn-m" data-region="midden">
+                <span class="rbtn-top">Midden</span>
+                <span class="rbtn-provinces">Noord-Holland · Zuid-Holland · Zeeland</span>
+            </button>
+            <button class="rbtn rbtn-z" data-region="zuidd">
+                <span class="rbtn-top">Zuid</span>
+                <span class="rbtn-provinces">Noord-Brabant · Limburg</span>
+            </button>
+        </div>
+        <div class="year-bar" id="year-bar"></div>
+        <div class="notice" id="notice-provisional" hidden>
+            ⚠️ Jaren 2028 en later zijn <strong>indicatief</strong>. Controleer de officiële data op
+            <a href="https://www.rijksoverheid.nl/onderwerpen/schoolvakanties" target="_blank" rel="noopener">rijksoverheid.nl</a>.
+        </div>
+        <div class="cards" id="cards"></div>
+    </div>
+</main>
+
+<div class="print-only" id="print-root"></div>
+
+<!-- ── Footer ─────────────────────────────────────── -->
+<footer class="footer no-print">
+    <div class="container">
+        <p class="footer-seo">Schoolvakanties regio Noord Nederland — zomervakantie, herfstvakantie, kerstvakantie, voorjaarsvakantie en meivakantie voor Groningen, Friesland, Drenthe, Overijssel, Flevoland, Gelderland en Utrecht.</p>
+        <p>© nl-schoolvakanties.nl · Data van <a href="https://www.rijksoverheid.nl/onderwerpen/schoolvakanties" target="_blank" rel="noopener">rijksoverheid.nl</a></p>
+        <p class="footer-sub">Jaren 2028+ zijn indicatief. Raadpleeg altijd de officiële bron.</p>
+        <p class="footer-disclaimer">Deze pagina is met grote zorgvuldigheid samengesteld, maar aan de vermelde data kunnen geen rechten worden ontleend en wij aanvaarden geen aansprakelijkheid voor eventuele onjuistheden.</p>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

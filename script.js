@@ -194,7 +194,7 @@ const DATA = {
 // ── State ─────────────────────────────────────────────────────────
 
 const VALID_REGIONS   = ['noord', 'midden', 'zuidd'];
-let activeRegion      = VALID_REGIONS.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'noord';
+let activeRegion      = VALID_REGIONS.includes(location.hash.slice(1)) ? location.hash.slice(1) : (window.__defaultRegion || 'noord');
 let yearExplicit      = false;
 let showPast          = false;
 
