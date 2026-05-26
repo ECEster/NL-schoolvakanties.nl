@@ -193,9 +193,14 @@ const DATA = {
 
 // ── State ─────────────────────────────────────────────────────────
 
-let activeRegion      = 'noord';
-let yearExplicit      = false; // true wanneer gebruiker zelf een jaar-tab heeft geklikt
+const VALID_REGIONS   = ['noord', 'midden', 'zuidd'];
+let activeRegion      = VALID_REGIONS.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'noord';
+let yearExplicit      = false;
 let showPast          = false;
+
+function setRegionURL(region) {
+    history.pushState(null, '', '#' + region);
+}
 
 // Start bij het eerste schooljaar dat nog toekomstige vakanties heeft
 let activeYear = (() => {
@@ -980,7 +985,18 @@ document.getElementById('region-row').addEventListener('click', e => {
     if (!btn) return;
     activeRegion = btn.dataset.region;
     showPast     = false;
+    setRegionURL(activeRegion);
     document.querySelectorAll('.rbtn').forEach(b => b.classList.toggle('active', b===btn));
+    renderCountdown();
+    renderRegionCountdown();
+    renderCards();
+});
+
+window.addEventListener('popstate', () => {
+    const region = VALID_REGIONS.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'noord';
+    activeRegion = region;
+    showPast     = false;
+    document.querySelectorAll('.rbtn').forEach(b => b.classList.toggle('active', b.dataset.region === region));
     renderCountdown();
     renderRegionCountdown();
     renderCards();
@@ -1028,6 +1044,10 @@ document.addEventListener('click', e => {
 });
 
 // ── Init ──────────────────────────────────────────────────────────
+
+// Zet actieve regio-knop op basis van URL-hash
+document.querySelectorAll('.rbtn').forEach(b => b.classList.toggle('active', b.dataset.region === activeRegion));
+if (!location.hash) setRegionURL(activeRegion);
 
 renderYearBar();
 renderCountdown();
