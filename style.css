@@ -289,7 +289,7 @@ a { color: var(--green); text-underline-offset: 3px; }
 .hero {
     padding: 56px 0;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     background: var(--green);
     transition: background .3s;
 }
