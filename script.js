@@ -587,9 +587,13 @@ function renderYearCalMonth(year, month, vakanties, region) {
         cells.push(`<span class="${cls}">${day}${dot}</span>`);
     }
 
+    const seenVacNames = new Set();
     const vacInMonth = vakanties.filter(v => {
         const p = v.periodes[region];
-        return p && parseDate(p.van) <= lastDay && parseDate(p.tot) >= firstDay;
+        if (!p || parseDate(p.van) > lastDay || parseDate(p.tot) < firstDay) return false;
+        if (seenVacNames.has(v.naam)) return false;
+        seenVacNames.add(v.naam);
+        return true;
     });
     const vacHTML = vacInMonth.length
         ? `<div class="mc-vac-row">${vacInMonth.map(v =>
