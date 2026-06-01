@@ -270,6 +270,50 @@ function latestEnd(v) {
         .reduce((a,b) => a > b ? a : b);
 }
 
+// ── Nederlandse feestdagen ────────────────────────────────────────
+
+function easterDate(y) {
+    const a=y%19, b=Math.floor(y/100), c=y%100, d=Math.floor(b/4), e=b%4,
+          f=Math.floor((b+8)/25), g=Math.floor((b-f+1)/3),
+          h=(19*a+b-d-g+15)%30, i=Math.floor(c/4), k=c%4,
+          l=(32+2*e+2*i-h-k)%7, m=Math.floor((a+11*h+22*l)/451),
+          mo=Math.floor((h+l-7*m+114)/31), da=((h+l-7*m+114)%31)+1;
+    return new Date(y, mo-1, da);
+}
+
+const HOLIDAY_CACHE = {};
+
+function getDutchHolidays(year) {
+    if (HOLIDAY_CACHE[year]) return HOLIDAY_CACHE[year];
+    const h = {};
+    const dk = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    const add = (d, name) => { h[dk(d)] = name; };
+    const shift = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate()+n);
+
+    add(new Date(year,0,1),  'Nieuwjaarsdag');
+    let kd = new Date(year,3,27);
+    if (kd.getDay()===0) kd = shift(kd,-1);
+    add(kd, 'Koningsdag');
+    add(new Date(year,4,5),  'Bevrijdingsdag');
+    add(new Date(year,11,25),'Eerste Kerstdag');
+    add(new Date(year,11,26),'Tweede Kerstdag');
+
+    const easter = easterDate(year);
+    add(shift(easter,-2), 'Goede Vrijdag');
+    add(easter,           'Eerste Paasdag');
+    add(shift(easter,1),  'Tweede Paasdag');
+    add(shift(easter,39), 'Hemelvaartsdag');
+    add(shift(easter,49), 'Eerste Pinksterdag');
+    add(shift(easter,50), 'Tweede Pinksterdag');
+
+    HOLIDAY_CACHE[year] = h;
+    return h;
+}
+
+function dateKey(d) {
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
 // ── Mini calendar ─────────────────────────────────────────────────
 
 function getMonthsForVakantie(v) {
@@ -541,9 +585,12 @@ function renderMiniCalFixed(year, month, v, selectedRegion, highlightColor) {
         let cls='mc-day';
         if(isWe) cls+=' weekend';
         if(isTd) cls+=' today';
+        const holidays = getDutchHolidays(year);
+        const holidayName = holidays[dateKey(date)];
+        if(holidayName) cls+=' holiday';
 
         const dot = dotBg ? `<b style="display:block;height:3px;border-radius:2px;background:${dotBg};margin-top:1px"></b>` : '';
-        cells.push(`<span class="${cls}">${day}${dot}</span>`);
+        cells.push(`<span class="${cls}"${holidayName?` title="${holidayName}"`:''}>${day}${dot}</span>`);
     }
 
     return `<div class="mini-cal">
@@ -580,11 +627,14 @@ function renderYearCalMonth(year, month, vakanties, region) {
         let cls = 'mc-day';
         if (isWe) cls += ' weekend';
         if (isTd) cls += ' today';
+        const holidays = getDutchHolidays(year);
+        const holidayName = holidays[dateKey(date)];
+        if (holidayName) cls += ' holiday';
 
         const dot = vacType
             ? `<b style="display:block;height:3px;border-radius:2px;background:${TYPE_COLOR[vacType]};margin-top:1px"></b>`
             : '';
-        cells.push(`<span class="${cls}">${day}${dot}</span>`);
+        cells.push(`<span class="${cls}"${holidayName?` title="${holidayName}"`:''}>${day}${dot}</span>`);
     }
 
     const seenVacNames = new Set();

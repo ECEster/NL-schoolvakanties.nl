@@ -816,6 +816,12 @@ a { color: var(--green); text-underline-offset: 3px; }
 
 .mc-day.weekend { color: var(--text2); }
 
+.mc-day.holiday {
+    color: #C06040;
+    font-weight: 700;
+    cursor: default;
+}
+
 .mc-day::after {
     content: '';
     display: block;
