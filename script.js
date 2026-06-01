@@ -49,6 +49,8 @@ const TYPE_COLOR = {
     mei:      '#C4A0CC',
 };
 
+const HOLIDAY_COLOR = '#FF4560';
+
 // ── School holiday data ──────────────────────────────────────────
 // Bron: rijksoverheid.nl
 // Jaren 2024-2026: bevestigd. 2027+: indicatief.
@@ -551,6 +553,7 @@ function renderMiniCalFixed(year, month, v, selectedRegion, highlightColor) {
     let startDow   = (firstDay.getDay() + 6) % 7;
 
     const cells = [];
+    const holidaysInMonth = [];
     for (const h of DAYS_SH) cells.push(`<span class="mc-head">${h}</span>`);
     for (let i=0; i<startDow; i++) cells.push(`<span></span>`);
 
@@ -585,17 +588,25 @@ function renderMiniCalFixed(year, month, v, selectedRegion, highlightColor) {
         let cls='mc-day';
         if(isWe) cls+=' weekend';
         if(isTd) cls+=' today';
-        const holidays = getDutchHolidays(year);
-        const holidayName = holidays[dateKey(date)];
-        if(holidayName) cls+=' holiday';
+        const monthHolidays = getDutchHolidays(year);
+        const holidayName = monthHolidays[dateKey(date)];
+        if(holidayName) { cls+=' holiday'; holidaysInMonth.push(holidayName); }
 
-        const dot = dotBg ? `<b style="display:block;height:3px;border-radius:2px;background:${dotBg};margin-top:1px"></b>` : '';
-        cells.push(`<span class="${cls}"${holidayName?` title="${holidayName}"`:''}>${day}${dot}</span>`);
+        const dot  = dotBg      ? `<b style="display:block;height:3px;border-radius:2px;background:${dotBg};margin-top:1px"></b>` : '';
+        const hdot = holidayName ? `<b style="display:block;height:3px;border-radius:2px;background:${HOLIDAY_COLOR};margin-top:1px"></b>` : '';
+        cells.push(`<span class="${cls}"${holidayName?` title="${holidayName}"`:''}>${day}${dot}${hdot}</span>`);
     }
+
+    const holHTML = holidaysInMonth.length
+        ? `<div class="mc-vac-row">${holidaysInMonth.map(name =>
+            `<span class="mc-vac-label"><b class="mc-vac-dot" style="background:${HOLIDAY_COLOR}"></b>${name}</span>`
+          ).join('')}</div>`
+        : '';
 
     return `<div class="mini-cal">
         <div class="mc-title">${MONTHS_SH[month]} ${year}</div>
         <div class="mc-grid">${cells.join('')}</div>
+        ${holHTML}
     </div>`;
 }
 
@@ -606,6 +617,7 @@ function renderYearCalMonth(year, month, vakanties, region) {
     let startDow   = (firstDay.getDay() + 6) % 7;
 
     const cells = [];
+    const holidaysInMonth = [];
     for (const h of DAYS_SH) cells.push(`<span class="mc-head">${h}</span>`);
     for (let i=0; i<startDow; i++) cells.push(`<span></span>`);
 
@@ -627,14 +639,17 @@ function renderYearCalMonth(year, month, vakanties, region) {
         let cls = 'mc-day';
         if (isWe) cls += ' weekend';
         if (isTd) cls += ' today';
-        const holidays = getDutchHolidays(year);
-        const holidayName = holidays[dateKey(date)];
-        if (holidayName) cls += ' holiday';
+        const monthHolidays = getDutchHolidays(year);
+        const holidayName = monthHolidays[dateKey(date)];
+        if (holidayName) { cls += ' holiday'; holidaysInMonth.push(holidayName); }
 
-        const dot = vacType
+        const dot  = vacType
             ? `<b style="display:block;height:3px;border-radius:2px;background:${TYPE_COLOR[vacType]};margin-top:1px"></b>`
             : '';
-        cells.push(`<span class="${cls}"${holidayName?` title="${holidayName}"`:''}>${day}${dot}</span>`);
+        const hdot = holidayName
+            ? `<b style="display:block;height:3px;border-radius:2px;background:${HOLIDAY_COLOR};margin-top:1px"></b>`
+            : '';
+        cells.push(`<span class="${cls}"${holidayName?` title="${holidayName}"`:''}>${day}${dot}${hdot}</span>`);
     }
 
     const seenVacNames = new Set();
@@ -650,11 +665,16 @@ function renderYearCalMonth(year, month, vakanties, region) {
             `<span class="mc-vac-label"><b class="mc-vac-dot" style="background:${TYPE_COLOR[v.type]}"></b>${v.naam}</span>`
           ).join('')}</div>`
         : '';
+    const holHTML = holidaysInMonth.length
+        ? `<div class="mc-vac-row">${holidaysInMonth.map(name =>
+            `<span class="mc-vac-label"><b class="mc-vac-dot" style="background:${HOLIDAY_COLOR}"></b>${name}</span>`
+          ).join('')}</div>`
+        : '';
 
     return `<div class="mini-cal">
         <div class="mc-title">${MONTHS_SH[month]} ${year}</div>
         <div class="mc-grid">${cells.join('')}</div>
-        ${vacHTML}
+        ${vacHTML}${holHTML}
     </div>`;
 }
 
