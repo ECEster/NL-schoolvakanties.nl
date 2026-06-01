@@ -776,11 +776,14 @@ a { color: var(--green); text-underline-offset: 3px; }
 .mc-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 0;
+    gap: 1px;
+    background: var(--border);
     border: 1px solid var(--border);
     border-radius: 8px;
     overflow: hidden;
 }
+
+.mc-grid > span:not(.mc-head):not(.mc-day) { background: var(--bg); }
 
 .mc-head {
     font-size: 0.68rem;
@@ -789,11 +792,7 @@ a { color: var(--green); text-underline-offset: 3px; }
     color: var(--text2);
     padding: 4px 2px;
     background: var(--bg2);
-    border-right: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
 }
-
-.mc-head:last-of-type { border-right: none; }
 
 .mc-day {
     font-size: 0.78rem;
@@ -801,12 +800,9 @@ a { color: var(--green); text-underline-offset: 3px; }
     padding: 3px 2px;
     line-height: 1.4;
     position: relative;
-    border-right: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
     font-weight: 500;
+    background: var(--white);
 }
-
-.mc-day:nth-child(7n) { border-right: none; }
 
 .mc-day.today {
     font-weight: 700;
