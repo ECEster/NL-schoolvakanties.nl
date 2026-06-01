@@ -817,7 +817,7 @@ a { color: var(--green); text-underline-offset: 3px; }
 .mc-day.weekend { color: var(--text2); }
 
 .mc-day.holiday {
-    color: #FF4560;
+    color: #6A8A94;
     font-weight: 700;
     cursor: default;
 }
