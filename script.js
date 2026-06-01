@@ -299,6 +299,7 @@ function getDutchHolidays(year) {
     add(new Date(year,4,5),  'Bevrijdingsdag');
     add(new Date(year,11,25),'Eerste Kerstdag');
     add(new Date(year,11,26),'Tweede Kerstdag');
+    add(new Date(year,11,31),'Oudjaarsdag');
 
     const easter = easterDate(year);
     add(shift(easter,-2), 'Goede Vrijdag');
