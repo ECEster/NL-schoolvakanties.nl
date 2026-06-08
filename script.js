@@ -553,6 +553,8 @@ function renderMiniCalFixed(year, month, v, selectedRegion, highlightColor) {
     const lastDay  = new Date(year, month+1, 0);
     let startDow   = (firstDay.getDay() + 6) % 7;
 
+    const monthHolidays = getDutchHolidays(year);
+    const mPad = String(month+1).padStart(2,'0');
     const cells = [];
     const holidaysInMonth = [];
     for (const h of DAYS_SH) cells.push(`<span class="mc-head">${h}</span>`);
@@ -589,8 +591,7 @@ function renderMiniCalFixed(year, month, v, selectedRegion, highlightColor) {
         let cls='mc-day';
         if(isWe) cls+=' weekend';
         if(isTd) cls+=' today';
-        const monthHolidays = getDutchHolidays(year);
-        const holidayName = monthHolidays[dateKey(date)];
+        const holidayName = monthHolidays[`${year}-${mPad}-${String(day).padStart(2,'0')}`];
         if(holidayName) { cls+=' holiday'; holidaysInMonth.push(holidayName); }
 
         const dot  = dotBg      ? `<b style="display:block;height:3px;border-radius:2px;background:${dotBg};margin-top:1px"></b>` : '';
@@ -617,6 +618,8 @@ function renderYearCalMonth(year, month, vakanties, region) {
     const lastDay  = new Date(year, month+1, 0);
     let startDow   = (firstDay.getDay() + 6) % 7;
 
+    const monthHolidays = getDutchHolidays(year);
+    const mPad = String(month+1).padStart(2,'0');
     const cells = [];
     const holidaysInMonth = [];
     for (const h of DAYS_SH) cells.push(`<span class="mc-head">${h}</span>`);
@@ -640,8 +643,7 @@ function renderYearCalMonth(year, month, vakanties, region) {
         let cls = 'mc-day';
         if (isWe) cls += ' weekend';
         if (isTd) cls += ' today';
-        const monthHolidays = getDutchHolidays(year);
-        const holidayName = monthHolidays[dateKey(date)];
+        const holidayName = monthHolidays[`${year}-${mPad}-${String(day).padStart(2,'0')}`];
         if (holidayName) { cls += ' holiday'; holidaysInMonth.push(holidayName); }
 
         const dot  = vacType
