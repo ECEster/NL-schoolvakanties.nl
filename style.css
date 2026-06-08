@@ -1012,7 +1012,9 @@ a { color: var(--green); text-underline-offset: 3px; }
         -webkit-overflow-scrolling: touch;
         padding-bottom: 4px;
     }
-    .mini-cal { min-width: 140px; flex-shrink: 0; }
+    .mini-cal { min-width: 120px; flex-shrink: 0; }
+    .card-body { padding: 12px 8px 16px; }
+    .card.past.expanded .card-body { padding: 12px 8px 16px; }
 }
 
 /* ── Footer ──────────────────────────────────────────── */
