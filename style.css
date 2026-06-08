@@ -783,7 +783,7 @@ a { color: var(--green); text-underline-offset: 3px; }
     overflow: hidden;
 }
 
-.mc-grid > span:not(.mc-head):not(.mc-day) { background: var(--white); }
+.mc-grid > span:not(.mc-head):not(.mc-day) { background: var(--border); }
 
 .mc-head {
     font-size: 0.68rem;
