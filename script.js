@@ -1127,3 +1127,21 @@ if (!location.hash) setRegionURL(activeRegion);
 renderYearBar();
 renderCountdown();
 renderCards();
+
+// ── In-app browser notice ─────────────────────────────────────────
+(function() {
+    const ua = navigator.userAgent || '';
+    if (!/Instagram|FBAN|FBAV|FB_IAB/.test(ua)) return;
+
+    const notice = document.createElement('div');
+    notice.className = 'iab-notice';
+    notice.innerHTML = `
+        <span class="iab-text">
+            Je opent deze pagina via de Instagram-app.
+            <strong>Export</strong> en <strong>Afdrukken</strong> werken alleen in een echte browser.
+            Tik rechtsonder op <strong>⋯</strong> en kies <em>Openen in browser</em>.
+        </span>
+        <button class="iab-close" aria-label="Sluiten">✕</button>`;
+    notice.querySelector('.iab-close').addEventListener('click', () => notice.remove());
+    document.body.prepend(notice);
+})();
