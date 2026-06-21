@@ -559,6 +559,8 @@ a { color: var(--green); text-underline-offset: 3px; }
     gap: 8px;
 }
 
+.year-card .mini-cal { min-width: unset; }
+
 @media (max-width: 960px) {
     .year-cal-grid { grid-template-columns: repeat(3, 1fr); }
 }
@@ -573,8 +575,6 @@ a { color: var(--green); text-underline-offset: 3px; }
     }
     .year-card .mini-cal { min-width: 140px; flex-shrink: 0; }
 }
-
-.year-card .mini-cal { min-width: unset; }
 
 .ycal-legend {
     display: flex;
