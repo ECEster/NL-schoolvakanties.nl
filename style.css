@@ -1015,6 +1015,8 @@ a { color: var(--green); text-underline-offset: 3px; }
     .mini-cal { min-width: 120px; flex-shrink: 0; }
     .card-body { padding: 12px 8px 16px; }
     .card.past.expanded .card-body { padding: 12px 8px 16px; }
+    .mc-day  { font-size: 0.68rem; padding: 2px 1px; }
+    .mc-head { padding: 4px 1px; }
 }
 
 /* ── Footer ──────────────────────────────────────────── */
