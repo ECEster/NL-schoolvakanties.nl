@@ -56,7 +56,7 @@ const TYPE_COLOR = {
     mei:      '#C4A0CC',
 };
 
-const HOLIDAY_COLOR = '#BAC6C7';
+const HOLIDAY_COLOR = '#9878C8';
 
 // ── School holiday data ──────────────────────────────────────────
 // Bron: rijksoverheid.nl
