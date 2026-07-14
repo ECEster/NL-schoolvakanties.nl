@@ -1145,6 +1145,14 @@ renderYearBar();
 renderCountdown();
 renderCards();
 
+// ── Week-nummer post-it ───────────────────────────────────────────
+(function() {
+    const el = document.getElementById('postit-wk');
+    if (!el) return;
+    const wk = isoWeek(new Date());
+    el.innerHTML = `<span class="postit-wk-label">wk</span><span class="postit-wk-num">${wk}</span>`;
+})();
+
 // ── In-app browser notice ─────────────────────────────────────────
 (function() {
     const ua = navigator.userAgent || '';
