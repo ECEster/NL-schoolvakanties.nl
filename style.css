@@ -783,6 +783,20 @@ a { color: var(--green); text-underline-offset: 3px; }
     overflow: hidden;
 }
 
+.mc-grid--wk {
+    grid-template-columns: auto repeat(7, 1fr);
+}
+
+.mc-wk-cell {
+    font-size: 0.58rem;
+    text-align: center;
+    color: var(--text2);
+    padding: 2px 3px;
+    background: var(--bg2);
+    opacity: 0.75;
+    white-space: nowrap;
+}
+
 .mc-grid > span:not(.mc-head):not(.mc-day) { background: var(--border); }
 
 .mc-head {

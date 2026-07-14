@@ -10,6 +10,13 @@ const MONTHS_NL  = ['Januari','Februari','Maart','April','Mei','Juni',
 const MONTHS_SH  = ['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
 const DAYS_SH    = ['Ma','Di','Wo','Do','Vr','Za','Zo'];
 
+function isoWeek(date) {
+    const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+    d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+    const y0 = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+    return Math.ceil(((d - y0) / 86400000 + 1) / 7);
+}
+
 const C_NOORD  = '#B5A800';
 const C_MIDDEN = '#6B96C4';
 const C_ZUIDD  = '#7EBD8F';
@@ -557,12 +564,16 @@ function renderMiniCalFixed(year, month, v, selectedRegion, highlightColor) {
     const mPad = String(month+1).padStart(2,'0');
     const cells = [];
     const holidaysInMonth = [];
+    cells.push(`<span class="mc-head mc-wk-cell">wk</span>`);
     for (const h of DAYS_SH) cells.push(`<span class="mc-head">${h}</span>`);
+    const firstMonday = new Date(year, month, 1 - startDow);
+    cells.push(`<span class="mc-wk-cell">${isoWeek(firstMonday)}</span>`);
     for (let i=0; i<startDow; i++) cells.push(`<span></span>`);
 
     for (let day=1; day<=lastDay.getDate(); day++) {
         const date = new Date(year,month,day);
         const dow  = date.getDay();
+        if ((dow+6)%7 === 0 && day > 1) cells.push(`<span class="mc-wk-cell">${isoWeek(date)}</span>`);
         const isWe = dow===0||dow===6;
         const isTd = date.getTime()===t.getTime();
 
@@ -607,7 +618,7 @@ function renderMiniCalFixed(year, month, v, selectedRegion, highlightColor) {
 
     return `<div class="mini-cal">
         <div class="mc-title">${MONTHS_SH[month]} ${year}</div>
-        <div class="mc-grid">${cells.join('')}</div>
+        <div class="mc-grid mc-grid--wk">${cells.join('')}</div>
         ${holHTML}
     </div>`;
 }
@@ -622,12 +633,16 @@ function renderYearCalMonth(year, month, vakanties, region) {
     const mPad = String(month+1).padStart(2,'0');
     const cells = [];
     const holidaysInMonth = [];
+    cells.push(`<span class="mc-head mc-wk-cell">wk</span>`);
     for (const h of DAYS_SH) cells.push(`<span class="mc-head">${h}</span>`);
+    const firstMonday = new Date(year, month, 1 - startDow);
+    cells.push(`<span class="mc-wk-cell">${isoWeek(firstMonday)}</span>`);
     for (let i=0; i<startDow; i++) cells.push(`<span></span>`);
 
     for (let day=1; day<=lastDay.getDate(); day++) {
         const date = new Date(year, month, day);
         const dow  = date.getDay();
+        if ((dow+6)%7 === 0 && day > 1) cells.push(`<span class="mc-wk-cell">${isoWeek(date)}</span>`);
         const isWe = dow===0||dow===6;
         const isTd = date.getTime()===t.getTime();
 
@@ -676,7 +691,7 @@ function renderYearCalMonth(year, month, vakanties, region) {
 
     return `<div class="mini-cal">
         <div class="mc-title">${MONTHS_SH[month]} ${year}</div>
-        <div class="mc-grid">${cells.join('')}</div>
+        <div class="mc-grid mc-grid--wk">${cells.join('')}</div>
         ${vacHTML}${holHTML}
     </div>`;
 }
