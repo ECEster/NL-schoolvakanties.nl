@@ -96,7 +96,8 @@ a { color: var(--green); text-underline-offset: 3px; }
 
 .nav-right { display: flex; gap: 8px; align-items: center; }
 
-.print-btn-wrap { position: relative; flex-shrink: 0; }
+.print-btn-wrap  { position: relative; flex-shrink: 0; }
+.export-btn-wrap { position: relative; flex-shrink: 0; }
 
 .rbtn-action {
     display: flex;
@@ -165,9 +166,9 @@ a { color: var(--green); text-underline-offset: 3px; }
 
 .postit-wk {
     position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%) rotate(-2.5deg);
+    left: calc(100% + 12px);
+    top: -8px;
+    transform: rotate(-2.5deg);
     width: 58px;
     text-align: center;
     background: #FFF176;
