@@ -170,8 +170,8 @@ a { color: var(--green); text-underline-offset: 3px; }
     transform: translateY(-50%) rotate(-2.5deg);
     width: 58px;
     text-align: center;
-    background: #FF2D8A;
-    color: #fff;
+    background: #FFF176;
+    color: #3A2E00;
     font-family: 'Space Mono', monospace;
     padding: 10px 8px 14px;
     border-radius: 2px;
