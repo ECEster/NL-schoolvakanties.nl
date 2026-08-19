@@ -59,9 +59,13 @@ const TYPE_COLOR = {
 const HOLIDAY_COLOR = '#9878C8';
 const KONINGSDAG_COLOR = '#E07A50';
 const KERSTDAG_COLOR = '#D6362A';
+const PAASDAG_COLOR = '#A8BCC9';
+const GOEDE_VRIJDAG_COLOR = '#4CAF6E';
 const holidayColor = name => {
     if (name === 'Koningsdag') return KONINGSDAG_COLOR;
     if (name === 'Eerste Kerstdag' || name === 'Tweede Kerstdag') return KERSTDAG_COLOR;
+    if (name === 'Eerste Paasdag' || name === 'Tweede Paasdag') return PAASDAG_COLOR;
+    if (name === 'Goede Vrijdag') return GOEDE_VRIJDAG_COLOR;
     return HOLIDAY_COLOR;
 };
 
