@@ -1025,8 +1025,8 @@ a { color: var(--green); text-underline-offset: 3px; }
         margin-bottom: 4px;
     }
 
-    .print-month { page-break-before: always; padding: 16px 24px; }
-    .print-month:first-of-type { page-break-before: avoid; }
+    .print-month { padding: 16px 24px; }
+    .print-month + .print-month { page-break-before: always; }
 
     .pm-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; color: #2A2018; }
 

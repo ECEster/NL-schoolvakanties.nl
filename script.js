@@ -985,28 +985,28 @@ function doExport(region, year) {
 // ── Print view ────────────────────────────────────────────────────
 
 function buildPrintView() {
-    const yd     = DATA[activeYear];
     const region = activeRegion;
     const root   = document.getElementById('print-root');
 
-    // Gather all months in the school year
-    const monthSet = new Set();
-    for (const v of yd.vakanties) {
-        for (const p of Object.values(v.periodes)) {
-            let cur = new Date(parseDate(p.van).getFullYear(), parseDate(p.van).getMonth(), 1);
-            const end = new Date(parseDate(p.tot).getFullYear(), parseDate(p.tot).getMonth(), 1);
-            while (cur <= end) {
-                monthSet.add(`${cur.getFullYear()}-${cur.getMonth()}`);
-                cur = new Date(cur.getFullYear(), cur.getMonth()+1, 1);
-            }
-        }
-    }
+    // Kalenderjaar = zelfde jaar als getoond in het "Kalenderjaar"-blok
+    // (het tweede jaartal van het geselecteerde schooljaar, bv. "2025-2026" → 2026)
+    const y2 = parseInt(activeYear.split('-')[1]);
+    const calStart = new Date(y2, 0, 1);
+    const calEnd   = new Date(y2, 11, 31);
+    const yearKeys = Object.keys(DATA);
+    const nextKey  = yearKeys[yearKeys.indexOf(activeYear) + 1];
+    const extraVak = nextKey ? DATA[nextKey].vakanties.filter(v =>
+        Object.values(v.periodes).some(p =>
+            parseDate(p.van) <= calEnd && parseDate(p.tot) >= calStart
+        )
+    ) : [];
+    const allVakanties = [...DATA[activeYear].vakanties, ...extraVak];
 
-    const months = Array.from(monthSet)
-        .map(s => { const [y,m]=s.split('-'); return {y:+y,m:+m}; })
-        .sort((a,b)=>a.y-b.y||a.m-b.m);
+    // Altijd januari t/m december van het kalenderjaar, ook maanden zonder vakantie
+    const months = [];
+    for (let m = 0; m <= 11; m++) months.push({y: y2, m});
 
-    let html = `<div class="print-header">nl-schoolvakanties – Schoolvakanties Nederland</div>`;
+    let html = `<div class="print-header">nl-schoolvakanties – Schoolvakanties Nederland ${y2}</div>`;
 
     for (const {y,m} of months) {
         const firstDay = new Date(y,m,1);
@@ -1033,7 +1033,7 @@ function buildPrintView() {
 
             // Find vacations on this day
             let bars = '';
-            for (const v of yd.vakanties) {
+            for (const v of allVakanties) {
                 for (const [r,p] of Object.entries(v.periodes)) {
                     if ((region==='alle'||region===r) && date>=parseDate(p.van) && date<=parseDate(p.tot)) {
                         bars += `<div class="pm-vac-bar" style="background:${REGION_COLOR[r]}">${REGION_LABEL[r].slice(0,1)}</div>`;
