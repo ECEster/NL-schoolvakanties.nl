@@ -716,13 +716,6 @@ function buildYearCard(year) {
     const months = [];
     for (let m = 0; m <= 11; m++) months.push({y: y2, m});
 
-    // Legend: dedupliceer op type
-    const seenTypes = new Set();
-    const legendHTML = allVakanties
-        .filter(v => { if (!v.periodes[activeRegion] || seenTypes.has(v.type)) return false; seenTypes.add(v.type); return true; })
-        .map(v => `<span class="ycal-legend-item"><span class="ycal-swatch" style="background:${TYPE_COLOR[v.type]}"></span>${v.naam}</span>`)
-        .join('');
-
     const monthsHTML = months.map(({y, m}) => renderYearCalMonth(y, m, allVakanties, activeRegion)).join('');
 
     const t = today();
@@ -741,7 +734,6 @@ function buildYearCard(year) {
             </div>
         </div>
         <div class="card-body">
-            <div class="ycal-legend">${legendHTML}</div>
             <div class="year-cal-grid">${monthsHTML}</div>
             <div class="ycal-scrollhint" aria-hidden="true"></div>
         </div>
