@@ -57,6 +57,8 @@ const TYPE_COLOR = {
 };
 
 const HOLIDAY_COLOR = '#9878C8';
+const KONINGSDAG_COLOR = '#E07A50';
+const holidayColor = name => name === 'Koningsdag' ? KONINGSDAG_COLOR : HOLIDAY_COLOR;
 
 // ── School holiday data ──────────────────────────────────────────
 // Bron: rijksoverheid.nl
@@ -605,13 +607,13 @@ function renderMiniCalFixed(year, month, v, selectedRegion, highlightColor) {
         if(holidayName) { cls+=' holiday'; holidaysInMonth.push(holidayName); }
 
         const dot  = dotBg      ? `<b style="display:block;height:3px;border-radius:2px;background:${dotBg};margin-top:1px"></b>` : '';
-        const hdot = holidayName ? `<b style="display:block;height:3px;border-radius:2px;background:${HOLIDAY_COLOR};margin-top:1px"></b>` : '';
+        const hdot = holidayName ? `<b style="display:block;height:3px;border-radius:2px;background:${holidayColor(holidayName)};margin-top:1px"></b>` : '';
         cells.push(`<span class="${cls}"${holidayName?` title="${holidayName}"`:''}>${day}${dot}${hdot}</span>`);
     }
 
     const holHTML = holidaysInMonth.length
         ? `<div class="mc-vac-row">${holidaysInMonth.map(name =>
-            `<span class="mc-vac-label"><b class="mc-vac-dot" style="background:${HOLIDAY_COLOR}"></b>${name}</span>`
+            `<span class="mc-vac-label"><b class="mc-vac-dot" style="background:${holidayColor(name)}"></b>${name}</span>`
           ).join('')}</div>`
         : '';
 
@@ -664,7 +666,7 @@ function renderYearCalMonth(year, month, vakanties, region) {
             ? `<b style="display:block;height:3px;border-radius:2px;background:${TYPE_COLOR[vacType]};margin-top:1px"></b>`
             : '';
         const hdot = holidayName
-            ? `<b style="display:block;height:3px;border-radius:2px;background:${HOLIDAY_COLOR};margin-top:1px"></b>`
+            ? `<b style="display:block;height:3px;border-radius:2px;background:${holidayColor(holidayName)};margin-top:1px"></b>`
             : '';
         cells.push(`<span class="${cls}"${holidayName?` title="${holidayName}"`:''}>${day}${dot}${hdot}</span>`);
     }
@@ -684,7 +686,7 @@ function renderYearCalMonth(year, month, vakanties, region) {
         : '';
     const holHTML = holidaysInMonth.length
         ? `<div class="mc-vac-row">${holidaysInMonth.map(name =>
-            `<span class="mc-vac-label"><b class="mc-vac-dot" style="background:${HOLIDAY_COLOR}"></b>${name}</span>`
+            `<span class="mc-vac-label"><b class="mc-vac-dot" style="background:${holidayColor(name)}"></b>${name}</span>`
           ).join('')}</div>`
         : '';
 
