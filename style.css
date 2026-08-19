@@ -615,8 +615,40 @@ a { color: var(--green); text-underline-offset: 3px; }
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         padding-bottom: 4px;
+        scrollbar-width: none;      /* Firefox */
+        -ms-overflow-style: none;   /* oude Edge */
     }
+    .year-cal-grid::-webkit-scrollbar { display: none; }  /* Chrome/Safari */
     .year-card .mini-cal { min-width: 140px; flex-shrink: 0; }
+
+    /* Handgetekend pijltje i.p.v. scrollbalk — zelfde lijnstijl als de kop */
+    .ycal-scrollhint {
+        position: relative;
+        display: block;
+        width: 30px;
+        height: 1.5px;
+        background: var(--text2);
+        opacity: 0.55;
+        margin: 10px auto 2px;
+    }
+    .ycal-scrollhint::before,
+    .ycal-scrollhint::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        width: 6px;
+        height: 6px;
+        border-top: 1.5px solid var(--text2);
+        border-right: 1.5px solid var(--text2);
+    }
+    .ycal-scrollhint::before {
+        left: 0;
+        transform: translate(-70%, -50%) rotate(-135deg); /* open pijlpunt naar links */
+    }
+    .ycal-scrollhint::after {
+        right: 0;
+        transform: translate(70%, -50%) rotate(45deg); /* open pijlpunt naar rechts */
+    }
 }
 
 .ycal-legend {

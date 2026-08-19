@@ -743,6 +743,7 @@ function buildYearCard(year) {
         <div class="card-body">
             <div class="ycal-legend">${legendHTML}</div>
             <div class="year-cal-grid">${monthsHTML}</div>
+            <div class="ycal-scrollhint" aria-hidden="true"></div>
         </div>
     </div>`;
 }
