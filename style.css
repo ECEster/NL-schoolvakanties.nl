@@ -166,8 +166,8 @@ a { color: var(--green); text-underline-offset: 3px; }
 
 .postit-wk {
     position: absolute;
-    left: calc(100% + 12px + 3cm);
-    top: -8px;
+    left: 0;
+    bottom: -96px;
     transform: rotate(-2.5deg);
     width: 58px;
     text-align: center;
