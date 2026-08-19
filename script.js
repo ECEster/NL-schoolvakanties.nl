@@ -505,7 +505,6 @@ function buildCard(v, year) {
                 else if (activeRegion !== 'alle') cls += ' dimmed';
                 return `<div class="${cls}" data-region="${r}">
                     <span class="rrow-dot" style="background:${REGION_COLOR[r]}"></span>
-                    <span class="rrow-name">${REGION_LABEL[r]}</span>
                     <span class="rrow-dates">${formatDate(p.van)} – ${formatDate(p.tot)}</span>
                     <span class="rrow-days">${d} dgn</span>
                 </div>`;
@@ -784,7 +783,6 @@ function buildCardFixed(v, year) {
                     const d = durationDays(p.van, p.tot);
                     return `<div class="rrow">
                         <span class="rrow-dot" style="background:${REGION_COLOR[r]}"></span>
-                        <span class="rrow-name">${REGION_LABEL[r]}</span>
                         <span class="rrow-dates">${formatDate(p.van)} – ${formatDate(p.tot)}</span>
                         <span class="rrow-days">${d} dgn</span>
                     </div>`;
@@ -798,7 +796,6 @@ function buildCardFixed(v, year) {
         regionHTML = `<div class="region-rows">
             <div class="rrow active">
                 <span class="rrow-dot" style="background:${REGION_COLOR[activeRegion]}"></span>
-                <span class="rrow-name">${REGION_LABEL[activeRegion]}</span>
                 <span class="rrow-dates">${formatDate(p.van)} – ${formatDate(p.tot)}</span>
                 <span class="rrow-days">${d} dgn</span>
             </div>
