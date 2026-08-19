@@ -1006,7 +1006,7 @@ function buildPrintView() {
     const months = [];
     for (let m = 0; m <= 11; m++) months.push({y: y2, m});
 
-    let html = `<div class="print-header">nl-schoolvakanties – Schoolvakanties Nederland ${y2}</div>`;
+    let html = '';
 
     for (const {y,m} of months) {
         const firstDay = new Date(y,m,1);
