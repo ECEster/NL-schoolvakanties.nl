@@ -52,13 +52,18 @@ const TYPE_COLOR = {
     zomer:    '#C8A000',
     herfst:   '#B8541A',
     kerst:    '#1A5C2A',
-    voorjaar: '#B06A7A',
+    voorjaar: '#F5C518',
     mei:      '#C4A0CC',
 };
 
 const HOLIDAY_COLOR = '#9878C8';
 const KONINGSDAG_COLOR = '#E07A50';
-const holidayColor = name => name === 'Koningsdag' ? KONINGSDAG_COLOR : HOLIDAY_COLOR;
+const KERSTDAG_COLOR = '#D6362A';
+const holidayColor = name => {
+    if (name === 'Koningsdag') return KONINGSDAG_COLOR;
+    if (name === 'Eerste Kerstdag' || name === 'Tweede Kerstdag') return KERSTDAG_COLOR;
+    return HOLIDAY_COLOR;
+};
 
 // ── School holiday data ──────────────────────────────────────────
 // Bron: rijksoverheid.nl
