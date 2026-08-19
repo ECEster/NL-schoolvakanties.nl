@@ -823,6 +823,7 @@ a { color: var(--green); text-underline-offset: 3px; }
     background: var(--border);
     border: 1px solid var(--border);
     border-radius: 8px;
+    padding: 2px;
     overflow: hidden;
 }
 
