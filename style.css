@@ -818,7 +818,7 @@ a { color: var(--green); text-underline-offset: 3px; }
 
 .mc-grid {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(7, minmax(0, 1fr));
     gap: 1px;
     background: var(--border);
     border: 1px solid var(--border);
@@ -827,7 +827,7 @@ a { color: var(--green); text-underline-offset: 3px; }
 }
 
 .mc-grid--wk {
-    grid-template-columns: auto repeat(7, 1fr);
+    grid-template-columns: auto repeat(7, minmax(0, 1fr));
 }
 
 .mc-wk-cell {
