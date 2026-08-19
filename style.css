@@ -619,7 +619,7 @@ a { color: var(--green); text-underline-offset: 3px; }
         -ms-overflow-style: none;   /* oude Edge */
     }
     .year-cal-grid::-webkit-scrollbar { display: none; }  /* Chrome/Safari */
-    .year-card .mini-cal { min-width: 140px; flex-shrink: 0; }
+    .year-card .mini-cal { min-width: 168px; flex-shrink: 0; }
 
     /* Handgetekend pijltje i.p.v. scrollbalk — zelfde lijnstijl als de kop */
     .ycal-scrollhint {
