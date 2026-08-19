@@ -61,11 +61,19 @@ const KONINGSDAG_COLOR = '#E07A50';
 const KERSTDAG_COLOR = '#D6362A';
 const PAASDAG_COLOR = '#A8BCC9';
 const GOEDE_VRIJDAG_COLOR = '#4CAF6E';
+const BEVRIJDINGSDAG_COLOR = '#8DC63F';
+const HEMELVAART_COLOR = '#4A90D9';
+const PINKSTEREN_COLOR = '#EFA8C4';
+const JAARWISSELING_COLOR = '#C9A876';
 const holidayColor = name => {
     if (name === 'Koningsdag') return KONINGSDAG_COLOR;
     if (name === 'Eerste Kerstdag' || name === 'Tweede Kerstdag') return KERSTDAG_COLOR;
     if (name === 'Eerste Paasdag' || name === 'Tweede Paasdag') return PAASDAG_COLOR;
     if (name === 'Goede Vrijdag') return GOEDE_VRIJDAG_COLOR;
+    if (name === 'Bevrijdingsdag') return BEVRIJDINGSDAG_COLOR;
+    if (name === 'Hemelvaartsdag') return HEMELVAART_COLOR;
+    if (name === 'Eerste Pinksterdag' || name === 'Tweede Pinksterdag') return PINKSTEREN_COLOR;
+    if (name === 'Oudjaarsdag' || name === 'Nieuwjaarsdag') return JAARWISSELING_COLOR;
     return HOLIDAY_COLOR;
 };
 
