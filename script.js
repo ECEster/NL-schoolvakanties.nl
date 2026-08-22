@@ -105,7 +105,7 @@ const DATA = {
                 midden:{van:'2025-02-22',tot:'2025-03-02'},
                 zuidd: {van:'2025-02-22',tot:'2025-03-02'},
             }},
-            { naam:'Meivakantie', type:'mei', note:'Datums kunnen per school verschillen. Controleer bij de eigen school.', periodes:{
+            { naam:'Meivakantie', type:'mei', note:'Data kunnen per school verschillen. Controleer bij de eigen school.', periodes:{
                 noord: {van:'2025-04-26',tot:'2025-05-04'},
                 midden:{van:'2025-04-26',tot:'2025-05-04'},
                 zuidd: {van:'2025-04-26',tot:'2025-05-04'},
@@ -135,7 +135,7 @@ const DATA = {
                 midden:{van:'2026-02-14',tot:'2026-02-22'},
                 zuidd: {van:'2026-02-14',tot:'2026-02-22'},
             }},
-            { naam:'Meivakantie', type:'mei', note:'Datums kunnen per school verschillen. Controleer bij de eigen school.', periodes:{
+            { naam:'Meivakantie', type:'mei', note:'Data kunnen per school verschillen. Controleer bij de eigen school.', periodes:{
                 noord: {van:'2026-04-25',tot:'2026-05-03'},
                 midden:{van:'2026-04-25',tot:'2026-05-03'},
                 zuidd: {van:'2026-04-25',tot:'2026-05-03'},
@@ -170,7 +170,7 @@ const DATA = {
                 midden:{van:'2027-02-20',tot:'2027-02-28'},
                 zuidd: {van:'2027-02-13',tot:'2027-02-21'},
             }},
-            { naam:'Meivakantie', type:'mei', note:'Datums kunnen per school verschillen. Controleer bij de eigen school.', periodes:{
+            { naam:'Meivakantie', type:'mei', note:'Data kunnen per school verschillen. Controleer bij de eigen school.', periodes:{
                 noord: {van:'2027-04-24',tot:'2027-05-02'},
                 midden:{van:'2027-04-24',tot:'2027-05-02'},
                 zuidd: {van:'2027-04-24',tot:'2027-05-02'},
@@ -205,7 +205,7 @@ const DATA = {
                 midden:{van:'2028-02-26',tot:'2028-03-05'},
                 zuidd: {van:'2028-02-12',tot:'2028-02-20'},
             }},
-            { naam:'Meivakantie', type:'mei', note:'Datums kunnen per school verschillen. Controleer bij de eigen school.', periodes:{
+            { naam:'Meivakantie', type:'mei', note:'Data kunnen per school verschillen. Controleer bij de eigen school.', periodes:{
                 noord: {van:'2028-04-29',tot:'2028-05-14'},
                 midden:{van:'2028-04-29',tot:'2028-05-14'},
                 zuidd: {van:'2028-04-29',tot:'2028-05-14'},
