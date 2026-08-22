@@ -77,23 +77,50 @@ const holidayColor = name => {
     return HOLIDAY_COLOR;
 };
 
-// Feestdag-icoontjes voor print — herkenbaar op vorm, dus ook bruikbaar
-// op een zwart-witprinter. Kleurenprinters printen de emoji gewoon in kleur.
-const HOLIDAY_ICONS = {
-    'Nieuwjaarsdag':       '🎉',
-    'Oudjaarsdag':         '🎆',
-    'Koningsdag':          '👑',
-    'Bevrijdingsdag':      '🕊️',
-    'Goede Vrijdag':       '✝️',
-    'Eerste Paasdag':      '🐣',
-    'Tweede Paasdag':      '🐣',
-    'Hemelvaartsdag':      '☁️',
-    'Eerste Pinksterdag':  '🔥',
-    'Tweede Pinksterdag':  '🔥',
-    'Eerste Kerstdag':     '🎄',
-    'Tweede Kerstdag':     '🎄',
+// Feestdag-icoontjes voor print — eigen getekende lijn-doodles (geen
+// emoji), zodat ze er clean en consistent uitzien i.p.v. als emoticons.
+// Elke doodle is een simpele SVG-path, getekend in de kleur van de
+// feestdag (holidayColor) — dus ook een zwart-witprinter toont een
+// duidelijk herkenbare vorm, en een kleurenprinter de juiste kleur.
+const EGG_DOODLE =
+    '<path d="M12 21c-4 0-6-3.6-6-7.6C6 8.4 9 3.3 12 3.3s6 5.1 6 10.1c0 4-2 7.6-6 7.6Z"/>' +
+    '<path d="M8 12.3l1.4 1.4 1.4-1.4 1.4 1.4 1.4-1.4 1.4 1.4" stroke-width="1.3"/>';
+const FLAME_DOODLE =
+    '<path d="M12 21c-3 0-5-2-5-5 0-3 2-4 3-7 1 2 1 3 2 3 .5-2-.5-4 0-6 2 2 4 5 4 8.5 0 3.5-1 6.5-4 6.5Z"/>';
+const TREE_DOODLE =
+    '<path d="M12 2 7 9h3l-4 6h4l-4 6h12l-4-6h4l-4-6h3Z"/><path d="M12 21v1.5"/>';
+
+const HOLIDAY_DOODLES = {
+    'Nieuwjaarsdag':
+        '<path d="M12 2 13.6 9.4 21 11 13.6 12.6 12 20 10.4 12.6 3 11 10.4 9.4Z"/>',
+    'Oudjaarsdag':
+        '<g transform="rotate(-18 6 9)"><path d="M2 3 6 8 10 3"/><path d="M6 8v6"/><path d="M4 15h4"/></g>' +
+        '<g transform="rotate(18 18 9)"><path d="M14 3 18 8 22 3"/><path d="M18 8v6"/><path d="M16 15h4"/></g>' +
+        '<path d="M12 0.5v2M10.8 1.7l0.9 0.9M13.2 1.7l-0.9 0.9"/>',
+    'Koningsdag':
+        '<path d="M4 18h16M4 18l1.4-8 4.1 4 2.5-6.6 2.5 6.6 4.1-4 1.4 8"/>' +
+        '<circle cx="5.6" cy="10" r=".6" fill="currentColor" stroke="none"/>' +
+        '<circle cx="12" cy="8.1" r=".6" fill="currentColor" stroke="none"/>' +
+        '<circle cx="18.4" cy="10" r=".6" fill="currentColor" stroke="none"/>',
+    'Bevrijdingsdag':
+        '<path d="M2 15c4-6 7-6 10-1 3-5 6-5 10 1"/>',
+    'Goede Vrijdag':
+        '<path d="M12 3v18M7.3 8.3h9.4"/>',
+    'Eerste Paasdag': EGG_DOODLE,
+    'Tweede Paasdag': EGG_DOODLE,
+    'Hemelvaartsdag':
+        '<path d="M7 17a4 4 0 0 1-.5-7.97A5 5 0 0 1 16.2 8.1 4.5 4.5 0 0 1 17 17Z"/>',
+    'Eerste Pinksterdag': FLAME_DOODLE,
+    'Tweede Pinksterdag': FLAME_DOODLE,
+    'Eerste Kerstdag': TREE_DOODLE,
+    'Tweede Kerstdag': TREE_DOODLE,
 };
-const holidayIcon = name => HOLIDAY_ICONS[name] || '★';
+function holidayIcon(name) {
+    const inner = HOLIDAY_DOODLES[name] || '<circle cx="12" cy="12" r="7"/>';
+    return `<svg class="doodle" viewBox="0 0 24 24" fill="none" stroke="currentColor" ` +
+        `stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" ` +
+        `style="color:${holidayColor(name)}">${inner}</svg>`;
+}
 
 // ── School holiday data ──────────────────────────────────────────
 // Bron: rijksoverheid.nl
