@@ -993,10 +993,10 @@ a { color: var(--green); text-underline-offset: 3px; }
 
     body { background: #fff; font-size: 12px; font-family: 'Space Mono', monospace; }
 
-    .print-month { padding: 16px 24px; }
+    .print-month { padding: 16px 24px; break-inside: avoid; page-break-inside: avoid; }
     .print-month + .print-month { page-break-before: always; }
 
-    .pm-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; color: #2A2018; }
+    .pm-title { font-family: 'Playwrite GB J Guides', cursive; font-size: 1.3rem; font-weight: 400; margin-bottom: 4px; color: #2A2018; }
 
     .pm-legend { display: flex; gap: 16px; margin-bottom: 12px; font-size: 0.78rem; }
     .pm-legend-item { display: flex; align-items: center; gap: 5px; }
@@ -1009,6 +1009,8 @@ a { color: var(--green); text-underline-offset: 3px; }
         border: 1px solid #DDD5C8;
         border-radius: 6px;
         overflow: hidden;
+        break-inside: avoid;
+        page-break-inside: avoid;
     }
 
     .pm-head {
