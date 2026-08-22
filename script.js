@@ -77,6 +77,24 @@ const holidayColor = name => {
     return HOLIDAY_COLOR;
 };
 
+// Feestdag-icoontjes voor print — herkenbaar op vorm, dus ook bruikbaar
+// op een zwart-witprinter. Kleurenprinters printen de emoji gewoon in kleur.
+const HOLIDAY_ICONS = {
+    'Nieuwjaarsdag':       '🎉',
+    'Oudjaarsdag':         '🎆',
+    'Koningsdag':          '👑',
+    'Bevrijdingsdag':      '🕊️',
+    'Goede Vrijdag':       '✝️',
+    'Eerste Paasdag':      '🐣',
+    'Tweede Paasdag':      '🐣',
+    'Hemelvaartsdag':      '☁️',
+    'Eerste Pinksterdag':  '🔥',
+    'Tweede Pinksterdag':  '🔥',
+    'Eerste Kerstdag':     '🎄',
+    'Tweede Kerstdag':     '🎄',
+};
+const holidayIcon = name => HOLIDAY_ICONS[name] || '★';
+
 // ── School holiday data ──────────────────────────────────────────
 // Bron: rijksoverheid.nl
 // Jaren 2024-2026: bevestigd. 2027+: indicatief.
@@ -1059,14 +1077,15 @@ function buildPrintView() {
                 }
             }
 
-            // Feestdag — dun streepje, andere vorm dan het vakantieblokje
+            // Feestdag — eigen icoontje i.p.v. een kleurvlak: herkenbaar op
+            // vorm, dus ook op een zwart-witprinter te onderscheiden
             const holidayName = monthHolidays[`${y}-${mPad}-${String(day).padStart(2,'0')}`];
-            const holidayBar = holidayName
-                ? `<div class="pm-holiday-bar" style="background:${holidayColor(holidayName)}"></div>`
+            const holidayMark = holidayName
+                ? `<div class="pm-holiday-icon" title="${holidayName}">${holidayIcon(holidayName)}</div>`
                 : '';
             if (holidayName) holidaysInMonth.push(holidayName);
 
-            cells += `<div class="${cls}"><span class="pm-num">${day}</span>${bars}${holidayBar}</div>`;
+            cells += `<div class="${cls}"><span class="pm-num">${day}</span>${bars}${holidayMark}</div>`;
         }
 
         // Legenda onder de kalender — vakanties en feestdagen met naam,
@@ -1075,7 +1094,7 @@ function buildPrintView() {
             `<span class="pm-vac-label"><b class="pm-vac-dot" style="background:${TYPE_COLOR[v.type]}"></b>${v.naam}</span>`
         ).join('');
         const holLegendHTML = [...new Set(holidaysInMonth)].map(name =>
-            `<span class="pm-vac-label"><b class="pm-vac-dot pm-vac-dot--holiday" style="background:${holidayColor(name)}"></b>${name}</span>`
+            `<span class="pm-vac-label"><span class="pm-vac-icon">${holidayIcon(name)}</span>${name}</span>`
         ).join('');
         const belowHTML = (vacLegendHTML || holLegendHTML)
             ? `<div class="pm-vac-row">${vacLegendHTML}${holLegendHTML}</div>`

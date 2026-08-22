@@ -1050,12 +1050,13 @@ a { color: var(--green); text-underline-offset: 3px; }
 
     .pm-vac-bar { font-size: 0.6rem; font-weight: 700; border-radius: 4px; padding: 2px 4px; margin-top: 1px; color: #fff; }
 
-    /* Feestdag: dun streepje i.p.v. het vakantieblokje — ook zonder kleur
-       (bv. zwart-wit printer) te onderscheiden van een vakantiedag */
-    .pm-holiday-bar { height: 3px; border-radius: 2px; margin-top: 2px; }
+    /* Feestdag: eigen icoontje i.p.v. het vakantieblokje — herkenbaar op
+       vorm, dus ook bruikbaar op een zwart-witprinter. Kleurenprinters
+       printen de emoji gewoon in kleur. */
+    .pm-holiday-icon { font-size: 0.9rem; line-height: 1; margin-top: 2px; }
 
     /* Legenda onder de maandkalender: vakanties (ronde stip) en
-       feestdagen (ruit) met naam — leesbaar zonder kleur nodig te hebben */
+       feestdagen (icoontje) met naam — leesbaar zonder kleur nodig te hebben */
     .pm-vac-row {
         display: flex;
         flex-wrap: wrap;
@@ -1078,10 +1079,7 @@ a { color: var(--green); text-underline-offset: 3px; }
         border-radius: 50%;
         flex-shrink: 0;
     }
-    .pm-vac-dot--holiday {
-        border-radius: 2px;
-        transform: rotate(45deg);
-    }
+    .pm-vac-icon { font-size: 0.85rem; line-height: 1; }
 }
 
 /* Post-it verborgen op tussenliggende breedtes — te weinig ruimte naast vakantiename */
