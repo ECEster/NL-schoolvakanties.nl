@@ -1046,7 +1046,7 @@ a { color: var(--green); text-underline-offset: 3px; }
         justify-content: center;
     }
 
-    .pm-vac-bar { font-size: 0.6rem; font-weight: 700; border-radius: 4px; padding: 2px 4px; margin-top: 1px; color: #fff; }
+    .pm-vac-bar { width: 10px; height: 10px; border-radius: 50%; margin-top: 3px; }
 
     /* Feestdag: eigen getekende lijn-doodle i.p.v. het vakantieblokje —
        herkenbaar op vorm, dus ook bruikbaar op een zwart-witprinter.
@@ -1078,6 +1078,7 @@ a { color: var(--green); text-underline-offset: 3px; }
         border-radius: 50%;
         flex-shrink: 0;
     }
+    .pm-vac-name { font-family: 'Playwrite GB J Guides', cursive; font-size: 0.85rem; font-weight: 400; }
     .pm-vac-icon { display: inline-flex; flex-shrink: 0; }
     .pm-vac-icon svg.doodle { display: block; width: 15px; height: 15px; shape-rendering: geometricPrecision; }
 }

@@ -1093,12 +1093,12 @@ function buildPrintView() {
             let cls = 'pm-cell';
             if(isWe) cls+=' weekend';
 
-            // Vakantieblokjes (per regio, met letter) — vierkant blok
+            // Vakantiebolletje (per regio) — geen letter meer, gewoon een stip
             let bars = '';
             for (const v of allVakanties) {
                 for (const [r,p] of Object.entries(v.periodes)) {
                     if ((region==='alle'||region===r) && date>=parseDate(p.van) && date<=parseDate(p.tot)) {
-                        bars += `<div class="pm-vac-bar" style="background:${REGION_COLOR[r]}">${REGION_LABEL[r].slice(0,1)}</div>`;
+                        bars += `<div class="pm-vac-bar" style="background:${REGION_COLOR[r]}" title="${REGION_LABEL[r]}"></div>`;
                         if (!seenVacNames.has(v.naam)) { seenVacNames.add(v.naam); vacInMonth.push(v); }
                     }
                 }
@@ -1118,7 +1118,7 @@ function buildPrintView() {
         // Legenda onder de kalender — vakanties en feestdagen met naam,
         // zodat het ook zonder kleur (zwart-wit printer) te onderscheiden is
         const vacLegendHTML = vacInMonth.map(v =>
-            `<span class="pm-vac-label"><b class="pm-vac-dot" style="background:${TYPE_COLOR[v.type]}"></b>${v.naam}</span>`
+            `<span class="pm-vac-label"><b class="pm-vac-dot" style="background:${TYPE_COLOR[v.type]}"></b><span class="pm-vac-name">${v.naam}</span></span>`
         ).join('');
         const holLegendHTML = [...new Set(holidaysInMonth)].map(name =>
             `<span class="pm-vac-label"><span class="pm-vac-icon">${holidayIcon(name)}</span>${name}</span>`
