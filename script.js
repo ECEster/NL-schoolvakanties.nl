@@ -1023,6 +1023,8 @@ function buildPrintView() {
         const firstDay = new Date(y,m,1);
         const lastDay  = new Date(y,m+1,0);
         let startDow   = (firstDay.getDay()+6)%7;
+        const monthHolidays = getDutchHolidays(y);
+        const mPad = String(m+1).padStart(2,'0');
 
         // Legend — alleen geselecteerde regio(s)
         const legendRegions = region === 'alle'
@@ -1035,6 +1037,10 @@ function buildPrintView() {
         let cells = DAYS_SH.map(h=>`<div class="pm-head">${h}</div>`).join('');
         for (let i=0;i<startDow;i++) cells += `<div class="pm-cell outside"></div>`;
 
+        const seenVacNames = new Set();
+        const vacInMonth = [];
+        const holidaysInMonth = [];
+
         for (let day=1; day<=lastDay.getDate(); day++) {
             const date = new Date(y,m,day);
             const dow  = date.getDay();
@@ -1042,23 +1048,44 @@ function buildPrintView() {
             let cls = 'pm-cell';
             if(isWe) cls+=' weekend';
 
-            // Find vacations on this day
+            // Vakantieblokjes (per regio, met letter) — vierkant blok
             let bars = '';
             for (const v of allVakanties) {
                 for (const [r,p] of Object.entries(v.periodes)) {
                     if ((region==='alle'||region===r) && date>=parseDate(p.van) && date<=parseDate(p.tot)) {
                         bars += `<div class="pm-vac-bar" style="background:${REGION_COLOR[r]}">${REGION_LABEL[r].slice(0,1)}</div>`;
+                        if (!seenVacNames.has(v.naam)) { seenVacNames.add(v.naam); vacInMonth.push(v); }
                     }
                 }
             }
 
-            cells += `<div class="${cls}"><span class="pm-num">${day}</span>${bars}</div>`;
+            // Feestdag — dun streepje, andere vorm dan het vakantieblokje
+            const holidayName = monthHolidays[`${y}-${mPad}-${String(day).padStart(2,'0')}`];
+            const holidayBar = holidayName
+                ? `<div class="pm-holiday-bar" style="background:${holidayColor(holidayName)}"></div>`
+                : '';
+            if (holidayName) holidaysInMonth.push(holidayName);
+
+            cells += `<div class="${cls}"><span class="pm-num">${day}</span>${bars}${holidayBar}</div>`;
         }
+
+        // Legenda onder de kalender — vakanties en feestdagen met naam,
+        // zodat het ook zonder kleur (zwart-wit printer) te onderscheiden is
+        const vacLegendHTML = vacInMonth.map(v =>
+            `<span class="pm-vac-label"><b class="pm-vac-dot" style="background:${TYPE_COLOR[v.type]}"></b>${v.naam}</span>`
+        ).join('');
+        const holLegendHTML = [...new Set(holidaysInMonth)].map(name =>
+            `<span class="pm-vac-label"><b class="pm-vac-dot pm-vac-dot--holiday" style="background:${holidayColor(name)}"></b>${name}</span>`
+        ).join('');
+        const belowHTML = (vacLegendHTML || holLegendHTML)
+            ? `<div class="pm-vac-row">${vacLegendHTML}${holLegendHTML}</div>`
+            : '';
 
         html += `<div class="print-month">
             <div class="pm-title">${MONTHS_NL[m]} ${y}</div>
             ${legend}
             <div class="pm-grid">${cells}</div>
+            ${belowHTML}
         </div>`;
     }
 
