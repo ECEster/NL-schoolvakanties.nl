@@ -103,7 +103,7 @@ const HOLIDAY_DOODLES = {
         '<circle cx="12" cy="8.1" r=".6" fill="currentColor" stroke="none"/>' +
         '<circle cx="18.4" cy="10" r=".6" fill="currentColor" stroke="none"/>',
     'Bevrijdingsdag':
-        '<path d="M2 15c4-6 7-6 10-1 3-5 6-5 10 1"/>',
+        '<path d="M5 22V3"/><path d="M5 3.5c2.8 1.3 4.2-1.3 7 0 2.8 1.3 4.2-1.3 7 0v8.5c-2.8-1.3-4.2 1.3-7 0-2.8-1.3-4.2 1.3-7 0Z"/>',
     'Goede Vrijdag':
         '<path d="M12 3v18M7.3 8.3h9.4"/>',
     'Eerste Paasdag': EGG_DOODLE,

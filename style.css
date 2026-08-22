@@ -1009,8 +1009,6 @@ a { color: var(--green); text-underline-offset: 3px; }
         border: 1px solid #DDD5C8;
         border-radius: 6px;
         overflow: hidden;
-        break-inside: avoid;
-        page-break-inside: avoid;
     }
 
     .pm-head {
@@ -1054,7 +1052,7 @@ a { color: var(--green); text-underline-offset: 3px; }
        herkenbaar op vorm, dus ook bruikbaar op een zwart-witprinter.
        Kleurenprinters tonen 'm gewoon in de kleur van de feestdag. */
     .pm-holiday-icon { margin-top: 2px; }
-    .pm-holiday-icon svg.doodle { display: block; width: 14px; height: 14px; }
+    .pm-holiday-icon svg.doodle { display: block; width: 19px; height: 19px; shape-rendering: geometricPrecision; }
 
     /* Legenda onder de maandkalender: vakanties (ronde stip) en
        feestdagen (icoontje) met naam — leesbaar zonder kleur nodig te hebben */
@@ -1081,7 +1079,7 @@ a { color: var(--green); text-underline-offset: 3px; }
         flex-shrink: 0;
     }
     .pm-vac-icon { display: inline-flex; flex-shrink: 0; }
-    .pm-vac-icon svg.doodle { display: block; width: 13px; height: 13px; }
+    .pm-vac-icon svg.doodle { display: block; width: 15px; height: 15px; shape-rendering: geometricPrecision; }
 }
 
 /* Post-it verborgen op tussenliggende breedtes — te weinig ruimte naast vakantiename */
