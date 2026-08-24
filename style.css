@@ -988,6 +988,17 @@ a { color: var(--green); text-underline-offset: 3px; }
 @page { margin: 0; }
 
 @media print {
+    /* Zonder dit laten sommige browsers achtergrondkleuren standaard weg bij
+       printen (tenzij de gebruiker zelf 'achtergrondafbeeldingen' aanvinkt in
+       het printvenster) — daardoor verdwenen de vakantiebolletjes, die puur
+       op een achtergrondkleur leunen (geen tekst/rand zoals de feestdag-
+       icoontjes wel hebben). Dit forceert ze altijd mee te printen. */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+    }
+
     .no-print { display: none !important; }
     .print-only { display: block; }
 
