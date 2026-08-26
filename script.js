@@ -1093,13 +1093,21 @@ function buildPrintView() {
             let cls = 'pm-cell';
             if(isWe) cls+=' weekend';
 
-            // Vakantiebolletje (per regio) — geen letter meer, gewoon een stip
+            // Vakantiebolletje — kleur van het vakantietype, zelfde kleur als
+            // de bullet voor de naam in de legenda. Eén bolletje per vakantie-
+            // naam per dag (sommige vakanties, zoals de zomervakantie, staan
+            // dubbel in de data — als afsluiter van het ene schooljaar én als
+            // opener van het volgende — dus dedupliceren op naam per dag).
             let bars = '';
+            const seenTodayVac = new Set();
             for (const v of allVakanties) {
+                if (seenTodayVac.has(v.naam)) continue;
                 for (const [r,p] of Object.entries(v.periodes)) {
                     if ((region==='alle'||region===r) && date>=parseDate(p.van) && date<=parseDate(p.tot)) {
-                        bars += `<div class="pm-vac-bar" style="background:${REGION_COLOR[r]}" title="${REGION_LABEL[r]}"></div>`;
+                        seenTodayVac.add(v.naam);
+                        bars += `<div class="pm-vac-bar" style="background:${TYPE_COLOR[v.type]}" title="${v.naam}"></div>`;
                         if (!seenVacNames.has(v.naam)) { seenVacNames.add(v.naam); vacInMonth.push(v); }
+                        break;
                     }
                 }
             }
