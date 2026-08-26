@@ -1118,7 +1118,7 @@ function buildPrintView() {
         // Legenda onder de kalender — vakanties en feestdagen met naam,
         // zodat het ook zonder kleur (zwart-wit printer) te onderscheiden is
         const vacLegendHTML = vacInMonth.map(v =>
-            `<span class="pm-vac-label"><b class="pm-vac-dot" style="background:${TYPE_COLOR[v.type]}"></b><span class="pm-vac-name">${v.naam}</span></span>`
+            `<span class="pm-vac-label"><b class="pm-vac-dot" style="background:${TYPE_COLOR[v.type]}"></b><span class="pm-vac-name" data-text="${v.naam}">${v.naam}</span></span>`
         ).join('');
         const holLegendHTML = [...new Set(holidaysInMonth)].map(name =>
             `<span class="pm-vac-label"><span class="pm-vac-icon">${holidayIcon(name)}</span>${name}</span>`
@@ -1127,8 +1127,9 @@ function buildPrintView() {
             ? `<div class="pm-vac-row">${vacLegendHTML}${holLegendHTML}</div>`
             : '';
 
+        const titleText = `${MONTHS_NL[m]} ${y}`;
         html += `<div class="print-month">
-            <div class="pm-title">${MONTHS_NL[m]} ${y}</div>
+            <div class="pm-title" data-text="${titleText}">${titleText}</div>
             ${legend}
             <div class="pm-grid">${cells}</div>
             ${belowHTML}
