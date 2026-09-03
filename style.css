@@ -94,7 +94,17 @@ a { color: var(--green); text-underline-offset: 3px; }
 
 .logo-tld { color: rgba(255,255,255,.75); }
 
+.lang-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    vertical-align: middle;
+}
+
 .btn-lang {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     background: rgba(255,255,255,.18);
     border: 1.5px solid rgba(255,255,255,.45);
     color: var(--white);

@@ -1314,11 +1314,10 @@ function applyStaticTranslations() {
         const val = UI[activeLang][key];
         if (val !== undefined) el.innerHTML = val;
     });
+    const label = document.getElementById('lang-label');
+    if (label) label.textContent = activeLang === 'nl' ? 'EN' : 'NL';
     const btn = document.getElementById('btn-lang');
-    if (btn) {
-        btn.textContent = activeLang === 'nl' ? 'EN' : 'NL';
-        btn.title = activeLang === 'nl' ? 'Switch to English' : 'Schakel naar Nederlands';
-    }
+    if (btn) btn.title = activeLang === 'nl' ? 'Switch to English' : 'Schakel naar Nederlands';
 }
 
 function setLang(lang) {
