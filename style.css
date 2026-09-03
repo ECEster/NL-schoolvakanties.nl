@@ -194,14 +194,14 @@ a { color: var(--green); text-underline-offset: 3px; }
 .postit-wk {
     position: absolute;
     left: 44px;
-    bottom: -96px;
+    bottom: -110px;
     transform: rotate(-2.5deg);
-    width: 58px;
+    width: 72px;
     text-align: center;
     background: #FFF176;
     color: #3A2E00;
     font-family: 'Space Mono', monospace;
-    padding: 10px 8px 14px;
+    padding: 12px 10px 16px;
     border-radius: 2px;
     box-shadow: 2px 4px 10px rgba(0,0,0,0.22), 0 1px 3px rgba(0,0,0,0.15);
     z-index: 150;
@@ -220,7 +220,7 @@ a { color: var(--green); text-underline-offset: 3px; }
 
 .postit-wk-label {
     display: block;
-    font-size: 0.60rem;
+    font-size: 0.68rem;
     opacity: 0.85;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -228,7 +228,7 @@ a { color: var(--green); text-underline-offset: 3px; }
 
 .postit-wk-num {
     display: block;
-    font-size: 1.35rem;
+    font-size: 1.6rem;
     font-weight: 700;
     letter-spacing: -0.02em;
 }
