@@ -1073,7 +1073,7 @@ a { color: var(--green); text-underline-offset: 3px; }
     .pm-cell {
         min-height: 80px;
         border-right: 1px solid #eee;
-        border-top: 1px solid #eee;
+        border-bottom: 1px solid #eee;
         padding: 4px;
         vertical-align: top;
         position: relative;
