@@ -106,8 +106,10 @@ a { color: var(--green); text-underline-offset: 3px; }
     border-radius: 10px;
     cursor: pointer;
     transition: background .15s, transform .1s;
-    flex-shrink: 0;
-    margin-right: -20px;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 .btn-lang:hover  { background: rgba(255,255,255,.30); transform: translateY(-1px); }
 .btn-lang:active { transform: scale(0.96); }
