@@ -1198,6 +1198,12 @@ a { color: var(--green); text-underline-offset: 3px; }
     font-weight: 500;
 }
 
+.footer-inner { display: flex; align-items: flex-end; gap: 20px; }
+
+.footer-gnome { height: 130px; width: auto; flex-shrink: 0; display: block; }
+
+.footer-text { flex: 1; text-align: center; }
+
 .footer a { color: rgba(255,255,255,.90); text-underline-offset: 3px; }
 
 .footer-sub { font-size: 0.76rem; opacity: 0.65; margin-top: 6px; }
