@@ -593,7 +593,7 @@ a { color: var(--green); text-underline-offset: 3px; }
     z-index: 1;
 }
 
-.year-card-tabs .ycal-tab { padding: 3px 10px; font-size: 0.70rem; font-family: 'Space Mono', monospace; font-weight: 400; background: rgba(255,255,255,0.18); border: 1.5px solid rgba(255,255,255,0.35); border-radius: 999px; color: rgba(255,255,255,0.85); cursor: pointer; transition: all .18s; }
+.year-card-tabs .ycal-tab { padding: 3px 10px; font-size: 0.70rem; font-family: 'Playwrite GB J Guides', cursive; font-weight: 400; background: rgba(255,255,255,0.18); border: 1.5px solid rgba(255,255,255,0.35); border-radius: 999px; color: rgba(255,255,255,0.85); cursor: pointer; transition: all .18s; }
 .year-card-tabs .ycal-tab:hover { background: rgba(255,255,255,0.32); border-color: rgba(255,255,255,0.65); color: #fff; }
 .year-card-tabs .ycal-tab.active { background: rgba(255,255,255,0.92); border-color: transparent; color: var(--green); font-weight: 700; box-shadow: 0 1px 4px rgba(0,0,0,0.15); }
 
