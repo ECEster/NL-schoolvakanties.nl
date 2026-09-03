@@ -182,9 +182,18 @@ a { color: var(--green); text-underline-offset: 3px; }
     border-radius: 2px 2px 0 0;
 }
 
+.postit-gnome-figure {
+    position: absolute;
+    bottom: -118px;
+    left: 4px;
+    width: 62px;
+    z-index: 152;
+    pointer-events: none;
+}
+
 .postit-wk {
     position: absolute;
-    left: 0;
+    left: 44px;
     bottom: -96px;
     transform: rotate(-2.5deg);
     width: 58px;
