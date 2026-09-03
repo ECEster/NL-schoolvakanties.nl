@@ -865,10 +865,10 @@ function renderYearCalMonth(year, month, vakanties, region) {
 
 function buildYearCard(year) {
     const yd = DATA[year];
-    const parts = year.split('-');
-    const y2 = parseInt(parts[1]);
+    const y1 = parseInt(year.split('-')[0]);
+    const y2 = parseInt(year.split('-')[1]);
 
-    const calStart = new Date(y2, 0, 1);
+    const calStart = new Date(y1, 8, 1);   // September of y1
     const calEnd   = new Date(y2, 11, 31);
     const yearKeys = Object.keys(DATA);
     const nextKey  = yearKeys[yearKeys.indexOf(year) + 1];
@@ -880,7 +880,8 @@ function buildYearCard(year) {
     const allVakanties = [...yd.vakanties, ...extraVak];
 
     const months = [];
-    for (let m = 0; m <= 11; m++) months.push({y: y2, m});
+    for (let m = 8; m <= 11; m++) months.push({y: y1, m}); // Sept–Dec van y1
+    for (let m = 0; m <= 11; m++) months.push({y: y2, m}); // Jan–Dec van y2
 
     const monthsHTML = months.map(({y, m}) => renderYearCalMonth(y, m, allVakanties, activeRegion)).join('');
 
@@ -896,7 +897,7 @@ function buildYearCard(year) {
         <div class="card-img year-card-img">
             <div class="year-card-tabs">${yearTabsHTML}</div>
             <div class="card-img-text">
-                <div class="card-img-name">${t('kalenderjaar')} ${y2}</div>
+                <div class="card-img-name">${t('kalenderjaar')} ${y1}–${y2}</div>
             </div>
         </div>
         <div class="card-body">
