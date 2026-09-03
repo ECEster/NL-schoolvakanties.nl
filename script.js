@@ -901,10 +901,10 @@ function buildYearCard() {
 
     return `<div class="card year-card">
         <div class="card-img year-card-img">
-            <div class="year-card-tabs">${tabsHTML}</div>
             <div class="card-img-text">
                 <div class="card-img-name">${t('kalenderjaar')} ${calYear}</div>
             </div>
+            <div class="year-card-tabs">${tabsHTML}</div>
         </div>
         <div class="card-body">
             <div class="year-cal-grid">${monthsHTML}</div>
