@@ -94,6 +94,23 @@ a { color: var(--green); text-underline-offset: 3px; }
 
 .logo-tld { color: rgba(255,255,255,.75); }
 
+.btn-lang {
+    background: rgba(255,255,255,.18);
+    border: 1.5px solid rgba(255,255,255,.45);
+    color: var(--white);
+    font-family: var(--font-mono);
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    padding: 5px 11px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background .15s, transform .1s;
+    flex-shrink: 0;
+}
+.btn-lang:hover  { background: rgba(255,255,255,.30); transform: translateY(-1px); }
+.btn-lang:active { transform: scale(0.96); }
+
 .nav-right { display: flex; gap: 8px; align-items: center; }
 
 .print-btn-wrap  { position: relative; flex-shrink: 0; }

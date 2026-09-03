@@ -10,6 +10,128 @@ const MONTHS_NL  = ['Januari','Februari','Maart','April','Mei','Juni',
 const MONTHS_SH  = ['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
 const DAYS_SH    = ['Ma','Di','Wo','Do','Vr','Za','Zo'];
 
+// ── Language / i18n ───────────────────────────────────────────────
+
+let activeLang = localStorage.getItem('lang') || 'nl';
+
+const MONTHS_EN    = ['January','February','March','April','May','June',
+                      'July','August','September','October','November','December'];
+const MONTHS_SH_EN = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const DAYS_SH_EN   = ['Mo','Tu','We','Th','Fr','Sa','Su'];
+
+function months()   { return activeLang === 'en' ? MONTHS_EN    : MONTHS_NL; }
+function monthsSh() { return activeLang === 'en' ? MONTHS_SH_EN : MONTHS_SH; }
+function daysSh()   { return activeLang === 'en' ? DAYS_SH_EN   : DAYS_SH; }
+
+const TYPE_NAAM = {
+    nl: { zomer:'Zomervakantie', herfst:'Herfstvakantie', kerst:'Kerstvakantie', voorjaar:'Voorjaarsvakantie', mei:'Meivakantie' },
+    en: { zomer:'Summer holiday', herfst:'Autumn holiday', kerst:'Christmas holiday', voorjaar:'Spring holiday', mei:'May holiday' },
+};
+const REGION_LABEL_TRANS = {
+    nl: { noord:'Noord', midden:'Midden', zuidd:'Zuid' },
+    en: { noord:'North', midden:'Central', zuidd:'South' },
+};
+const HOLIDAY_NAMES_EN = {
+    'Nieuwjaarsdag':      "New Year's Day",
+    'Koningsdag':         "King's Day",
+    'Bevrijdingsdag':     "Liberation Day",
+    'Goede Vrijdag':      "Good Friday",
+    'Eerste Paasdag':     "Easter Sunday",
+    'Tweede Paasdag':     "Easter Monday",
+    'Hemelvaartsdag':     "Ascension Day",
+    'Eerste Pinksterdag': "Whit Sunday",
+    'Tweede Pinksterdag': "Whit Monday",
+    'Eerste Kerstdag':    "Christmas Day",
+    'Tweede Kerstdag':    "Boxing Day",
+    'Oudjaarsdag':        "New Year's Eve",
+};
+
+function vacName(v)     { return TYPE_NAAM[activeLang][v.type] || v.naam; }
+function regionLabel(r) { return REGION_LABEL_TRANS[activeLang][r]; }
+function holName(n)     { return activeLang === 'en' ? (HOLIDAY_NAMES_EN[n] || n) : n; }
+
+const UI = {
+    nl: {
+        nu:              'Nu',
+        voorbij:         'Voorbij',
+        duur:            'Duur:',
+        dagen:           'dagen',
+        dag:             'dag',
+        dgn:             'dgn',
+        alle_gelijk:     "Alle regio's gelijk:",
+        voor_alle:       "voor alle regio's",
+        alle_regio:      "Alle regio's:",
+        schooljaar:      'Schooljaar',
+        kalenderjaar:    'Kalenderjaar',
+        wk:              'wk',
+        region_noord:    'Noord',
+        region_midden:   'Midden',
+        region_zuidd:    'Zuid',
+        all_regions:     "Alle regio's",
+        export_title:    'Exporteer naar agenda (.ics)',
+        export_label:    'Schooljaar',
+        import_hint:     'Importeer het .ics bestand in Google Agenda, Outlook of Apple Agenda.',
+        postit_long:     'Print hier gemakkelijk de kalender voor op<br>je koelkast!',
+        postit_short:    'Print!',
+        provisional:     '⚠️ Jaren 2028 en later zijn <strong>indicatief</strong>. Controleer de officiële data op <a href="https://www.rijksoverheid.nl/onderwerpen/schoolvakanties" target="_blank" rel="noopener">rijksoverheid.nl</a>.',
+        footer_seo:      'Alle schoolvakanties van Nederland voor regio Noord, Midden en Zuid — zomervakantie, herfstvakantie, kerstvakantie, voorjaarsvakantie en meivakantie overzichtelijk op één pagina.',
+        footer_indicatief: 'Jaren 2028+ zijn indicatief. Raadpleeg altijd de officiële bron.',
+        toon_voorbij:    n      => `Toon voorbije vakanties (${n})`,
+        verberg_voorbij: 'Verberg voorbije vakanties',
+        mei_note:        'Data kunnen per school verschillen. Controleer bij de eigen school.',
+        nog_vakantie:    n      => `Nog <strong>${n} dag${n!==1?'en':''}</strong> vakantie`,
+        nog_x_dagen:     (n,nm) => `Nog <strong>${n} dag${n!==1?'en':''}</strong> ${nm}`,
+        x_tot:           (n,nm) => `<strong>${n} dag${n!==1?'en':''}</strong> tot ${nm}`,
+        cal_name_all:    y      => `Schoolvakanties NL ${y}`,
+        cal_name:        (r,y)  => `Schoolvakanties ${regionLabel(r)} ${y}`,
+        region_desc:     r      => `Schoolvakantie regio ${regionLabel(r)}`,
+        iab_text:        'Je opent deze pagina via de Instagram-app. <strong>Export</strong> en <strong>Afdrukken</strong> werken alleen in een echte browser. Tik rechtsonder op <strong>⋯</strong> en kies <em>Openen in browser</em>.',
+        iab_close:       'Sluiten',
+    },
+    en: {
+        nu:              'Now',
+        voorbij:         'Past',
+        duur:            'Duration:',
+        dagen:           'days',
+        dag:             'day',
+        dgn:             'd',
+        alle_gelijk:     'All regions equal:',
+        voor_alle:       'for all regions',
+        alle_regio:      'All regions:',
+        schooljaar:      'School year',
+        kalenderjaar:    'Calendar year',
+        wk:              'wk',
+        region_noord:    'North',
+        region_midden:   'Central',
+        region_zuidd:    'South',
+        all_regions:     'All regions',
+        export_title:    'Export to calendar (.ics)',
+        export_label:    'School year',
+        import_hint:     'Import the .ics file into Google Calendar, Outlook or Apple Calendar.',
+        postit_long:     'Easily print the calendar for your fridge!',
+        postit_short:    'Print!',
+        provisional:     '⚠️ Years 2028 and later are <strong>indicative</strong>. Check the official dates at <a href="https://www.rijksoverheid.nl/onderwerpen/schoolvakanties" target="_blank" rel="noopener">rijksoverheid.nl</a>.',
+        footer_seo:      'All Dutch school holidays for regions North, Central and South — summer, autumn, Christmas, spring and May holidays at a glance.',
+        footer_indicatief: 'Years 2028+ are indicative. Always check the official source.',
+        toon_voorbij:    n      => `Show past holidays (${n})`,
+        verberg_voorbij: 'Hide past holidays',
+        mei_note:        'Dates may vary by school. Check with your school.',
+        nog_vakantie:    n      => `<strong>${n} day${n!==1?'s':''}</strong> of holiday left`,
+        nog_x_dagen:     (n,nm) => `<strong>${n} day${n!==1?'s':''}</strong> left of ${nm}`,
+        x_tot:           (n,nm) => `<strong>${n} day${n!==1?'s':''}</strong> until ${nm}`,
+        cal_name_all:    y      => `School Holidays NL ${y}`,
+        cal_name:        (r,y)  => `School Holidays ${regionLabel(r)} ${y}`,
+        region_desc:     r      => `School holiday region ${regionLabel(r)}`,
+        iab_text:        'You are opening this page via the Instagram app. <strong>Export</strong> and <strong>Print</strong> only work in a real browser. Tap <strong>⋯</strong> at the bottom right and choose <em>Open in browser</em>.',
+        iab_close:       'Close',
+    },
+};
+
+function t(key, ...args) {
+    const val = UI[activeLang][key];
+    return typeof val === 'function' ? val(...args) : (val ?? '');
+}
+
 function isoWeek(date) {
     const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
     d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
@@ -22,7 +144,6 @@ const C_MIDDEN = '#6B96C4';
 const C_ZUIDD  = '#7EBD8F';
 
 const REGION_COLOR = { noord: C_NOORD, midden: C_MIDDEN, zuidd: C_ZUIDD };
-const REGION_LABEL = { noord: 'Noord', midden: 'Midden', zuidd: 'Zuid' };
 
 const TYPE_EMOJI = {
     zomer:    '☀️',
@@ -77,11 +198,6 @@ const holidayColor = name => {
     return HOLIDAY_COLOR;
 };
 
-// Feestdag-icoontjes voor print — eigen getekende lijn-doodles (geen
-// emoji), zodat ze er clean en consistent uitzien i.p.v. als emoticons.
-// Elke doodle is een simpele SVG-path, getekend in de kleur van de
-// feestdag (holidayColor) — dus ook een zwart-witprinter toont een
-// duidelijk herkenbare vorm, en een kleurenprinter de juiste kleur.
 const EGG_DOODLE =
     '<path d="M12 21c-4 0-6-3.6-6-7.6C6 8.4 9 3.3 12 3.3s6 5.1 6 10.1c0 4-2 7.6-6 7.6Z"/>' +
     '<path d="M8 12.3l1.4 1.4 1.4-1.4 1.4 1.4 1.4-1.4 1.4 1.4" stroke-width="1.3"/>';
@@ -150,7 +266,7 @@ const DATA = {
                 midden:{van:'2025-02-22',tot:'2025-03-02'},
                 zuidd: {van:'2025-02-22',tot:'2025-03-02'},
             }},
-            { naam:'Meivakantie', type:'mei', note:'Data kunnen per school verschillen. Controleer bij de eigen school.', periodes:{
+            { naam:'Meivakantie', type:'mei', note:true, periodes:{
                 noord: {van:'2025-04-26',tot:'2025-05-04'},
                 midden:{van:'2025-04-26',tot:'2025-05-04'},
                 zuidd: {van:'2025-04-26',tot:'2025-05-04'},
@@ -180,7 +296,7 @@ const DATA = {
                 midden:{van:'2026-02-14',tot:'2026-02-22'},
                 zuidd: {van:'2026-02-14',tot:'2026-02-22'},
             }},
-            { naam:'Meivakantie', type:'mei', note:'Data kunnen per school verschillen. Controleer bij de eigen school.', periodes:{
+            { naam:'Meivakantie', type:'mei', note:true, periodes:{
                 noord: {van:'2026-04-25',tot:'2026-05-03'},
                 midden:{van:'2026-04-25',tot:'2026-05-03'},
                 zuidd: {van:'2026-04-25',tot:'2026-05-03'},
@@ -215,7 +331,7 @@ const DATA = {
                 midden:{van:'2027-02-20',tot:'2027-02-28'},
                 zuidd: {van:'2027-02-13',tot:'2027-02-21'},
             }},
-            { naam:'Meivakantie', type:'mei', note:'Data kunnen per school verschillen. Controleer bij de eigen school.', periodes:{
+            { naam:'Meivakantie', type:'mei', note:true, periodes:{
                 noord: {van:'2027-04-24',tot:'2027-05-02'},
                 midden:{van:'2027-04-24',tot:'2027-05-02'},
                 zuidd: {van:'2027-04-24',tot:'2027-05-02'},
@@ -250,7 +366,7 @@ const DATA = {
                 midden:{van:'2028-02-26',tot:'2028-03-05'},
                 zuidd: {van:'2028-02-12',tot:'2028-02-20'},
             }},
-            { naam:'Meivakantie', type:'mei', note:'Data kunnen per school verschillen. Controleer bij de eigen school.', periodes:{
+            { naam:'Meivakantie', type:'mei', note:true, periodes:{
                 noord: {van:'2028-04-29',tot:'2028-05-14'},
                 midden:{van:'2028-04-29',tot:'2028-05-14'},
                 zuidd: {van:'2028-04-29',tot:'2028-05-14'},
@@ -275,7 +391,6 @@ function setRegionURL(region) {
     history.pushState(null, '', '#' + region);
 }
 
-// Start bij het eerste schooljaar dat nog toekomstige vakanties heeft
 let activeYear = (() => {
     const t = today();
     for (const [y, yd] of Object.entries(DATA)) {
@@ -308,12 +423,12 @@ function durationDays(van,tot) {
 
 function formatDate(s) {
     const d = parseDate(s);
-    return `${d.getDate()} ${MONTHS_SH[d.getMonth()]}`;
+    return `${d.getDate()} ${monthsSh()[d.getMonth()]}`;
 }
 
 function formatDateLong(s) {
     const d = parseDate(s);
-    return `${d.getDate()} ${MONTHS_NL[d.getMonth()]} ${d.getFullYear()}`;
+    return `${d.getDate()} ${months()[d.getMonth()]} ${d.getFullYear()}`;
 }
 
 function cardStatus(van,tot) {
@@ -409,20 +524,19 @@ function renderMiniCal(year, month, v) {
     const t = today();
     const firstDay = new Date(year, month, 1);
     const lastDay  = new Date(year, month+1, 0);
-    let startDow   = (firstDay.getDay() + 6) % 7; // Mo=0
+    let startDow   = (firstDay.getDay() + 6) % 7;
 
-    let html = `<div class="mini-cal"><div class="mc-title">${MONTHS_SH[month]} ${year}</div><div class="mc-grid">`;
+    let html = `<div class="mini-cal"><div class="mc-title">${monthsSh()[month]} ${year}</div><div class="mc-grid">`;
 
-    for (const h of DAYS_SH) html += `<span class="mc-head">${h}</span>`;
+    for (const h of daysSh()) html += `<span class="mc-head">${h}</span>`;
     for (let i=0; i<startDow; i++) html += `<span></span>`;
 
     for (let day=1; day<=lastDay.getDate(); day++) {
         const date = new Date(year,month,day);
-        const dow  = date.getDay(); // 0=Sun
+        const dow  = date.getDay();
         const isWe = dow===0 || dow===6;
         const isTd = date.getTime() === t.getTime();
 
-        // Which regions have vacation on this day?
         const vacRegions = [];
         for (const [r,p] of Object.entries(v.periodes)) {
             if (date >= parseDate(p.van) && date <= parseDate(p.tot)) vacRegions.push(r);
@@ -433,7 +547,6 @@ function renderMiniCal(year, month, v) {
         if (isTd) cls += ' today';
         if (vacRegions.length) cls += ' vac';
 
-        // Inline gradient for the dot
         let dotStyle = '';
         if (vacRegions.length === 1) {
             dotStyle = `background:${REGION_COLOR[vacRegions[0]]}`;
@@ -456,20 +569,20 @@ function renderMiniCal(year, month, v) {
 
 function renderCountdown() {
     const el = document.getElementById('countdown');
-    const t  = today();
+    const td  = today();
     let found = null;
 
     outer: for (const [year, yd] of Object.entries(DATA)) {
         for (const v of yd.vakanties) {
             const p = v.periodes[activeRegion];
-            if (!p || t > parseDate(p.tot)) continue;
+            if (!p || td > parseDate(p.tot)) continue;
             found = {v, year};
             break outer;
         }
     }
 
     if (!found) {
-        el.innerHTML = `<div class="cd-region">${REGION_LABEL[activeRegion]}</div>`;
+        el.innerHTML = `<div class="cd-region">${regionLabel(activeRegion)}</div>`;
         return;
     }
 
@@ -479,19 +592,19 @@ function renderCountdown() {
     const p = v.periodes[activeRegion];
     const startDate = parseDate(p.van);
     const endDate   = parseDate(p.tot);
-    const isCurrent = t >= startDate && t <= endDate;
+    const isCurrent = td >= startDate && td <= endDate;
 
     let countdownHTML;
     if (isCurrent) {
-        const daysLeft = daysBetween(t, endDate) + 1;
-        countdownHTML = `<div class="cd-countdown">Nog <strong>${daysLeft} dag${daysLeft !== 1 ? 'en' : ''}</strong> ${v.naam.toLowerCase()}</div>`;
+        const daysLeft = daysBetween(td, endDate) + 1;
+        countdownHTML = `<div class="cd-countdown">${t('nog_x_dagen', daysLeft, vacName(v).toLowerCase())}</div>`;
     } else {
-        const daysTo = daysBetween(t, startDate);
-        countdownHTML = `<div class="cd-countdown"><strong>${daysTo} dag${daysTo !== 1 ? 'en' : ''}</strong> tot ${v.naam}</div>`;
+        const daysTo = daysBetween(td, startDate);
+        countdownHTML = `<div class="cd-countdown">${t('x_tot', daysTo, vacName(v))}</div>`;
     }
 
     el.innerHTML = `
-        <div class="cd-region">${REGION_LABEL[activeRegion]}</div>
+        <div class="cd-region">${regionLabel(activeRegion)}</div>
         ${countdownHTML}`;
 }
 
@@ -500,16 +613,16 @@ function renderCountdown() {
 function durationSummary(v) {
     if (activeRegion !== 'alle') {
         const p = v.periodes[activeRegion];
-        return `<strong>${durationDays(p.van, p.tot)} dagen</strong>`;
+        return `<strong>${durationDays(p.van, p.tot)} ${t('dagen')}</strong>`;
     }
     const days = Object.fromEntries(
         Object.entries(v.periodes).map(([r,p]) => [r, durationDays(p.van,p.tot)])
     );
     const vals = Object.values(days);
     const allSame = vals.every(d => d===vals[0]);
-    if (allSame) return `<strong>${vals[0]} dagen</strong> voor alle regio's`;
+    if (allSame) return `<strong>${vals[0]} ${t('dagen')}</strong> ${t('voor_alle')}`;
     return Object.entries(days)
-        .map(([r,d]) => `${REGION_LABEL[r]}: <strong>${d} dgn</strong>`)
+        .map(([r,d]) => `${regionLabel(r)}: <strong>${d} ${t('dgn')}</strong>`)
         .join(' · ');
 }
 
@@ -518,20 +631,20 @@ function durationSummary(v) {
 function renderRegionCountdown() {
     const el = document.getElementById('region-cd');
     if (!el) return;
-    const t = today();
+    const td = today();
     const years = Object.keys(DATA).sort();
 
     for (const yr of years) {
         for (const v of DATA[yr].vakanties) {
             const p = v.periodes[activeRegion];
             const s = parseDate(p.van), e = parseDate(p.tot);
-            if (t > e) continue;
-            if (t >= s) {
-                const daysLeft = daysBetween(t, e) + 1;
-                el.innerHTML = `<div class="rcd rcd-current"><span class="pulse"></span> Nog <strong>${daysLeft} dag${daysLeft!==1?'en':''}</strong> vakantie</div>`;
+            if (td > e) continue;
+            if (td >= s) {
+                const daysLeft = daysBetween(td, e) + 1;
+                el.innerHTML = `<div class="rcd rcd-current"><span class="pulse"></span> ${t('nog_vakantie', daysLeft)}</div>`;
             } else {
-                const daysLeft = daysBetween(t, s);
-                el.innerHTML = `<div class="rcd"><strong>${daysLeft} dag${daysLeft!==1?'en':''}</strong> tot ${v.naam}</div>`;
+                const daysLeft = daysBetween(td, s);
+                el.innerHTML = `<div class="rcd">${t('x_tot', daysLeft, vacName(v))}</div>`;
             }
             return;
         }
@@ -545,10 +658,8 @@ function buildCard(v, year) {
     const status = statusForAll(v);
     const months = getMonthsForVakantie(v);
 
-    // Mini calendars HTML
     const miniCals = months.map(({y,m}) => renderMiniCal(y,m,v)).join('');
 
-    // Region rows
     const regions = ['noord','midden','zuidd'];
     let regionHTML = '';
 
@@ -557,7 +668,7 @@ function buildCard(v, year) {
         const d = durationDays(p.van, p.tot);
         regionHTML = `
             <div class="rrow-same">
-                Alle regio's gelijk: ${formatDate(p.van)} – ${formatDate(p.tot)} &nbsp;·&nbsp; <strong>${d} dagen</strong>
+                ${t('alle_gelijk')} ${formatDate(p.van)} – ${formatDate(p.tot)} &nbsp;·&nbsp; <strong>${d} ${t('dagen')}</strong>
             </div>`;
     } else {
         regionHTML = `<div class="region-rows">` +
@@ -570,28 +681,28 @@ function buildCard(v, year) {
                 return `<div class="${cls}" data-region="${r}">
                     <span class="rrow-dot" style="background:${REGION_COLOR[r]}"></span>
                     <span class="rrow-dates">${formatDate(p.van)} – ${formatDate(p.tot)}</span>
-                    <span class="rrow-days">${d} dgn</span>
+                    <span class="rrow-days">${d} ${t('dgn')}</span>
                 </div>`;
             }).join('') +
         `</div>`;
     }
 
-    const badgeText = {current:'Nu',upcoming:'',past:'Voorbij'}[status];
+    const badgeText = {current:t('nu'),upcoming:'',past:t('voorbij')}[status];
     const badgeCls  = {current:'badge-current',upcoming:'badge-upcoming',past:'badge-past'}[status];
-    const noteHTML  = v.note ? `<div class="card-note">ℹ️ ${v.note}</div>` : '';
-    const iconHTML  = TYPE_ICON[v.type] ? `<img class="season-icon" src="${TYPE_ICON[v.type]}" alt="${v.naam} icoon">` : '';
+    const noteHTML  = v.note ? `<div class="card-note">ℹ️ ${t('mei_note')}</div>` : '';
+    const iconHTML  = TYPE_ICON[v.type] ? `<img class="season-icon" src="${TYPE_ICON[v.type]}" alt="${vacName(v)} icoon">` : '';
 
     return `<div class="card ${status}" data-type="${v.type}">
         <div class="card-img">
             <div class="card-img-deco">${TYPE_DECO[v.type]}</div>
             <div class="card-img-text">
-                <div class="card-img-name">${v.naam}</div>
-                <div class="card-img-year">Schooljaar ${year}</div>
+                <div class="card-img-name">${vacName(v)}</div>
+                <div class="card-img-year">${t('schooljaar')} ${year}</div>
             </div>
             <span class="card-badge ${badgeCls}">${badgeText}</span>
         </div>
         <div class="card-body">
-            <div class="card-duration">Duur: ${durationSummary(v)}</div>
+            <div class="card-duration">${t('duur')} ${durationSummary(v)}</div>
             ${iconHTML}
             <div class="mini-cal-wrap">${miniCals}</div>
             ${regionHTML}
@@ -600,12 +711,9 @@ function buildCard(v, year) {
     </div>`;
 }
 
-// ── Mini cal dot CSS fix (set ::after via JS) ─────────────────────
-// We use a style injection approach since ::after can't be set inline
+// ── Mini cal dot CSS fix ──────────────────────────────────────────
 
 function injectDotStyles() {
-    // No-op: we handle dots via inline style on the element itself
-    // by styling the span's border-bottom when it has data-dot attribute
     const style = document.createElement('style');
     style.textContent = `
         .mc-day[data-dot]::after { content:''; display:block; height:3px; border-radius:2px; margin-top:1px; }
@@ -614,11 +722,8 @@ function injectDotStyles() {
     document.head.appendChild(style);
 }
 
-// Actually simpler: set background on ::after via JS by wrapping
-// We'll re-render using a different approach — add a <b> child element
-
 function renderMiniCalFixed(year, month, v, selectedRegion, highlightColor) {
-    const t = today();
+    const td = today();
     const firstDay = new Date(year, month, 1);
     const lastDay  = new Date(year, month+1, 0);
     let startDow   = (firstDay.getDay() + 6) % 7;
@@ -627,8 +732,8 @@ function renderMiniCalFixed(year, month, v, selectedRegion, highlightColor) {
     const mPad = String(month+1).padStart(2,'0');
     const cells = [];
     const holidaysInMonth = [];
-    cells.push(`<span class="mc-head mc-wk-cell">wk</span>`);
-    for (const h of DAYS_SH) cells.push(`<span class="mc-head">${h}</span>`);
+    cells.push(`<span class="mc-head mc-wk-cell">${t('wk')}</span>`);
+    for (const h of daysSh()) cells.push(`<span class="mc-head">${h}</span>`);
     const firstMonday = new Date(year, month, 1 - startDow);
     cells.push(`<span class="mc-wk-cell">${isoWeek(firstMonday)}</span>`);
     for (let i=0; i<startDow; i++) cells.push(`<span></span>`);
@@ -638,9 +743,8 @@ function renderMiniCalFixed(year, month, v, selectedRegion, highlightColor) {
         const dow  = date.getDay();
         if ((dow+6)%7 === 0 && day > 1) cells.push(`<span class="mc-wk-cell">${isoWeek(date)}</span>`);
         const isWe = dow===0||dow===6;
-        const isTd = date.getTime()===t.getTime();
+        const isTd = date.getTime()===td.getTime();
 
-        // Filter vacation days to only the selected region
         const vacRegions = Object.entries(v.periodes)
             .filter(([r,p]) => {
                 if (selectedRegion !== 'alle' && r !== selectedRegion) return false;
@@ -670,24 +774,24 @@ function renderMiniCalFixed(year, month, v, selectedRegion, highlightColor) {
 
         const dot  = dotBg      ? `<b style="display:block;height:3px;border-radius:2px;background:${dotBg};margin-top:1px"></b>` : '';
         const hdot = holidayName ? `<b style="display:block;height:3px;border-radius:2px;background:${holidayColor(holidayName)};margin-top:1px"></b>` : '';
-        cells.push(`<span class="${cls}"${holidayName?` title="${holidayName}"`:''}>${day}${dot}${hdot}</span>`);
+        cells.push(`<span class="${cls}"${holidayName?` title="${holName(holidayName)}"`:''}>${day}${dot}${hdot}</span>`);
     }
 
     const holHTML = holidaysInMonth.length
         ? `<div class="mc-vac-row">${holidaysInMonth.map(name =>
-            `<span class="mc-vac-label"><b class="mc-vac-dot" style="background:${holidayColor(name)}"></b>${name}</span>`
+            `<span class="mc-vac-label"><b class="mc-vac-dot" style="background:${holidayColor(name)}"></b>${holName(name)}</span>`
           ).join('')}</div>`
         : '';
 
     return `<div class="mini-cal">
-        <div class="mc-title">${MONTHS_SH[month]} ${year}</div>
+        <div class="mc-title">${monthsSh()[month]} ${year}</div>
         <div class="mc-grid mc-grid--wk">${cells.join('')}</div>
         ${holHTML}
     </div>`;
 }
 
 function renderYearCalMonth(year, month, vakanties, region) {
-    const t = today();
+    const td = today();
     const firstDay = new Date(year, month, 1);
     const lastDay  = new Date(year, month+1, 0);
     let startDow   = (firstDay.getDay() + 6) % 7;
@@ -696,8 +800,8 @@ function renderYearCalMonth(year, month, vakanties, region) {
     const mPad = String(month+1).padStart(2,'0');
     const cells = [];
     const holidaysInMonth = [];
-    cells.push(`<span class="mc-head mc-wk-cell">wk</span>`);
-    for (const h of DAYS_SH) cells.push(`<span class="mc-head">${h}</span>`);
+    cells.push(`<span class="mc-head mc-wk-cell">${t('wk')}</span>`);
+    for (const h of daysSh()) cells.push(`<span class="mc-head">${h}</span>`);
     const firstMonday = new Date(year, month, 1 - startDow);
     cells.push(`<span class="mc-wk-cell">${isoWeek(firstMonday)}</span>`);
     for (let i=0; i<startDow; i++) cells.push(`<span></span>`);
@@ -707,7 +811,7 @@ function renderYearCalMonth(year, month, vakanties, region) {
         const dow  = date.getDay();
         if ((dow+6)%7 === 0 && day > 1) cells.push(`<span class="mc-wk-cell">${isoWeek(date)}</span>`);
         const isWe = dow===0||dow===6;
-        const isTd = date.getTime()===t.getTime();
+        const isTd = date.getTime()===td.getTime();
 
         let vacType = null;
         for (const v of vakanties) {
@@ -730,7 +834,7 @@ function renderYearCalMonth(year, month, vakanties, region) {
         const hdot = holidayName
             ? `<b style="display:block;height:3px;border-radius:2px;background:${holidayColor(holidayName)};margin-top:1px"></b>`
             : '';
-        cells.push(`<span class="${cls}"${holidayName?` title="${holidayName}"`:''}>${day}${dot}${hdot}</span>`);
+        cells.push(`<span class="${cls}"${holidayName?` title="${holName(holidayName)}"`:''}>${day}${dot}${hdot}</span>`);
     }
 
     const seenVacNames = new Set();
@@ -743,17 +847,17 @@ function renderYearCalMonth(year, month, vakanties, region) {
     });
     const vacHTML = vacInMonth.length
         ? `<div class="mc-vac-row">${vacInMonth.map(v =>
-            `<span class="mc-vac-label"><b class="mc-vac-dot" style="background:${TYPE_COLOR[v.type]}"></b>${v.naam}</span>`
+            `<span class="mc-vac-label"><b class="mc-vac-dot" style="background:${TYPE_COLOR[v.type]}"></b>${vacName(v)}</span>`
           ).join('')}</div>`
         : '';
     const holHTML = holidaysInMonth.length
         ? `<div class="mc-vac-row">${holidaysInMonth.map(name =>
-            `<span class="mc-vac-label"><b class="mc-vac-dot" style="background:${holidayColor(name)}"></b>${name}</span>`
+            `<span class="mc-vac-label"><b class="mc-vac-dot" style="background:${holidayColor(name)}"></b>${holName(name)}</span>`
           ).join('')}</div>`
         : '';
 
     return `<div class="mini-cal">
-        <div class="mc-title">${MONTHS_SH[month]} ${year}</div>
+        <div class="mc-title">${monthsSh()[month]} ${year}</div>
         <div class="mc-grid mc-grid--wk">${cells.join('')}</div>
         ${vacHTML}${holHTML}
     </div>`;
@@ -764,7 +868,6 @@ function buildYearCard(year) {
     const parts = year.split('-');
     const y2 = parseInt(parts[1]);
 
-    // Voeg vakanties van het volgende schooljaar toe die in kalenderjaar y2 vallen
     const calStart = new Date(y2, 0, 1);
     const calEnd   = new Date(y2, 11, 31);
     const yearKeys = Object.keys(DATA);
@@ -776,16 +879,15 @@ function buildYearCard(year) {
     ) : [];
     const allVakanties = [...yd.vakanties, ...extraVak];
 
-    // Jan y2 → Dec y2 (kalenderjaar van het tweede jaar)
     const months = [];
     for (let m = 0; m <= 11; m++) months.push({y: y2, m});
 
     const monthsHTML = months.map(({y, m}) => renderYearCalMonth(y, m, allVakanties, activeRegion)).join('');
 
-    const t = today();
+    const td = today();
     const yearTabsHTML = Object.keys(DATA)
         .filter(y => DATA[y].vakanties.some(v =>
-            Object.values(v.periodes).some(p => parseDate(p.tot) >= t)
+            Object.values(v.periodes).some(p => parseDate(p.tot) >= td)
         ))
         .map(y => `<button class="ytab${y === activeYear ? ' active' : ''}" data-year="${y}">${y.replace('-','–')}</button>`)
         .join('');
@@ -794,7 +896,7 @@ function buildYearCard(year) {
         <div class="card-img year-card-img">
             <div class="year-card-tabs">${yearTabsHTML}</div>
             <div class="card-img-text">
-                <div class="card-img-name">Kalenderjaar ${y2}</div>
+                <div class="card-img-name">${t('kalenderjaar')} ${y2}</div>
             </div>
         </div>
         <div class="card-body">
@@ -805,12 +907,10 @@ function buildYearCard(year) {
 }
 
 function buildCardFixed(v, year) {
-    // Status based on selected region for accurate past/current/upcoming
     const status = activeRegion === 'alle'
         ? statusForAll(v)
         : cardStatus(v.periodes[activeRegion].van, v.periodes[activeRegion].tot);
 
-    // Only render months relevant to the selected region
     const months = activeRegion === 'alle'
         ? getMonthsForVakantie(v)
         : (() => {
@@ -832,7 +932,7 @@ function buildCardFixed(v, year) {
         if (v.alleSame) {
             const p = v.periodes.noord;
             const d = durationDays(p.van, p.tot);
-            regionHTML = `<div class="rrow-same">Alle regio's: ${formatDate(p.van)} – ${formatDate(p.tot)} · <strong>${d} dagen</strong></div>`;
+            regionHTML = `<div class="rrow-same">${t('alle_regio')} ${formatDate(p.van)} – ${formatDate(p.tot)} · <strong>${d} ${t('dagen')}</strong></div>`;
         } else {
             regionHTML = `<div class="region-rows">${
                 regions.map(r => {
@@ -841,39 +941,38 @@ function buildCardFixed(v, year) {
                     return `<div class="rrow">
                         <span class="rrow-dot" style="background:${REGION_COLOR[r]}"></span>
                         <span class="rrow-dates">${formatDate(p.van)} – ${formatDate(p.tot)}</span>
-                        <span class="rrow-days">${d} dgn</span>
+                        <span class="rrow-days">${d} ${t('dgn')}</span>
                     </div>`;
                 }).join('')
             }</div>`;
         }
     } else {
-        // Only show the selected region's row
         const p = v.periodes[activeRegion];
         const d = durationDays(p.van, p.tot);
         regionHTML = `<div class="region-rows">
             <div class="rrow active">
                 <span class="rrow-dot" style="background:${REGION_COLOR[activeRegion]}"></span>
                 <span class="rrow-dates">${formatDate(p.van)} – ${formatDate(p.tot)}</span>
-                <span class="rrow-days">${d} dgn</span>
+                <span class="rrow-days">${d} ${t('dgn')}</span>
             </div>
         </div>`;
     }
 
-    const badgeText = {current:'Nu',upcoming:'',past:'Voorbij'}[status];
+    const badgeText = {current:t('nu'),upcoming:'',past:t('voorbij')}[status];
     const badgeCls  = {current:'badge-current',upcoming:'badge-upcoming',past:'badge-past'}[status];
-    const noteHTML  = v.note ? `<div class="card-note">ℹ️ ${v.note}</div>` : '';
-    const iconHTML  = TYPE_ICON[v.type] ? `<img class="season-icon" src="${TYPE_ICON[v.type]}" alt="${v.naam} icoon">` : '';
+    const noteHTML  = v.note ? `<div class="card-note">ℹ️ ${t('mei_note')}</div>` : '';
+    const iconHTML  = TYPE_ICON[v.type] ? `<img class="season-icon" src="${TYPE_ICON[v.type]}" alt="${vacName(v)}">` : '';
 
     return `<div class="card ${status}${isWide ? ' card--wide' : ''}" data-type="${v.type}">
         <div class="card-img">
             <div class="card-img-text">
-                <div class="card-img-name">${v.naam}</div>
-                <div class="card-img-year">Schooljaar ${year}</div>
+                <div class="card-img-name">${vacName(v)}</div>
+                <div class="card-img-year">${t('schooljaar')} ${year}</div>
             </div>
             <span class="card-badge ${badgeCls}">${badgeText}</span>
         </div>
         <div class="card-body">
-            <div class="card-duration">Duur: ${durationSummary(v)}</div>
+            <div class="card-duration">${t('duur')} ${durationSummary(v)}</div>
             ${iconHTML}
             <div class="mini-cal-wrap">${miniCals}</div>
             ${regionHTML}
@@ -890,7 +989,6 @@ function renderCards() {
     const grid   = document.getElementById('cards');
     const notice = document.getElementById('notice-provisional');
 
-    // Collect calendar years spanned by this school year
     const calYears = new Set();
     for (const v of yd.vakanties) {
         for (const p of Object.values(v.periodes)) {
@@ -899,19 +997,16 @@ function renderCards() {
         }
     }
 
-    // Collect start dates already in this school year to avoid duplicates
     const existingStarts = new Set(
         yd.vakanties.flatMap(v => Object.values(v.periodes).map(p => p.van))
     );
 
-    // Append vacations from the next school year that start in the same calendar years
     const yearKeys = Object.keys(DATA);
     const nextYearKey = yearKeys[yearKeys.indexOf(activeYear) + 1];
     const extraCards = [];
     if (nextYearKey) {
         for (const v of DATA[nextYearKey].vakanties) {
             const starts = Object.values(v.periodes).map(p => p.van);
-            // Skip if already present in current year's data
             if (starts.some(s => existingStarts.has(s))) continue;
             const startYear = Math.min(...starts.map(s => parseDate(s).getFullYear()));
             if (calYears.has(startYear)) {
@@ -932,7 +1027,7 @@ function renderCards() {
     const toggleHTML = !yearExplicit && pastVakanties.length
         ? `<div class="past-toggle-wrap">
                <button class="past-toggle-btn" id="btn-toggle-past">
-                   ${showPast ? 'Verberg voorbije vakanties' : `Toon voorbije vakanties (${pastVakanties.length})`}
+                   ${showPast ? t('verberg_voorbij') : t('toon_voorbij', pastVakanties.length)}
                </button>
            </div>`
         : '';
@@ -948,10 +1043,10 @@ function renderCards() {
 
 function renderYearBar() {
     const bar = document.getElementById('year-bar');
-    const t = today();
+    const td = today();
     bar.innerHTML = Object.keys(DATA)
         .filter(y => DATA[y].vakanties.some(v =>
-            Object.values(v.periodes).some(p => parseDate(p.tot) >= t)
+            Object.values(v.periodes).some(p => parseDate(p.tot) >= td)
         ))
         .map(y => {
             const cls = y === activeYear ? 'ytab active' : 'ytab';
@@ -1005,8 +1100,8 @@ function doExport(region, year) {
                 events.push({
                     start:   padDate(parseDate(p.van)),
                     end:     nextDay(p.tot),
-                    summary: `${v.naam} (${REGION_LABEL[r]}) – ${year}`,
-                    desc:    `Schoolvakantie regio ${REGION_LABEL[r]}`,
+                    summary: `${v.naam} (${regionLabel(r)}) – ${year}`,
+                    desc:    t('region_desc', r),
                     uid:     `${year}-${v.naam.replace(/\s/g,'-')}-${r}`,
                 });
             }
@@ -1016,15 +1111,15 @@ function doExport(region, year) {
                 start:   padDate(parseDate(p.van)),
                 end:     nextDay(p.tot),
                 summary: `${v.naam} – ${year}`,
-                desc:    `Schoolvakantie regio ${REGION_LABEL[region]}`,
+                desc:    t('region_desc', region),
                 uid:     `${year}-${v.naam.replace(/\s/g,'-')}-${region}`,
             });
         }
     }
 
     const calName = region==='alle'
-        ? `Schoolvakanties NL ${year}`
-        : `Schoolvakanties ${REGION_LABEL[region]} ${year}`;
+        ? t('cal_name_all', year)
+        : t('cal_name', region, year);
 
     const ics  = generateICS(events, calName);
     const blob = new Blob([ics], {type:'text/calendar;charset=utf-8'});
@@ -1044,8 +1139,6 @@ function buildPrintView() {
     const region = activeRegion;
     const root   = document.getElementById('print-root');
 
-    // Kalenderjaar = zelfde jaar als getoond in het "Kalenderjaar"-blok
-    // (het tweede jaartal van het geselecteerde schooljaar, bv. "2025-2026" → 2026)
     const y2 = parseInt(activeYear.split('-')[1]);
     const calStart = new Date(y2, 0, 1);
     const calEnd   = new Date(y2, 11, 31);
@@ -1058,28 +1151,26 @@ function buildPrintView() {
     ) : [];
     const allVakanties = [...DATA[activeYear].vakanties, ...extraVak];
 
-    // Altijd januari t/m december van het kalenderjaar, ook maanden zonder vakantie
-    const months = [];
-    for (let m = 0; m <= 11; m++) months.push({y: y2, m});
+    const monthsList = [];
+    for (let m = 0; m <= 11; m++) monthsList.push({y: y2, m});
 
     let html = '';
 
-    for (const {y,m} of months) {
+    for (const {y,m} of monthsList) {
         const firstDay = new Date(y,m,1);
         const lastDay  = new Date(y,m+1,0);
         let startDow   = (firstDay.getDay()+6)%7;
         const monthHolidays = getDutchHolidays(y);
         const mPad = String(m+1).padStart(2,'0');
 
-        // Legend — alleen geselecteerde regio(s)
         const legendRegions = region === 'alle'
-            ? [['noord', C_NOORD, 'Noord'], ['midden', C_MIDDEN, 'Midden'], ['zuidd', C_ZUIDD, 'Zuid']]
-            : [[region, REGION_COLOR[region], REGION_LABEL[region]]];
+            ? [['noord', C_NOORD, regionLabel('noord')], ['midden', C_MIDDEN, regionLabel('midden')], ['zuidd', C_ZUIDD, regionLabel('zuidd')]]
+            : [[region, REGION_COLOR[region], regionLabel(region)]];
         const legend = `<div class="pm-legend">${legendRegions.map(([,kleur,label]) =>
             `<span class="pm-legend-item"><span class="pm-swatch" style="background:${kleur}"></span>${label}</span>`
         ).join('')}</div>`;
 
-        let cells = DAYS_SH.map(h=>`<div class="pm-head">${h}</div>`).join('');
+        let cells = daysSh().map(h=>`<div class="pm-head">${h}</div>`).join('');
         for (let i=0;i<startDow;i++) cells += `<div class="pm-cell outside"></div>`;
 
         const seenVacNames = new Set();
@@ -1093,11 +1184,6 @@ function buildPrintView() {
             let cls = 'pm-cell';
             if(isWe) cls+=' weekend';
 
-            // Vakantiebolletje — kleur van het vakantietype, zelfde kleur als
-            // de bullet voor de naam in de legenda. Eén bolletje per vakantie-
-            // naam per dag (sommige vakanties, zoals de zomervakantie, staan
-            // dubbel in de data — als afsluiter van het ene schooljaar én als
-            // opener van het volgende — dus dedupliceren op naam per dag).
             let bars = '';
             const seenTodayVac = new Set();
             for (const v of allVakanties) {
@@ -1105,37 +1191,33 @@ function buildPrintView() {
                 for (const [r,p] of Object.entries(v.periodes)) {
                     if ((region==='alle'||region===r) && date>=parseDate(p.van) && date<=parseDate(p.tot)) {
                         seenTodayVac.add(v.naam);
-                        bars += `<div class="pm-vac-bar" style="background:${TYPE_COLOR[v.type]}" title="${v.naam}"></div>`;
+                        bars += `<div class="pm-vac-bar" style="background:${TYPE_COLOR[v.type]}" title="${vacName(v)}"></div>`;
                         if (!seenVacNames.has(v.naam)) { seenVacNames.add(v.naam); vacInMonth.push(v); }
                         break;
                     }
                 }
             }
 
-            // Feestdag — eigen icoontje i.p.v. een kleurvlak: herkenbaar op
-            // vorm, dus ook op een zwart-witprinter te onderscheiden
             const holidayName = monthHolidays[`${y}-${mPad}-${String(day).padStart(2,'0')}`];
             const holidayMark = holidayName
-                ? `<div class="pm-holiday-icon" title="${holidayName}">${holidayIcon(holidayName)}</div>`
+                ? `<div class="pm-holiday-icon" title="${holName(holidayName)}">${holidayIcon(holidayName)}</div>`
                 : '';
             if (holidayName) holidaysInMonth.push(holidayName);
 
             cells += `<div class="${cls}"><span class="pm-num">${day}</span>${bars}${holidayMark}</div>`;
         }
 
-        // Legenda onder de kalender — vakanties en feestdagen met naam,
-        // zodat het ook zonder kleur (zwart-wit printer) te onderscheiden is
         const vacLegendHTML = vacInMonth.map(v =>
-            `<span class="pm-vac-label"><b class="pm-vac-dot" style="background:${TYPE_COLOR[v.type]}"></b><span class="pm-vac-name" data-text="${v.naam}">${v.naam}</span></span>`
+            `<span class="pm-vac-label"><b class="pm-vac-dot" style="background:${TYPE_COLOR[v.type]}"></b><span class="pm-vac-name" data-text="${vacName(v)}">${vacName(v)}</span></span>`
         ).join('');
         const holLegendHTML = [...new Set(holidaysInMonth)].map(name =>
-            `<span class="pm-vac-label"><span class="pm-vac-icon">${holidayIcon(name)}</span>${name}</span>`
+            `<span class="pm-vac-label"><span class="pm-vac-icon">${holidayIcon(name)}</span>${holName(name)}</span>`
         ).join('');
         const belowHTML = (vacLegendHTML || holLegendHTML)
             ? `<div class="pm-vac-row">${vacLegendHTML}${holLegendHTML}</div>`
             : '';
 
-        const titleText = `${MONTHS_NL[m]} ${y}`;
+        const titleText = `${months()[m]} ${y}`;
         html += `<div class="print-month">
             <div class="pm-title" data-text="${titleText}">${titleText}</div>
             ${legend}
@@ -1185,7 +1267,6 @@ window.addEventListener('popstate', () => {
     renderCards();
 });
 
-// Export panel
 const exportPanel = document.getElementById('export-panel');
 const exportYearSel = document.getElementById('export-year-sel');
 
@@ -1210,14 +1291,12 @@ exportPanel.addEventListener('click', e => {
     exportPanel.hidden = true;
 });
 
-// Toggle past cards open/closed on header click
 document.getElementById('cards').addEventListener('click', e => {
     const header = e.target.closest('.card.past .card-img');
     if (!header) return;
     header.closest('.card').classList.toggle('expanded');
 });
 
-// Close panel when clicking outside
 document.addEventListener('click', e => {
     if (!exportPanel.hidden &&
         !exportPanel.contains(e.target) &&
@@ -1226,22 +1305,52 @@ document.addEventListener('click', e => {
     }
 });
 
+// ── Language toggle ───────────────────────────────────────────────
+
+function applyStaticTranslations() {
+    document.documentElement.lang = activeLang;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        const val = UI[activeLang][key];
+        if (val !== undefined) el.innerHTML = val;
+    });
+    const btn = document.getElementById('btn-lang');
+    if (btn) {
+        btn.textContent = activeLang === 'nl' ? 'EN' : 'NL';
+        btn.title = activeLang === 'nl' ? 'Switch to English' : 'Schakel naar Nederlands';
+    }
+}
+
+function setLang(lang) {
+    activeLang = lang;
+    localStorage.setItem('lang', lang);
+    applyStaticTranslations();
+    renderCountdown();
+    renderRegionCountdown();
+    renderCards();
+}
+window.setLang = setLang;
+
 // ── Init ──────────────────────────────────────────────────────────
 
-// Zet actieve regio-knop op basis van URL-hash
 document.querySelectorAll('.rbtn').forEach(b => b.classList.toggle('active', b.dataset.region === activeRegion));
 if (!location.hash) setRegionURL(activeRegion);
+
+document.getElementById('btn-lang').addEventListener('click', () => {
+    setLang(activeLang === 'nl' ? 'en' : 'nl');
+});
 
 renderYearBar();
 renderCountdown();
 renderCards();
+applyStaticTranslations();
 
 // ── Week-nummer post-it ───────────────────────────────────────────
 (function() {
     const el = document.getElementById('postit-wk');
     if (!el) return;
     const wk = isoWeek(new Date());
-    el.innerHTML = `<span class="postit-wk-label">wk</span><span class="postit-wk-num">${wk}</span>`;
+    el.innerHTML = `<span class="postit-wk-label">${t('wk')}</span><span class="postit-wk-num">${wk}</span>`;
 })();
 
 // ── In-app browser notice ─────────────────────────────────────────
@@ -1252,12 +1361,8 @@ renderCards();
     const notice = document.createElement('div');
     notice.className = 'iab-notice';
     notice.innerHTML = `
-        <span class="iab-text">
-            Je opent deze pagina via de Instagram-app.
-            <strong>Export</strong> en <strong>Afdrukken</strong> werken alleen in een echte browser.
-            Tik rechtsonder op <strong>⋯</strong> en kies <em>Openen in browser</em>.
-        </span>
-        <button class="iab-close" aria-label="Sluiten">✕</button>`;
+        <span class="iab-text">${t('iab_text')}</span>
+        <button class="iab-close" aria-label="${t('iab_close')}">✕</button>`;
     notice.querySelector('.iab-close').addEventListener('click', () => notice.remove());
     document.body.prepend(notice);
 })();

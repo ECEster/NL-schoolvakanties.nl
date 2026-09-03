@@ -52,6 +52,7 @@
             <span class="logo-mark">NL</span>
             <span class="logo-text">schoolvakanties<span class="logo-tld">.nl</span></span>
         </a>
+        <button id="btn-lang" class="btn-lang" title="Switch to English">EN</button>
     </div>
 </header>
 
@@ -59,19 +60,19 @@
 <div class="export-panel no-print" id="export-panel" hidden>
     <div class="export-inner">
         <div class="export-head">
-            <strong>📅 Exporteer naar agenda (.ics)</strong>
+            <strong>📅 <span data-i18n="export_title">Exporteer naar agenda (.ics)</span></strong>
             <button class="export-close" id="export-close">✕</button>
         </div>
-        <label class="export-label">Schooljaar
+        <label class="export-label"><span data-i18n="export_label">Schooljaar</span>
             <select id="export-year-sel"></select>
         </label>
         <div class="export-btns">
-            <button class="ebtn ebtn-alle" data-region="alle"><img src="images/icons_seasons/IconFlag.png" class="ebtn-icon" alt="">Alle regio's</button>
-            <button class="ebtn ebtn-noord" data-region="noord"><img src="images/icons_seasons/IconFlag.png" class="ebtn-icon" alt="">Noord</button>
-            <button class="ebtn ebtn-midden" data-region="midden"><img src="images/icons_seasons/IconFlag.png" class="ebtn-icon" alt="">Midden</button>
-            <button class="ebtn ebtn-zuidd" data-region="zuidd"><img src="images/icons_seasons/IconFlag.png" class="ebtn-icon" alt="">Zuid</button>
+            <button class="ebtn ebtn-alle" data-region="alle"><img src="images/icons_seasons/IconFlag.png" class="ebtn-icon" alt=""><span data-i18n="all_regions">Alle regio's</span></button>
+            <button class="ebtn ebtn-noord" data-region="noord"><img src="images/icons_seasons/IconFlag.png" class="ebtn-icon" alt=""><span data-i18n="region_noord">Noord</span></button>
+            <button class="ebtn ebtn-midden" data-region="midden"><img src="images/icons_seasons/IconFlag.png" class="ebtn-icon" alt=""><span data-i18n="region_midden">Midden</span></button>
+            <button class="ebtn ebtn-zuidd" data-region="zuidd"><img src="images/icons_seasons/IconFlag.png" class="ebtn-icon" alt=""><span data-i18n="region_zuidd">Zuid</span></button>
         </div>
-        <p class="export-hint">Importeer het .ics bestand in Google Agenda, Outlook of Apple Agenda.</p>
+        <p class="export-hint" data-i18n="import_hint">Importeer het .ics bestand in Google Agenda, Outlook of Apple Agenda.</p>
     </div>
 </div>
 
@@ -113,15 +114,15 @@
         <!-- Region selector -->
         <div class="region-row" id="region-row">
             <button class="rbtn rbtn-n active" data-region="noord">
-                <span class="rbtn-top">Noord</span>
+                <span class="rbtn-top" data-i18n="region_noord">Noord</span>
                 <span class="rbtn-provinces">Groningen · Friesland · Drenthe · Overijssel · Noord-Holland</span>
             </button>
             <button class="rbtn rbtn-m" data-region="midden">
-                <span class="rbtn-top">Midden</span>
+                <span class="rbtn-top" data-i18n="region_midden">Midden</span>
                 <span class="rbtn-provinces">Gelderland · Flevoland · Utrecht · Zuid-Holland</span>
             </button>
             <button class="rbtn rbtn-z" data-region="zuidd">
-                <span class="rbtn-top">Zuid</span>
+                <span class="rbtn-top" data-i18n="region_zuidd">Zuid</span>
                 <span class="rbtn-provinces">Noord-Brabant · Limburg · Zeeland</span>
             </button>
         </div>
@@ -130,7 +131,7 @@
         <div class="year-bar" id="year-bar"></div>
 
         <!-- Provisional notice -->
-        <div class="notice" id="notice-provisional" hidden>
+        <div class="notice" id="notice-provisional" data-i18n="provisional" hidden>
             ⚠️ Jaren 2028 en later zijn <strong>indicatief</strong>. Controleer de officiële data op
             <a href="https://www.rijksoverheid.nl/onderwerpen/schoolvakanties" target="_blank" rel="noopener">rijksoverheid.nl</a>.
         </div>
