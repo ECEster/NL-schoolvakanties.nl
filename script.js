@@ -1139,8 +1139,9 @@ function buildPrintView() {
     const region = activeRegion;
     const root   = document.getElementById('print-root');
 
+    const y1 = parseInt(activeYear.split('-')[0]);
     const y2 = parseInt(activeYear.split('-')[1]);
-    const calStart = new Date(y2, 0, 1);
+    const calStart = new Date(y1, 8, 1);   // September of y1
     const calEnd   = new Date(y2, 11, 31);
     const yearKeys = Object.keys(DATA);
     const nextKey  = yearKeys[yearKeys.indexOf(activeYear) + 1];
@@ -1152,7 +1153,8 @@ function buildPrintView() {
     const allVakanties = [...DATA[activeYear].vakanties, ...extraVak];
 
     const monthsList = [];
-    for (let m = 0; m <= 11; m++) monthsList.push({y: y2, m});
+    for (let m = 8; m <= 11; m++) monthsList.push({y: y1, m}); // Sept–Dec of first year
+    for (let m = 0; m <= 11; m++) monthsList.push({y: y2, m}); // Jan–Dec of second year
 
     let html = '';
 
