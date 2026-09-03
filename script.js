@@ -897,7 +897,7 @@ function buildYearCard(year) {
         <div class="card-img year-card-img">
             <div class="year-card-tabs">${yearTabsHTML}</div>
             <div class="card-img-text">
-                <div class="card-img-name">${t('kalenderjaar')} ${y1}–${y2}</div>
+                <div class="card-img-name">${t('schooljaar')} ${y1}–${y2}</div>
             </div>
         </div>
         <div class="card-body">
