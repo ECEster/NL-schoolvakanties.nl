@@ -400,6 +400,8 @@ let activeYear = (() => {
     return Object.keys(DATA)[0];
 })();
 
+let activeCalYear = new Date().getFullYear();
+
 // ── Date helpers ──────────────────────────────────────────────────
 
 function parseDate(s) {
@@ -863,41 +865,45 @@ function renderYearCalMonth(year, month, vakanties, region) {
     </div>`;
 }
 
-function buildYearCard(year) {
-    const yd = DATA[year];
-    const y1 = parseInt(year.split('-')[0]);
-    const y2 = parseInt(year.split('-')[1]);
+function buildYearCard() {
+    const calYear  = activeCalYear;
+    const calStart = new Date(calYear, 0, 1);
+    const calEnd   = new Date(calYear, 11, 31);
 
-    const calStart = new Date(y1, 8, 1);   // September of y1
-    const calEnd   = new Date(y2, 11, 31);
-    const yearKeys = Object.keys(DATA);
-    const nextKey  = yearKeys[yearKeys.indexOf(year) + 1];
-    const extraVak = nextKey ? DATA[nextKey].vakanties.filter(v =>
+    // Vacations that start in calYear come from the school year starting in calYear
+    const primaryKey = `${calYear}-${calYear + 1}`;
+    const prevKey    = `${calYear - 1}-${calYear}`;
+    const primaryVak = DATA[primaryKey] ? DATA[primaryKey].vakanties : [];
+    // Christmas (and similar) that starts in Dec of prev year and spills into Jan of calYear
+    const spillVak = DATA[prevKey] ? DATA[prevKey].vakanties.filter(v =>
         Object.values(v.periodes).some(p =>
-            parseDate(p.van) <= calEnd && parseDate(p.tot) >= calStart
+            parseDate(p.van) < calStart && parseDate(p.tot) >= calStart
         )
     ) : [];
-    const allVakanties = [...yd.vakanties, ...extraVak];
+    const allVakanties = [...spillVak, ...primaryVak];
 
     const months = [];
-    for (let m = 8; m <= 11; m++) months.push({y: y1, m}); // Sept–Dec van y1
-    for (let m = 0; m <= 11; m++) months.push({y: y2, m}); // Jan–Dec van y2
+    for (let m = 0; m <= 11; m++) months.push({y: calYear, m});
 
     const monthsHTML = months.map(({y, m}) => renderYearCalMonth(y, m, allVakanties, activeRegion)).join('');
 
-    const td = today();
-    const yearTabsHTML = Object.keys(DATA)
-        .filter(y => DATA[y].vakanties.some(v =>
-            Object.values(v.periodes).some(p => parseDate(p.tot) >= td)
-        ))
-        .map(y => `<button class="ytab${y === activeYear ? ' active' : ''}" data-year="${y}">${y.replace('-','–')}</button>`)
+    // Calendar year tabs: all unique years present in DATA, from current year onwards
+    const currentYear = new Date().getFullYear();
+    const availYears  = new Set();
+    for (const key of Object.keys(DATA)) {
+        const [y1, y2] = key.split('-').map(Number);
+        if (y1 >= currentYear) availYears.add(y1);
+        if (y2 >= currentYear) availYears.add(y2);
+    }
+    const tabsHTML = [...availYears].sort((a, b) => a - b)
+        .map(y => `<button class="ycal-tab${y === calYear ? ' active' : ''}" data-calyear="${y}">${y}</button>`)
         .join('');
 
     return `<div class="card year-card">
         <div class="card-img year-card-img">
-            <div class="year-card-tabs">${yearTabsHTML}</div>
+            <div class="year-card-tabs">${tabsHTML}</div>
             <div class="card-img-text">
-                <div class="card-img-name">${t('schooljaar')} ${y1}–${y2}</div>
+                <div class="card-img-name">${t('kalenderjaar')} ${calYear}</div>
             </div>
         </div>
         <div class="card-body">
@@ -1033,7 +1039,7 @@ function renderCards() {
            </div>`
         : '';
 
-    grid.innerHTML = buildYearCard(activeYear) + visibleVakanties.map(v => buildCardFixed(v, activeYear)).join('') + extraCards.join('') + pastHTML + toggleHTML;
+    grid.innerHTML = buildYearCard() + visibleVakanties.map(v => buildCardFixed(v, activeYear)).join('') + extraCards.join('') + pastHTML + toggleHTML;
     notice.hidden  = yd.confirmed;
 
     const toggleBtn = document.getElementById('btn-toggle-past');
@@ -1240,6 +1246,12 @@ function triggerPrint() {
 // ── Event listeners ───────────────────────────────────────────────
 
 document.addEventListener('click', e => {
+    const calBtn = e.target.closest('.ycal-tab');
+    if (calBtn) {
+        activeCalYear = parseInt(calBtn.dataset.calyear);
+        renderCards();
+        return;
+    }
     const btn = e.target.closest('.ytab');
     if (!btn) return;
     activeYear    = btn.dataset.year;
